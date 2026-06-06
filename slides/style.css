@@ -1071,3 +1071,98 @@
   line-height: 1.25;
   margin-top: 1rem;
 }
+
+.demo-frame {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0.9fr 2fr;
+  margin-top: 1.35rem;
+}
+
+.demo-target {
+  background: var(--panel);
+  border-top: 4px solid var(--claude);
+  border-radius: 8px;
+  min-height: 12rem;
+  padding: 1rem;
+}
+
+.demo-target span {
+  color: var(--claude);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.demo-target p {
+  color: var(--ink);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.demo-script {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.demo-script div {
+  align-items: center;
+  background: var(--panel);
+  border-left: 4px solid var(--line);
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 2rem 1fr;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.8rem;
+}
+
+.demo-script div:nth-child(1) {
+  border-left-color: var(--claude);
+}
+
+.demo-script div:nth-child(2) {
+  border-left-color: var(--sage);
+}
+
+.demo-script div:nth-child(3) {
+  border-left-color: var(--blue);
+}
+
+.demo-script div:nth-child(4) {
+  border-left-color: var(--gold);
+}
+
+.demo-script span {
+  align-items: center;
+  background: var(--claude);
+  border-radius: 50%;
+  color: var(--panel);
+  display: inline-flex;
+  font-size: 0.74rem;
+  font-weight: 720;
+  height: 1.35rem;
+  justify-content: center;
+  width: 1.35rem;
+}
+
+.demo-script p {
+  color: var(--ink);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.demo-question {
+  color: var(--claude-dark);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin-top: 1rem;
+}
+
+.demo-question p {
+  font-size: inherit;
+  margin: 0;
+}

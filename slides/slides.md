@@ -1175,3 +1175,51 @@ Use this as the summary reference before moving into the optional live demo. It
 should bring together the whole seminar: scope tightly, branch, verify, and keep
 scientific judgement with the researcher.
 -->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Live demo</div>
+
+# Process, not spectacle
+
+<div class="demo-frame">
+  <v-click>
+    <div class="demo-target">
+      <span>Target</span>
+      <p>Small scientific Python model; functional code, no tests.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="demo-script">
+      <div><span>1</span><p>Ask the agent to explain the codebase.</p></div>
+      <div><span>2</span><p>Show project instructions and scientific constraints.</p></div>
+      <div><span>3</span><p>Request a test plan before implementation.</p></div>
+      <div><span>4</span><p>Implement, inspect the diff, run the tests.</p></div>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="demo-question">
+    <p>But are these tests sufficient?</p>
+  </div>
+</v-click>
+
+<v-click>
+  <div class="note-strip">
+    <p>The demo should show the workflow: scope, context, plan, diff review, tests, and scientific judgement.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">6. Live demo</div>
+<div class="slide-no">25</div>
+
+<!--
+Use the recommended demo from seminar_notes.md: codebase onboarding plus targeted
+test writing for a small scientific Python script such as a 1D advection or heat
+equation solver. Keep it low risk and reproducible. The debrief line is that the
+agent did useful work, but the researcher still judged test sufficiency and science.
+-->
