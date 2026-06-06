@@ -35,6 +35,7 @@ what changes when the tool can read, edit, run, and iterate inside a real reposi
 -->
 
 ---
+
 layout: default
 ---
 
@@ -46,21 +47,21 @@ layout: default
   <v-click>
     <div class="stat">
       <span class="stat-number">&gt;80%</span>
-      <span class="stat-label">of code merged into Anthropic's production codebase was authored by Claude</span>
+      <span class="stat-label">of code merged into Anthropic's production codebase was authored by Claude (05/26)</span>
     </div>
   </v-click>
 
   <v-click>
     <div class="stat">
       <span class="stat-number">800+</span>
-      <span class="stat-label">autonomous fixes for a persistent class of API errors</span>
+      <span class="stat-label">autonomous fixes for a persistent class of API errors (04/26)</span>
     </div>
   </v-click>
 
   <v-click>
     <div class="stat">
       <span class="stat-number">1,000x</span>
-      <span class="stat-label">error-rate reduction from cleanup estimated at four years of human work</span>
+      <span class="stat-label">error-rate reduction from cleanup estimated at four years of human work (04/26)</span>
     </div>
   </v-click>
 </div>
@@ -82,6 +83,7 @@ Use this as the impact anchor, then immediately frame it as a workflow shift.
 -->
 
 ---
+
 layout: default
 ---
 
@@ -130,6 +132,7 @@ With an agent, the model has tools and can take actions inside the codebase.
 -->
 
 ---
+
 layout: default
 ---
 
@@ -180,6 +183,7 @@ they are not a substitute for scientific judgement or for clear task definition.
 -->
 
 ---
+
 layout: default
 ---
 
