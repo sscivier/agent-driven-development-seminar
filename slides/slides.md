@@ -1103,7 +1103,7 @@ layout: default
   <v-click>
     <div class="governance-card blue">
       <span>Students</span>
-      <p>Risk for production or assessment; valuable for tutoring and code explanation.</p>
+      <p>Check official university guidance; use as a learning tool within assessment rules.</p>
     </div>
   </v-click>
 </div>
@@ -1155,7 +1155,7 @@ layout: default
   </v-click>
 
   <v-click>
-    <div>Cross-cutting routine changes</div>
+    <div>Mechanical multi-file changes</div>
     <div>Long unsupervised runs</div>
     <div>Scientific ownership</div>
   </v-click>
