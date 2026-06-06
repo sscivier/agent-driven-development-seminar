@@ -1,11 +1,13 @@
 # Agent-Driven Development Seminar — Project Context
 
 ## What this project is
+
 A 30–40 minute seminar (+ ~20 min discussion) on agent-driven software development
 for computational geoscientists at the University of Oxford. Audience: PhD students,
 postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced AI users.
 
 ## Repository structure
+
 - `seminar_notes.md` — the full seminar content: all talking points, tool details,
   Oxford-specific access info, workflows, failure modes, demo script, and discussion
   questions. This is the source of truth. **Read this before writing any slides.**
@@ -13,6 +15,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
   Additional slide files can go in `slides/pages/`. Code snippets in `slides/snippets/`.
 
 ## Slidev setup
+
 - Framework: [Slidev](https://sli.dev) v52, using the `seriph` theme
 - Install dependencies: `cd slides && npm install`
 - Dev server: `cd slides && npm run dev` (opens at localhost:3030)
@@ -21,6 +24,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 - Package manager: npm (a pnpm-workspace.yaml exists from scaffolding but npm works fine)
 
 ## Seminar structure and target timings
+
 | Segment | Duration |
 |---|---|
 | 1. Real-world impact + conceptual shift | 5 min |
@@ -32,6 +36,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 | Discussion | 20 min |
 
 ## Slide structure (from seminar_notes.md §6.1)
+
 - Slide 1: Title
 - Slides 2–5: Conceptual shift (open with Anthropic 80%/800 stat; chat vs agent diagram;
   task decision framework; "capable junior collaborator" mental model)
@@ -47,6 +52,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 - Slide N: Discussion questions
 
 ## Style conventions for slides
+
 - Keep text minimal — bullet points, not paragraphs; aim for one key idea per slide
 - Use `---` to separate slides in slides.md
 - Use `layout: two-cols` or `layout: center` where helpful
@@ -58,6 +64,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 - The frontmatter duration is 35min; keep that set
 
 ## Key content notes (do not omit these)
+
 - The Anthropic 80%/800 stat is the intended **opening impact statement** (slide 2)
 - Oxford access section must clearly cover: ChatGPT Edu (free via SSO), Codex (consent
   forms required), OeRC AI Competency Centre resources
@@ -68,12 +75,14 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 - Student training nuance: agents as learning tools as well as productivity tools
 
 ## What you should NOT do
+
 - Do not invent pricing, features, or product details — use only what is in seminar_notes.md
 - Do not use external image URLs that require internet access during the presentation
 - Do not add slides for content not in seminar_notes.md without flagging it
 - Do not modify seminar_notes.md unless asked
 
 ## Suggested approach for a multi-step agent session
+
 1. Read seminar_notes.md in full (plan mode first)
 2. Propose a slide-by-slide outline for approval before writing any content
 3. Implement one section at a time; commit after each section passes review
