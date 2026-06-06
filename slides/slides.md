@@ -35,7 +35,6 @@ what changes when the tool can read, edit, run, and iterate inside a real reposi
 -->
 
 ---
-
 layout: default
 ---
 
@@ -83,7 +82,6 @@ Use this as the impact anchor, then immediately frame it as a workflow shift.
 -->
 
 ---
-
 layout: default
 ---
 
@@ -132,7 +130,6 @@ With an agent, the model has tools and can take actions inside the codebase.
 -->
 
 ---
-
 layout: default
 ---
 
@@ -183,7 +180,6 @@ they are not a substitute for scientific judgement or for clear task definition.
 -->
 
 ---
-
 layout: default
 ---
 
