@@ -226,3 +226,329 @@ layout: default
 End the first section with the core mental model from the notes. This phrase should
 carry through the later workflow and failure-mode sections.
 -->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Ecosystem</div>
+
+# Four ways agents show up
+
+<div class="tool-grid">
+  <v-click>
+    <div class="tool-card blue">
+      <span>In-editor agent</span>
+      <h2>Works where you code</h2>
+      <ul>
+        <li>Copilot agent mode</li>
+        <li>Cursor</li>
+        <li>Codex / Claude extensions</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card sage">
+      <span>Local repo agent</span>
+      <h2>Reads, edits, tests locally</h2>
+      <ul>
+        <li>Claude Code</li>
+        <li>Codex CLI</li>
+        <li>Codex App worktrees</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card gold">
+      <span>Cloud PR agent</span>
+      <h2>Delegated issue to PR</h2>
+      <ul>
+        <li>Codex Cloud</li>
+        <li>Copilot cloud agent</li>
+        <li>GitHub-assigned agents</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card accent">
+      <span>High-autonomy agent</span>
+      <h2>Plans and executes longer tasks</h2>
+      <ul>
+        <li>Devin Desktop</li>
+        <li>Concurrent sessions</li>
+        <li>Higher review burden</li>
+      </ul>
+    </div>
+  </v-click>
+</div>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">6</div>
+
+<!--
+Use this as a workflow map, not a ranking. The key point is that agent tools differ
+in where they run and how much autonomy they assume.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Oxford access</div>
+
+# What Oxford researchers already have
+
+<div class="access-grid">
+  <v-click>
+    <div class="access-card">
+      <span>ChatGPT Edu</span>
+      <h2>Free via SSO</h2>
+      <ul>
+        <li>Available to current Oxford staff and students</li>
+        <li>Use your Oxford email at chatgpt.com</li>
+        <li>No training on your data by default</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="access-card">
+      <span>Codex</span>
+      <h2>Consent forms required</h2>
+      <ul>
+        <li>Codex Local for App and CLI</li>
+        <li>Codex Cloud for GitHub repositories</li>
+        <li>Counts against ChatGPT Edu weekly limits</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="access-card">
+      <span>OeRC AI Centre</span>
+      <h2>Training and guidance</h2>
+      <ul>
+        <li>AI coding and research guides</li>
+        <li>Getting Started with Codex course</li>
+        <li>Workshops, events, and community</li>
+      </ul>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Practical start: ChatGPT Edu first; complete Codex consent if you want a real coding agent.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">7</div>
+
+<!--
+Keep this concrete for Oxford: SSO access, consent forms, and OeRC support.
+The detailed URLs are in the notes; do not make the slide URL-heavy.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Claude and Claude Code</div>
+
+# Local agent, strong codebase comprehension
+
+<div class="tool-grid">
+  <v-click>
+    <div class="tool-card accent">
+      <span>Plans</span>
+      <h2>Pro to Max</h2>
+      <ul>
+        <li>Pro: $17 annual / $20 monthly</li>
+        <li>Max 5x: $100 monthly</li>
+        <li>Max 20x: $200 monthly</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card sage">
+      <span>What it does</span>
+      <h2>Reads, edits, runs</h2>
+      <ul>
+        <li>Works locally in the terminal</li>
+        <li>Searches and edits across the repository</li>
+        <li>Runs tests, build tools, and Git commands</li>
+      </ul>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Best fit: researchers doing substantial development who want a repository-aware local agent with strong project instructions via <strong>CLAUDE.md</strong>.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">8</div>
+
+<!--
+Do not overload with every tier. Mention the pricing anchor and why Claude Code is
+distinctive: local execution, CLAUDE.md, large-codebase comprehension.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">GitHub Copilot and VS Code</div>
+
+# Lowest-friction IDE path
+
+<div class="tool-grid">
+  <v-click>
+    <div class="tool-card blue">
+      <span>Copilot</span>
+      <h2>Embedded in the editor</h2>
+      <ul>
+        <li>Free tier for completions and limited chat</li>
+        <li>Pro listed at $10 monthly</li>
+        <li>Multi-model backend and GitHub integration</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card sage">
+      <span>VS Code agent mode</span>
+      <h2>More than autocomplete</h2>
+      <ul>
+        <li>Multi-step file edits</li>
+        <li>Terminal access and MCP tools</li>
+        <li>Instruction files for persistent context</li>
+      </ul>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p><strong>Important:</strong> new Copilot sign-ups for Pro, Pro+, Max, and student plans were paused April-June 2026.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">9</div>
+
+<!--
+The sign-up pause is a required content note. Frame Copilot as the easiest starting
+point for VS Code users, while noting that availability may change.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Agent IDEs</div>
+
+# Cursor and Devin Desktop
+
+<div class="tool-grid">
+  <v-click>
+    <div class="tool-card gold">
+      <span>Cursor</span>
+      <h2>Polished VS Code fork</h2>
+      <ul>
+        <li>Hobby free tier; Pro at $20 monthly</li>
+        <li>Agent mode, cloud agents, Bugbot review</li>
+        <li>Strong all-in-one IDE experience</li>
+      </ul>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="tool-card accent">
+      <span>Devin Desktop</span>
+      <h2>Formerly Windsurf</h2>
+      <ul>
+        <li>Free light quota; Pro at $20 monthly</li>
+        <li>Highest autonomy among tools discussed</li>
+        <li>Issue to plan, code, test, and PR workflow</li>
+      </ul>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Higher autonomy increases leverage and risk. Good Git workflow and review discipline matter more, not less.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">10</div>
+
+<!--
+Explicitly mention Windsurf to Devin Desktop. Keep this slide comparative: Cursor
+is the polished IDE route; Devin is the high-autonomy route.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Choosing a tool</div>
+
+# Start from access, then fit the workflow
+
+<div class="decision-flow">
+  <v-click>
+    <div class="decision-step">
+      <span>1</span>
+      <h2>Oxford provision?</h2>
+      <p>Start with ChatGPT Edu. Use Codex after consent.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="decision-step">
+      <span>2</span>
+      <h2>Already in VS Code?</h2>
+      <p>Try Copilot agent mode or a Codex / Claude extension.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="decision-step">
+      <span>3</span>
+      <h2>Want deep local work?</h2>
+      <p>Claude Code or Codex CLI/App for repository-level tasks.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="decision-step">
+      <span>4</span>
+      <h2>Sustained heavy dev?</h2>
+      <p>Consider Cursor or Devin when the workflow justifies paid autonomy.</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>The tool choice matters less than the workflow: scope tightly, work on branches, verify the output.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">2. Ecosystem</div>
+<div class="slide-no">11</div>
+
+<!--
+This is the transition into practical workflows. Do not let the tool comparison
+become the point of the seminar; bring the audience back to workflow discipline.
+-->
