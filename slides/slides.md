@@ -6,11 +6,15 @@ info: |
   Source material: seminar_notes.md.
 layout: default
 class: deck
+colorSchema: light
+transition: fade
+duration: 35min
+fonts:
+  sans: Inter
+  mono: JetBrains Mono
+  weights: '400,500,600,700'
 drawings:
   persist: false
-transition: fade
-comark: true
-duration: 35min
 ---
 
 <div class="eyebrow">Computational geoscience seminar</div>
@@ -20,1206 +24,936 @@ duration: 35min
 <div class="title-rule"></div>
 
 <p class="subtitle">
-How to use coding agents as practical research software collaborators,
+Using coding agents as practical research-software collaborators —
 without outsourcing the scientific judgement.
 </p>
 
-<div class="abs-bl ml-17 mb-12 meta">
-University of Oxford<br>
-30-40 min seminar + discussion
+<div class="meta abs-bl ml-[4.2rem] mb-12">
+University of Oxford · 30–40 min + discussion
 </div>
 
 <!--
-Open by positioning this as a practical seminar for experienced scientific programmers:
+Position this as a practical seminar for experienced scientific programmers:
 what changes when the tool can read, edit, run, and iterate inside a real repository.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
+---
+
+<div class="divider">
+  <div class="dnum">PART ONE</div>
+  <h1>The conceptual shift</h1>
+  <div class="title-rule"></div>
+  <p>What actually changes when an AI can take actions, not just give advice.</p>
+</div>
+
 ---
 
 <div class="eyebrow">Real-world impact</div>
 
-# 80% and 800
+# It is already happening in production
 
-<div class="kicker-grid">
+<div class="stats">
   <v-click>
     <div class="stat">
-      <span class="stat-number">&gt;80%</span>
-      <span class="stat-label">of code merged into Anthropic's production codebase was authored by Claude (05/26)</span>
+      <span class="num">&gt;80%</span>
+      <span class="lbl">of code merged into Anthropic's own production codebase was authored by Claude (May 2026)</span>
     </div>
   </v-click>
-
   <v-click>
     <div class="stat">
-      <span class="stat-number">800+</span>
-      <span class="stat-label">autonomous fixes for a persistent class of API errors (04/26)</span>
+      <span class="num">800+</span>
+      <span class="lbl">autonomous fixes shipped for one persistent class of API errors (Apr 2026)</span>
     </div>
   </v-click>
-
   <v-click>
     <div class="stat">
-      <span class="stat-number">1,000x</span>
-      <span class="stat-label">error-rate reduction from cleanup estimated at four years of human work (04/26)</span>
+      <span class="num">1,000×</span>
+      <span class="lbl">error-rate reduction — work estimated at four years for a human developer</span>
     </div>
   </v-click>
 </div>
 
 <v-click>
-  <div class="quiet-box">
-    <p>This is not about replacing programmers. It is about a shift in what programmers can ask tools to do.</p>
-  </div>
+  <p class="lead">Not about replacing programmers — about a shift in <span v-mark="{ at: 4, type: 'underline', color: '#C15F3C' }">what we can ask tools to do</span>.</p>
 </v-click>
 
-<div class="section-tag">1. Conceptual shift</div>
-<div class="slide-no">2</div>
-
 <!--
-As of May 2026, Claude authored over 80% of the code merged into Anthropic's own
-production codebase. In April 2026, Claude autonomously shipped over 800 fixes for
-a persistent class of API errors, reducing the error rate by a factor of 1,000.
-Use this as the impact anchor, then immediately frame it as a workflow shift.
+Use this as the impact anchor, then immediately reframe it as a workflow shift.
+The four-years figure is about the cognitive load of holding code context, not raw typing.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">What actually changes</div>
 
 # From chat to agent
 
-<div class="comparison">
+<div class="cols cols-2">
   <v-click>
-    <div class="column-card">
-      <h2>Chat assistance</h2>
+    <div class="block cool">
+      <span class="tag">Chat assistance</span>
+      <h3>You drive</h3>
       <ul>
-        <li>You describe a problem</li>
+        <li>You describe the problem</li>
         <li>You paste the relevant code</li>
         <li>You copy, run, and fix</li>
         <li>The AI gives advice</li>
       </ul>
     </div>
   </v-click>
-
   <v-click>
-    <div class="column-card agent-card">
-      <h2>Agent-driven work</h2>
+    <div class="block">
+      <span class="tag">Agent-driven work</span>
+      <h3>The agent acts</h3>
       <ul>
-        <li>Agent reads the repository</li>
-        <li>Agent edits files directly</li>
-        <li>Agent runs commands and tests</li>
-        <li>Agent iterates toward a result</li>
+        <li>Reads the repository</li>
+        <li>Edits files directly</li>
+        <li>Runs commands and tests</li>
+        <li>Iterates toward a result</li>
       </ul>
     </div>
   </v-click>
 </div>
 
 <v-click>
-  <div class="quiet-box">
-    <p>The unit of work moves from <strong>answering a question</strong> to <strong>carrying out a task</strong>.</p>
-  </div>
+  <p class="lead">The unit of work moves from answering a question to <span v-mark="{ at: 3, type: 'underline', color: '#C15F3C' }">carrying out a task</span>.</p>
 </v-click>
 
-<div class="section-tag">1. Conceptual shift</div>
-<div class="slide-no">3</div>
-
 <!--
-Stress the operational difference: with chat, the human is the keyboard operator.
-With an agent, the model has tools and can take actions inside the codebase.
+With chat, the human is the keyboard operator. With an agent, the model has tools
+and takes actions inside the codebase. That is the whole shift.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Decision framework</div>
 
 # When do agents add value?
 
-<div class="fit-grid">
-  <v-click>
-    <div class="fit-list">
-      <h2>Good fit</h2>
-      <ul>
-        <li>Well-defined but tedious work</li>
-        <li>Boilerplate, tests, documentation</li>
-        <li>Codebase exploration and mapping</li>
-        <li>Cross-cutting refactors</li>
-        <li>Project scaffolding and ports</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="fit-list caution">
-      <h2>Poor fit</h2>
-      <ul>
-        <li>Novel scientific decisions</li>
-        <li>Unverifiable outputs</li>
-        <li>Vague exploratory tasks</li>
-        <li>Algorithms you cannot validate</li>
-        <li>Work where explanation takes longer than doing it</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Good fit</span>
+    <ul>
+      <li>Well-defined but tedious work</li>
+      <li>Boilerplate, tests, documentation</li>
+      <li>Codebase exploration and mapping</li>
+      <li>Cross-cutting refactors</li>
+      <li>Scaffolding and Fortran/Matlab → Python ports</li>
+    </ul>
+  </div>
+  <div class="block cool">
+    <span class="tag">Poor fit</span>
+    <ul>
+      <li>Novel scientific decisions</li>
+      <li>Outputs you cannot test objectively</li>
+      <li>Vague, exploratory tasks</li>
+      <li>Algorithms you cannot validate</li>
+      <li>Work quicker to do than to brief</li>
+    </ul>
+  </div>
 </div>
 
-<v-click>
-  <div class="heuristic">
-    <p><strong>Heuristic:</strong> if you could brief a skilled programmer who does not know your field, an agent can probably help.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">1. Conceptual shift</div>
-<div class="slide-no">4</div>
+<p class="note">
+<strong>Heuristic:</strong> if you could brief a skilled programmer who doesn't know your field, an agent can probably help. If it needs judgement only you hold, it cannot.
+</p>
 
 <!--
-This slide should keep the audience away from both extremes: agents are useful, but
-they are not a substitute for scientific judgement or for clear task definition.
+Keep the audience away from both extremes: agents are useful, but they replace
+neither scientific judgement nor clear task definition.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Mental model</div>
 
-# A capable junior collaborator
+# A capable, junior collaborator
 
-<div class="model-grid">
+<div class="cols cols-3">
   <v-click>
-    <div class="model-step">
-      <span>Brief</span>
-      <h2>Give the task shape</h2>
+    <div class="block">
+      <span class="tag">Brief</span>
+      <h3>Give the task shape</h3>
       <p>Deliverable, constraints, files, success criteria.</p>
     </div>
   </v-click>
-
   <v-click>
-    <div class="model-step">
-      <span>Review</span>
-      <h2>Treat output as draft</h2>
+    <div class="block">
+      <span class="tag">Review</span>
+      <h3>Treat output as a draft</h3>
       <p>Read the diff, run the tests, check the assumptions.</p>
     </div>
   </v-click>
-
   <v-click>
-    <div class="model-step">
-      <span>Verify</span>
-      <h2>Own scientific judgement</h2>
-      <p>Reference solutions, units, conservation, physical constraints.</p>
+    <div class="block">
+      <span class="tag">Verify</span>
+      <h3>Keep scientific judgement</h3>
+      <p>Reference values, units, conservation, physical limits.</p>
     </div>
   </v-click>
 </div>
 
 <v-click>
-  <div class="warning-line">
-    Agents can accelerate implementation. They cannot certify scientific correctness.
-  </div>
+  <p class="lead accent">Agents accelerate implementation. They cannot <span v-mark="{ at: 4, type: 'circle', color: '#C15F3C' }">certify scientific correctness</span>.</p>
 </v-click>
 
-<div class="section-tag">1. Conceptual shift</div>
-<div class="slide-no">5</div>
-
 <!--
-End the first section with the core mental model from the notes. This phrase should
-carry through the later workflow and failure-mode sections.
+This phrase — capable but junior collaborator — should carry through the workflow
+and failure-mode sections.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
 ---
 
-<div class="eyebrow">Ecosystem</div>
-
-# Four ways agents show up
-
-<div class="tool-grid">
-  <v-click>
-    <div class="tool-card blue">
-      <span>In-editor agent</span>
-      <h2>Works where you code</h2>
-      <ul>
-        <li>Copilot agent mode</li>
-        <li>Cursor</li>
-        <li>Codex / Claude extensions</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card sage">
-      <span>Local repo agent</span>
-      <h2>Reads, edits, tests locally</h2>
-      <ul>
-        <li>Claude Code</li>
-        <li>Codex CLI</li>
-        <li>Codex App worktrees</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card gold">
-      <span>Cloud PR agent</span>
-      <h2>Delegated issue to PR</h2>
-      <ul>
-        <li>Codex Cloud</li>
-        <li>Copilot cloud agent</li>
-        <li>GitHub-assigned agents</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card accent">
-      <span>High-autonomy agent</span>
-      <h2>Plans and executes longer tasks</h2>
-      <ul>
-        <li>Devin Desktop</li>
-        <li>Concurrent sessions</li>
-        <li>Higher review burden</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="divider">
+  <div class="dnum">PART TWO</div>
+  <h1>The ecosystem</h1>
+  <div class="title-rule"></div>
+  <p>Tools, pricing, and what Oxford researchers already have.</p>
 </div>
 
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">6</div>
+---
+
+<div class="eyebrow">The landscape</div>
+
+# A spectrum of autonomy
+
+<div class="spectrum">
+  <div>
+    <span class="tag">In-editor</span>
+    <h3>Assistive</h3>
+    <ul>
+      <li>Copilot completions</li>
+      <li>Inline chat</li>
+      <li>VS Code agent mode</li>
+    </ul>
+  </div>
+  <div>
+    <span class="tag">Local repo agent</span>
+    <h3>Reads · edits · tests</h3>
+    <ul>
+      <li>Claude Code</li>
+      <li>Codex CLI / App</li>
+    </ul>
+  </div>
+  <div>
+    <span class="tag">Cloud / PR agent</span>
+    <h3>Issue → pull request</h3>
+    <ul>
+      <li>Codex Cloud</li>
+      <li>Copilot cloud agent</li>
+    </ul>
+  </div>
+  <div>
+    <span class="tag">High autonomy</span>
+    <h3>Plans long tasks</h3>
+    <ul>
+      <li>Devin Desktop</li>
+      <li>Concurrent sessions</li>
+    </ul>
+  </div>
+</div>
+
+<div class="axis">
+  <span>Lower autonomy · you review more often</span>
+  <span>Higher autonomy · higher review burden</span>
+</div>
 
 <!--
-Use this as a workflow map, not a ranking. The key point is that agent tools differ
-in where they run and how much autonomy they assume.
+A map, not a ranking. Tools differ in where they run and how much autonomy they assume.
+More autonomy buys leverage and demands more review discipline.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Oxford access</div>
 
-# What Oxford researchers already have
+# What you already have
 
-<div class="access-grid">
-  <v-click>
-    <div class="access-card">
-      <span>ChatGPT Edu</span>
-      <h2>Free via SSO</h2>
-      <ul>
-        <li>Available to current Oxford staff and students</li>
-        <li>Use your Oxford email at chatgpt.com</li>
-        <li>No training on your data by default</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="access-card">
-      <span>Codex</span>
-      <h2>Consent forms required</h2>
-      <ul>
-        <li>Codex Local for App and CLI</li>
-        <li>Codex Cloud for GitHub repositories</li>
-        <li>Counts against ChatGPT Edu weekly limits</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="access-card">
-      <span>OeRC AI Centre</span>
-      <h2>Training and guidance</h2>
-      <ul>
-        <li>AI coding and research guides</li>
-        <li>Getting Started with Codex course</li>
-        <li>Workshops, events, and community</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="cols cols-3">
+  <div class="block">
+    <span class="tag">ChatGPT Edu</span>
+    <h3>Free via SSO</h3>
+    <ul>
+      <li>All current Oxford staff & students</li>
+      <li>Sign in at chatgpt.com with your ox.ac.uk address</li>
+      <li>No training on your data by default</li>
+    </ul>
+  </div>
+  <div class="block">
+    <span class="tag">Codex</span>
+    <h3>Consent forms required</h3>
+    <ul>
+      <li>Codex Local for App & CLI</li>
+      <li>Codex Cloud for GitHub repos</li>
+      <li>Counts against Edu weekly limits (~30/wk)</li>
+    </ul>
+  </div>
+  <div class="block">
+    <span class="tag">OeRC AI Centre</span>
+    <h3>Training & guidance</h3>
+    <ul>
+      <li>AI-for-coding & research guides</li>
+      <li>"Getting Started with Codex" course</li>
+      <li>Workshops, events, community</li>
+    </ul>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Practical start: ChatGPT Edu first; complete Codex consent if you want a real coding agent.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">7</div>
+<p class="note">
+Practical start: <strong>ChatGPT Edu</strong> first; complete the <strong>Codex consent</strong> if you want a real coding agent through Oxford's provision.
+</p>
 
 <!--
-Keep this concrete for Oxford: SSO access, consent forms, and OeRC support.
-The detailed URLs are in the notes; do not make the slide URL-heavy.
+Keep it concrete: SSO access, consent forms, OeRC support. Detailed URLs are in the
+notes — don't make the slide URL-heavy.
 -->
 
 ---
-layout: default
----
 
-<div class="eyebrow">Claude and Claude Code</div>
+<div class="eyebrow">Claude Code · Anthropic</div>
 
 # Local agent, strong codebase comprehension
 
-<div class="tool-grid">
-  <v-click>
-    <div class="tool-card accent">
-      <span>Plans</span>
-      <h2>Pro to Max</h2>
-      <ul>
-        <li>Pro: $17 annual / $20 monthly</li>
-        <li>Max 5x: $100 monthly</li>
-        <li>Max 20x: $200 monthly</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card sage">
-      <span>What it does</span>
-      <h2>Reads, edits, runs</h2>
-      <ul>
-        <li>Works locally in the terminal</li>
-        <li>Searches and edits across the repository</li>
-        <li>Runs tests, build tools, and Git commands</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Plans</span>
+    <ul>
+      <li>Pro — $17/mo annual ($20 monthly)</li>
+      <li>Max 5× — $100/mo</li>
+      <li>Max 20× — $200/mo</li>
+    </ul>
+  </div>
+  <div class="block">
+    <span class="tag">What it does</span>
+    <ul>
+      <li>Runs locally in the terminal</li>
+      <li>Searches & edits across the repo</li>
+      <li>Runs tests, build tools, Git</li>
+    </ul>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Best fit: researchers doing substantial development who want a repository-aware local agent with strong project instructions via <strong>CLAUDE.md</strong>.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">8</div>
+<p class="note">
+Best fit: researchers doing substantial development who want a repository-aware local agent with rich project instructions via <strong>CLAUDE.md</strong>.
+</p>
 
 <!--
-Do not overload with every tier. Mention the pricing anchor and why Claude Code is
-distinctive: local execution, CLAUDE.md, large-codebase comprehension.
+Don't overload with every tier. The pricing anchor plus why it's distinctive:
+local execution, CLAUDE.md, large-codebase comprehension.
 -->
 
 ---
-layout: default
----
 
-<div class="eyebrow">GitHub Copilot and VS Code</div>
+<div class="eyebrow">GitHub Copilot · VS Code</div>
 
-# Lowest-friction IDE path
+# The lowest-friction IDE path
 
-<div class="tool-grid">
-  <v-click>
-    <div class="tool-card blue">
-      <span>Copilot</span>
-      <h2>Embedded in the editor</h2>
-      <ul>
-        <li>Free tier for completions and limited chat</li>
-        <li>Pro listed at $10 monthly</li>
-        <li>Multi-model backend and GitHub integration</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card sage">
-      <span>VS Code agent mode</span>
-      <h2>More than autocomplete</h2>
-      <ul>
-        <li>Multi-step file edits</li>
-        <li>Terminal access and MCP tools</li>
-        <li>Instruction files for persistent context</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Copilot</span>
+    <ul>
+      <li>Free tier: completions + limited chat</li>
+      <li>Pro listed at $10/mo</li>
+      <li>Multi-model backend; GitHub integration</li>
+    </ul>
+  </div>
+  <div class="block">
+    <span class="tag">VS Code agent mode</span>
+    <ul>
+      <li>Multi-step file edits</li>
+      <li>Terminal access and MCP tools</li>
+      <li>Instruction files for persistent context</li>
+    </ul>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p><strong>Important:</strong> new Copilot sign-ups for Pro, Pro+, Max, and student plans were paused April-June 2026.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">9</div>
+<p class="note">
+<strong>Note:</strong> new Copilot sign-ups (Pro, Pro+, Max, student) were <span v-mark="{ at: 1, type: 'highlight', color: 'rgba(193,95,60,0.18)' }">paused April–June 2026</span>. Existing plans can still upgrade.
+</p>
 
 <!--
 The sign-up pause is a required content note. Frame Copilot as the easiest starting
-point for VS Code users, while noting that availability may change.
+point for VS Code users, noting availability may change.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Agent IDEs</div>
 
 # Cursor and Devin Desktop
 
-<div class="tool-grid">
-  <v-click>
-    <div class="tool-card gold">
-      <span>Cursor</span>
-      <h2>Polished VS Code fork</h2>
-      <ul>
-        <li>Hobby free tier; Pro at $20 monthly</li>
-        <li>Agent mode, cloud agents, Bugbot review</li>
-        <li>Strong all-in-one IDE experience</li>
-      </ul>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="tool-card accent">
-      <span>Devin Desktop</span>
-      <h2>Formerly Windsurf</h2>
-      <ul>
-        <li>Free light quota; Pro at $20 monthly</li>
-        <li>Highest autonomy among tools discussed</li>
-        <li>Issue to plan, code, test, and PR workflow</li>
-      </ul>
-    </div>
-  </v-click>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Cursor</span>
+    <h3>Polished VS Code fork</h3>
+    <ul>
+      <li>Hobby free tier; Pro at $20/mo</li>
+      <li>Agent mode, cloud agents, Bugbot review</li>
+      <li>Strong all-in-one IDE experience</li>
+    </ul>
+  </div>
+  <div class="block">
+    <span class="tag">Devin Desktop</span>
+    <h3>Formerly Windsurf</h3>
+    <ul>
+      <li>Free light quota; Pro at $20/mo</li>
+      <li>Highest autonomy of the tools here</li>
+      <li>Issue → plan → code → test → PR</li>
+    </ul>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Higher autonomy increases leverage and risk. Good Git workflow and review discipline matter more, not less.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">10</div>
+<p class="note">
+Higher autonomy increases leverage <em>and</em> risk. Good Git workflow and review discipline matter more, not less.
+</p>
 
 <!--
-Explicitly mention Windsurf to Devin Desktop. Keep this slide comparative: Cursor
-is the polished IDE route; Devin is the high-autonomy route.
+Explicitly state the Windsurf → Devin Desktop rebrand. Cursor is the polished IDE route;
+Devin is the high-autonomy route.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Choosing a tool</div>
 
 # Start from access, then fit the workflow
 
-<div class="decision-flow">
-  <v-click>
-    <div class="decision-step">
-      <span>1</span>
-      <h2>Oxford provision?</h2>
-      <p>Start with ChatGPT Edu. Use Codex after consent.</p>
-    </div>
-  </v-click>
+<ul class="steps">
+  <v-click><li>Use Oxford provision first — ChatGPT Edu, then Codex after consent.</li></v-click>
+  <v-click><li>Already in VS Code? Try Copilot agent mode or a Codex / Claude extension.</li></v-click>
+  <v-click><li>Want deep local work? Claude Code or Codex CLI/App for repository-level tasks.</li></v-click>
+  <v-click><li>Sustained heavy development? Consider Cursor or Devin when it justifies paid autonomy.</li></v-click>
+</ul>
 
-  <v-click>
-    <div class="decision-step">
-      <span>2</span>
-      <h2>Already in VS Code?</h2>
-      <p>Try Copilot agent mode or a Codex / Claude extension.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="decision-step">
-      <span>3</span>
-      <h2>Want deep local work?</h2>
-      <p>Claude Code or Codex CLI/App for repository-level tasks.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="decision-step">
-      <span>4</span>
-      <h2>Sustained heavy dev?</h2>
-      <p>Consider Cursor or Devin when the workflow justifies paid autonomy.</p>
-    </div>
-  </v-click>
-</div>
-
-<v-click>
-  <div class="note-strip">
-    <p>The tool choice matters less than the workflow: scope tightly, work on branches, verify the output.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">2. Ecosystem</div>
-<div class="slide-no">11</div>
+<p class="note">
+The tool matters less than the workflow: <strong>scope tightly, work on branches, verify the output</strong>.
+</p>
 
 <!--
-This is the transition into practical workflows. Do not let the tool comparison
-become the point of the seminar; bring the audience back to workflow discipline.
+Transition into practical workflows. Don't let the tool comparison become the point;
+bring the audience back to workflow discipline.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
 ---
 
-<div class="eyebrow">Practical workflows</div>
-
-# Before you start: scope the task
-
-<div class="scope-list">
-  <v-click>
-    <div class="scope-item">
-      <span>01</span>
-      <p>What is the concrete deliverable?</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="scope-item">
-      <span>02</span>
-      <p>How will I know if it worked?</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="scope-item">
-      <span>03</span>
-      <p>What does the agent need to know?</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="scope-item">
-      <span>04</span>
-      <p>What should it not do?</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="scope-item">
-      <span>05</span>
-      <p>Is this the right tool for this task?</p>
-    </div>
-  </v-click>
+<div class="divider">
+  <div class="dnum">PART THREE</div>
+  <h1>Practical workflows</h1>
+  <div class="title-rule"></div>
+  <p>How to actually work with an agent — scope, context, safety, verification.</p>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Vague tasks fail the same way they fail with junior collaborators, just faster and more confidently.</p>
-  </div>
-</v-click>
+---
 
-<div class="section-tag">3. Practical workflows</div>
-<div class="slide-no">12</div>
+<div class="eyebrow">Before you start</div>
+
+# Scope the task
+
+<div class="cols" style="grid-template-columns: 1.1fr 1fr; align-items: start;">
+
+<ul class="steps">
+  <li>What is the concrete deliverable?</li>
+  <li>How will I know it worked?</li>
+  <li>What does the agent need to know?</li>
+  <li>What should it <em>not</em> do?</li>
+  <li>Is this the right tool for this task?</li>
+</ul>
+
+```python
+# A deliverable — an agent can act on this
+def load_var(path: str, name: str) -> np.ma.MaskedArray:
+    """Read `name` from a NetCDF file as a masked array."""
+    ...
+
+# Not a deliverable
+#   "improve the data loading code"
+```
+
+</div>
+
+<p class="note">
+Vague tasks fail the way they fail with junior collaborators — just faster, and more confidently.
+</p>
 
 <!--
-Keep the five questions as the operational checklist. Give one concrete example:
-"a function that reads a NetCDF file and returns a masked numpy array" is a
-deliverable; "improve the data loading code" is not.
+The five questions are the operational checklist. The code makes the deliverable vs.
+non-deliverable distinction concrete.
 -->
 
 ---
-layout: default
+layout: two-cols-header
+layoutClass: gap-10
 ---
 
 <div class="eyebrow">Providing context</div>
 
 # Make the brief unambiguous
 
-<div class="brief-grid">
-  <v-click>
-    <div class="brief-card accent">
-      <span>Persistent context</span>
-      <h2>Project instructions</h2>
-      <p><strong>CLAUDE.md</strong>, <strong>AGENTS.md</strong>, or <strong>.github/copilot-instructions.md</strong></p>
-    </div>
-  </v-click>
+::left::
 
-  <v-click>
-    <div class="brief-card sage">
-      <span>Scientific context</span>
-      <h2>What code cannot infer</h2>
-      <p>Equations, expected ranges, numerical pitfalls, physical constraints.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="brief-card blue">
-      <span>Task context</span>
-      <h2>Point to the code</h2>
-      <p>Use file paths and function names, not vague descriptions.</p>
-    </div>
-  </v-click>
+<div class="cols" style="grid-template-columns: 1fr; gap: 1.3rem;">
+  <div class="block">
+    <span class="tag">Persistent</span>
+    <p>Project instructions: <strong>CLAUDE.md</strong>, <strong>AGENTS.md</strong>, <strong>copilot-instructions.md</strong>.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Scientific</span>
+    <p>What the code can't reveal: equations, expected ranges, numerical pitfalls, physical constraints.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Task</span>
+    <p>Point to the code: <code>advect()</code> in <code>src/dynamics/advection.py</code> — not "the advection function".</p>
+  </div>
 </div>
 
-<v-click>
-  <div class="prompt-example">
-    <p>Work on <strong>src/dynamics/advection.py::advect()</strong>. Preserve the public API. Add tests for mass conservation and boundary behaviour.</p>
-  </div>
-</v-click>
+::right::
 
-<div class="section-tag">3. Practical workflows</div>
-<div class="slide-no">13</div>
+<<< @/snippets/CLAUDE.example.md
 
 <!--
-Emphasise that agents are good at repository context but poor at guessing domain
-constraints. Mention examples from the notes: divergence-free velocity fields,
-positive tracer values, and CFL-style timestep constraints.
+Agents are good at repository context, poor at guessing domain constraints: divergence-free
+velocity fields, positive tracers, CFL timestep limits. Persist that in the instruction file.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Context management</div>
 
 # Context is a budget
 
-<div class="context-grid">
-  <v-click>
-    <div class="context-card">
-      <span>Cost</span>
-      <p>Every token in and out is paid for.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="context-card">
-      <span>Attention</span>
-      <p>Long histories accumulate stale detail.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="context-card">
-      <span>Strategy</span>
-      <p>Use compact tasks with clear endpoints.</p>
-    </div>
-  </v-click>
+<div class="cols cols-3">
+  <div class="block">
+    <span class="tag">Cost</span>
+    <p>Every token in and out is paid for.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Attention</span>
+    <p>Long histories accumulate stale detail and degrade quality.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Strategy</span>
+    <p>Chain compact, well-scoped tasks with clear endpoints.</p>
+  </div>
 </div>
 
-<div class="context-actions">
-  <v-click>
-    <div>Start fresh after a completed sub-task</div>
-  </v-click>
-  <v-click>
-    <div>Use <strong>/compact</strong> when the session is useful but long</div>
-  </v-click>
-  <v-click>
-    <div>Store persistent rules in instruction files</div>
-  </v-click>
-  <v-click>
-    <div>Give paths; do not paste full large files</div>
-  </v-click>
+<div class="flow">
+  <span>Start fresh after a sub-task</span>
+  <span class="arrow">·</span>
+  <span><code>/compact</code> when long but useful</span>
+  <span class="arrow">·</span>
+  <span>Persist rules in instruction files</span>
+  <span class="arrow">·</span>
+  <span>Give paths, not full files</span>
 </div>
-
-<div class="section-tag">3. Practical workflows</div>
-<div class="slide-no">14</div>
 
 <!--
-The message is not that context windows are small; they are large, but cost and
-attention still matter. Use this slide to normalise starting fresh and compacting
-instead of dragging every session forward forever.
+Context windows are large, but cost and attention still matter. Normalise starting fresh
+and compacting instead of dragging every session forward forever.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Working safely</div>
 
 # Git is the safety net
 
-<div class="git-flow">
-  <v-click><div><span>1</span><p>Create a branch</p></div></v-click>
-  <v-click><div><span>2</span><p>Let the agent work</p></div></v-click>
-  <v-click><div><span>3</span><p>Commit checkpoints</p></div></v-click>
-  <v-click><div><span>4</span><p>Review the diff</p></div></v-click>
-  <v-click><div><span>5</span><p>Run tests, then merge or PR</p></div></v-click>
-</div>
-
 <v-click>
-
-<pre class="safe-workflow"><code>git checkout -b agent/feature-name
-# agent works and commits incrementally
-git diff
-npm test  # or pytest, cargo test, ...</code></pre>
-
+  <p class="lead">Treat the agent's output like a PR from a collaborator you respect but don't <span v-mark="{ at: 1, type: 'underline', color: '#C15F3C' }">yet fully trust</span>.</p>
 </v-click>
 
-<v-click>
-  <div class="note-strip">
-    <p>Keep <strong>.gitignore</strong> current so credentials, data files, and build artefacts do not become agent commits.</p>
-  </div>
-</v-click>
+```bash {1|2|3|4|all}
+git checkout -b agent/feature-name   # never let an agent work on main
+# the agent works and commits incrementally
+git diff                             # review every change before accepting
+pytest                               # or npm test, cargo test, ...
+```
 
-<div class="section-tag">3. Practical workflows</div>
-<div class="slide-no">15</div>
+<p class="note">
+Keep <strong>.gitignore</strong> current so credentials, data files, and build artefacts never become agent commits.
+</p>
 
 <!--
-Frame this as one of the most important practices. The agent's output should be
-treated like a pull request from a collaborator you respect but do not fully trust.
+One of the most important practices. Commit checkpoints let you git checkout back to a
+known-good state if a session goes wrong.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Verifying outputs</div>
 
 # Trust comes from checks, not confidence
 
-<div class="verify-ladder">
-  <v-click>
-    <div class="verify-step"><span>Tests</span><p>Ask for tests alongside implementation.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="verify-step"><span>Reference</span><p>Compare to analytical, slower, literature, or previous results.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="verify-step"><span>Physics</span><p>Check conservation, positivity, boundaries, units.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="verify-step"><span>Suite</span><p>Run existing tests for shared-code regressions.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="verify-step"><span>Read</span><p>Read the code that enters your research software.</p></div>
-  </v-click>
-</div>
+<ul class="steps">
+  <v-click><li><strong>Tests</strong> — ask for them alongside the implementation.</li></v-click>
+  <v-click><li><strong>Reference</strong> — compare to analytical, slower, literature, or prior results.</li></v-click>
+  <v-click><li><strong>Physics</strong> — conservation, positivity, boundaries, units.</li></v-click>
+  <v-click><li><strong>Suite</strong> — run existing tests to catch shared-code regressions.</li></v-click>
+  <v-click><li><strong>Read</strong> — read the code that enters your research software.</li></v-click>
+</ul>
 
 <v-click>
-  <div class="warning-line compact">
-    Agent-written numerical code is not accepted until it is validated.
-  </div>
+  <p class="lead accent">Agent-written numerical code is not accepted until it is validated.</p>
 </v-click>
 
-<div class="section-tag">3. Practical workflows</div>
-<div class="slide-no">16</div>
-
 <!--
-This is the bridge into the later failure-mode section. Scientific correctness
-gets a dedicated slide later, but this workflow section should already establish
-that verification is part of the task, not a separate optional step.
+The bridge into failure modes. Verification is part of the task, not an optional extra step.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
+---
+
+<div class="divider">
+  <div class="dnum">PART FOUR</div>
+  <h1>Deep dives</h1>
+  <div class="title-rule"></div>
+  <p>Claude Code and Codex — and the cost mechanics underneath.</p>
+</div>
+
 ---
 
 <div class="eyebrow">Claude Code in depth</div>
 
-# Use it like a controlled coding session
+# Run it like a controlled session
 
-<div class="deep-grid">
-  <v-click>
-    <div class="deep-card accent">
-      <span>Memory</span>
-      <h2>CLAUDE.md</h2>
-      <p>Purpose, conventions, tests, domain constraints, and boundaries.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="deep-card sage">
-      <span>Planning</span>
-      <h2>Read first, edit later</h2>
-      <p>Use plan mode for unclear, multi-file, or unfamiliar work.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="deep-card blue">
-      <span>Parallelism</span>
-      <h2>Worktrees</h2>
-      <p>Independent branches for parallel sessions or alternative approaches.</p>
-    </div>
-  </v-click>
+<div class="cols cols-3">
+  <div class="block">
+    <span class="tag">Memory</span>
+    <h3>CLAUDE.md</h3>
+    <p>Purpose, conventions, tests, domain constraints, boundaries. <code>/init</code> to start.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Planning</span>
+    <h3>Read first, edit later</h3>
+    <p>Plan mode (<code>Shift+Tab</code>) for unclear, multi-file, or unfamiliar work.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Parallelism</span>
+    <h3>Worktrees</h3>
+    <p>Isolated branches for parallel sessions or alternative approaches.</p>
+  </div>
 </div>
 
-<v-click>
-  <div class="phase-strip">
-    <div>Explore</div>
-    <div>Plan</div>
-    <div>Implement</div>
-    <div>Commit</div>
-  </div>
-</v-click>
+<div class="flow">
+  <span>Explore</span><span class="arrow">→</span>
+  <span>Plan</span><span class="arrow">→</span>
+  <span>Implement</span><span class="arrow">→</span>
+  <span>Commit</span>
+</div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Common mistake: letting the session run too long without checkpoints, compaction, or scientific verification.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">4. Deep dives</div>
-<div class="slide-no">17</div>
+<p class="note">
+Common mistake: letting a session run long without checkpoints, compaction, or scientific verification.
+</p>
 
 <!--
-This is a Claude Code workflow slide, not another feature list. Mention /init for
-CLAUDE.md, Shift+Tab for plan mode, Ctrl+G for editing a plan, /compact for long
-sessions, and worktrees for parallel isolation.
+A workflow slide, not a feature list. /init for CLAUDE.md, Shift+Tab for plan mode,
+/compact for long sessions, worktrees for parallel isolation.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Codex in depth</div>
 
 # A family of coding agents
 
-<div class="codex-map">
-  <v-click>
-    <div class="codex-surface app"><span>App</span><p>Visual workspace for parallel local tasks.</p></div>
-  </v-click>
-  <v-click>
-    <div class="codex-surface cli"><span>CLI</span><p>Terminal-native and scriptable.</p></div>
-  </v-click>
-  <v-click>
-    <div class="codex-surface cloud"><span>Cloud</span><p>GitHub issue to pull request.</p></div>
-  </v-click>
-  <v-click>
-    <div class="codex-surface ide"><span>Extension</span><p>Agent work without leaving the editor.</p></div>
-  </v-click>
+<div class="cols cols-4 tight">
+  <div class="block"><span class="tag">App</span><p>Visual workspace for parallel local tasks.</p></div>
+  <div class="block"><span class="tag">CLI</span><p>Terminal-native and scriptable.</p></div>
+  <div class="block"><span class="tag">Cloud</span><p>GitHub issue → pull request.</p></div>
+  <div class="block"><span class="tag">Extension</span><p>Agent work without leaving the editor.</p></div>
 </div>
 
-<div class="codex-workflow">
-  <v-click><div>Issue</div></v-click>
-  <v-click><div>Explore repo</div></v-click>
-  <v-click><div>Implement</div></v-click>
-  <v-click><div>Run tests</div></v-click>
-  <v-click><div>Open PR</div></v-click>
+<div class="flow">
+  <span>Issue</span><span class="arrow">→</span>
+  <span>Explore repo</span><span class="arrow">→</span>
+  <span>Implement</span><span class="arrow">→</span>
+  <span>Run tests</span><span class="arrow">→</span>
+  <span>Open PR</span>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>At Oxford, Codex uses the ChatGPT Edu weekly allowance; treat those tasks as scarce and review PRs carefully.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">4. Deep dives</div>
-<div class="slide-no">18</div>
+<p class="note">
+At Oxford, Codex draws on the ChatGPT Edu weekly allowance — treat those tasks as scarce, and review every PR for the science.
+</p>
 
 <!--
-Mention Codex Skills as modular project-specific capabilities, Automations for
-event-triggered behaviour, and worktrees as the safety mechanism for parallel
-tasks. For scientific issues, the PR still needs careful review.
+Skills as modular capabilities, Automations for event-triggered behaviour, worktrees as the
+safety mechanism for parallel tasks. Scientific PRs still need careful review.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Cost mechanics</div>
 
 # Agent cost is multiplicative
 
-<div class="token-loop">
-  <v-click><div><span>1</span><p>Read files</p></div></v-click>
-  <v-click><div><span>2</span><p>Reason and plan</p></div></v-click>
-  <v-click><div><span>3</span><p>Write code</p></div></v-click>
-  <v-click><div><span>4</span><p>Run commands</p></div></v-click>
-  <v-click><div><span>5</span><p>Read output</p></div></v-click>
-  <v-click><div><span>6</span><p>Correct mistakes</p></div></v-click>
+<div class="flow">
+  <span>Read files</span><span class="arrow">→</span>
+  <span>Reason & plan</span><span class="arrow">→</span>
+  <span>Write code</span><span class="arrow">→</span>
+  <span>Run commands</span><span class="arrow">→</span>
+  <span>Read output</span><span class="arrow">→</span>
+  <span>Correct mistakes</span>
 </div>
 
 <v-click>
-  <div class="cost-callout">
-    <span>100k-500k tokens</span>
-    <p>A complex task on a medium-sized codebase can land in this range.</p>
-  </div>
+  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">100k–500k tokens</span> — roughly $5–$50 at Opus pricing.</p>
 </v-click>
 
-<v-click>
-  <div class="note-strip">
-    <p>Overspend usually comes from long context, mismatched models, redundant reads, runaway agents, or parallel agents without enough benefit.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">4. Deep dives</div>
-<div class="slide-no">19</div>
+<p class="note">
+Overspend usually comes from long context, mismatched models, redundant reads, runaway agents, or parallel agents without the benefit to match.
+</p>
 
 <!--
-Use this to explain why agent costs do not feel like one prompt. Each action can
-create new input and output tokens. Mention that Opus 4.8 API pricing makes a
-single complex task plausibly $5-$50 in the notes' example.
+Each action creates new input and output tokens, so cost doesn't feel like one prompt.
+On subscription plans, a few large tasks can exhaust the monthly allocation.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Cost comparison</div>
 
 # Choose the cheapest reliable mode
 
-<div class="cost-table">
-  <div class="head">Mode</div>
-  <div class="head">Typical fit</div>
-  <div class="head">Watch for</div>
+| Mode | Typical fit | Watch for |
+|---|---|---|
+| Oxford ChatGPT Edu | Learning, scoping, limited Codex tasks | ~30 Codex queries/week |
+| Claude Pro / ChatGPT Plus | Occasional short coding sprints | Quota exhaustion on large repos |
+| Claude Max / ChatGPT Pro | Regular agent-driven development | Soft limits, not hard caps |
+| API billing | Automation, bulk, scripted work | Can spike without monitoring |
 
-  <v-click>
-    <div>Oxford ChatGPT Edu</div>
-    <div>Learning, scoping, limited Codex tasks</div>
-    <div>~30 Codex queries/week</div>
-  </v-click>
-
-  <v-click>
-    <div>Claude Pro / ChatGPT Plus</div>
-    <div>Occasional short coding sprints</div>
-    <div>Quota exhaustion on large repos</div>
-  </v-click>
-
-  <v-click>
-    <div>Claude Max / ChatGPT Pro</div>
-    <div>Regular agent-driven development</div>
-    <div>Soft limits, not hard caps</div>
-  </v-click>
-
-  <v-click>
-    <div>API billing</div>
-    <div>Automation, bulk, scripted workloads</div>
-    <div>Can spike without monitoring</div>
-  </v-click>
-</div>
-
-<v-click>
-  <div class="cost-rules">
-    <div>Match model to task before starting</div>
-    <div>Compact or clear long sessions</div>
-    <div>Monitor usage; batch non-interactive work</div>
-  </div>
-</v-click>
-
-<div class="section-tag">4. Deep dives</div>
-<div class="slide-no">20</div>
+<p class="note">
+Match the model to the task <em>before</em> starting · compact or clear long sessions · monitor usage and batch non-interactive work.
+</p>
 
 <!--
-Keep this table intentionally coarse. The exact price list is in the notes and
-changes quickly. The actionable message is to choose the cheapest reliable mode,
-avoid retrying the same bad prompt on stronger models, and monitor spend.
+Intentionally coarse — exact prices are in the notes and move fast. The message: cheapest
+reliable mode, don't retry the same bad prompt on a stronger model, monitor spend.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
+---
+
+<div class="divider">
+  <div class="dnum">PART FIVE</div>
+  <h1>Failure modes &amp; risks</h1>
+  <div class="title-rule"></div>
+  <p>The sober assessment — starting with the one that matters most here.</p>
+</div>
+
 ---
 
 <div class="eyebrow">Failure mode #1</div>
 
 # Scientific correctness
 
-<v-click>
-  <div class="science-risk">
-    <p>The code runs. The tests pass. The result looks plausible. The science is wrong.</p>
-  </div>
-</v-click>
+<p class="lead accent">The code runs. The tests pass. The result looks plausible. <span v-mark="{ at: 0, type: 'circle', color: '#C15F3C' }">The science is wrong.</span></p>
 
-<div class="risk-grid">
-  <v-click><div><span>Sign</span><p>Wrong direction, right magnitude.</p></div></v-click>
-  <v-click><div><span>Units</span><p>Conversion error hidden by scale.</p></div></v-click>
-  <v-click><div><span>Indexing</span><p>Boundary or staggering mistake.</p></div></v-click>
-  <v-click><div><span>Physics</span><p>Missed conservation, positivity, or CFL constraints.</p></div></v-click>
+<div class="cols cols-4 tight">
+  <div class="block"><span class="tag">Sign</span><p>Right magnitude, wrong direction.</p></div>
+  <div class="block"><span class="tag">Units</span><p>Conversion error hidden by scale.</p></div>
+  <div class="block"><span class="tag">Indexing</span><p>Boundary or staggering mistake.</p></div>
+  <div class="block"><span class="tag">Physics</span><p>Missed conservation, positivity, CFL.</p></div>
 </div>
 
-<v-click>
-  <div class="warning-line compact">
-    Never deploy agent-written numerical code without validation against reference values.
-  </div>
-</v-click>
-
-<div class="section-tag">5. Failure modes and risks</div>
-<div class="slide-no">21</div>
+<p class="note">
+Never deploy agent-written numerical code without validation against reference values. For any algorithm of consequence, read it line by line.
+</p>
 
 <!--
-This is the most important failure mode for the audience. Explain that the danger
-is not dramatic failure; it is plausible, confident, executable wrongness. The
-mitigation from the notes: test against known solutions and read consequential
-algorithms line by line.
+The most important failure mode for this audience. The danger is not dramatic failure —
+it is plausible, confident, executable wrongness.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Other technical failure modes</div>
 
 # Plausible, broken, or unreproducible
 
-<div class="failure-stack">
-  <v-click>
-    <div class="failure-row"><span>Hallucination</span><p>Invented APIs, constants, papers, or claims about existing code.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="failure-row"><span>Dependencies</span><p>Packages that do not exist, do not match the API, or add risk.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="failure-row"><span>Repository damage</span><p>Deleted files, scope creep, sensitive data, or unsafe Git operations.</p></div>
-  </v-click>
-
-  <v-click>
-    <div class="failure-row"><span>Reproducibility</span><p>Unrecorded environment assumptions, randomness, or changing data sources.</p></div>
-  </v-click>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Hallucination</span>
+    <p>Invented APIs, constants, papers, or claims about existing code.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Dependencies</span>
+    <p>Packages that don't exist, don't match the API, or add risk.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Repository damage</span>
+    <p>Deleted files, scope creep, sensitive data, unsafe Git operations.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Reproducibility</span>
+    <p>Unrecorded environments, randomness, or shifting data sources.</p>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Run the code, check imports and dependencies, inspect <strong>git status</strong> and <strong>git diff</strong>, and record versions.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">5. Failure modes and risks</div>
-<div class="slide-no">22</div>
+<p class="note">
+Run the code · check imports & dependencies · inspect <code>git status</code> and <code>git diff</code> · record versions and set seeds.
+</p>
 
 <!--
-Use concrete examples from the notes. Agents can invent APIs, suggest problematic
-dependencies, modify files outside scope, or create code that only works in one
-environment. Keep the mitigation practical.
+Concrete examples from the notes. Keep the mitigation practical and routine.
 -->
 
 ---
-layout: default
----
 
-<div class="eyebrow">Security, governance, training</div>
+<div class="eyebrow">Security · governance · training</div>
 
 # Check the rules before the workflow
 
-<div class="governance-grid">
-  <v-click>
-    <div class="governance-card accent">
-      <span>Data handling</span>
-      <p>Credentials, unpublished data, patient data, commercial data, export controls.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="governance-card sage">
-      <span>Disclosure</span>
-      <p>Authorship, attribution, licensing, and reproducibility obligations.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="governance-card blue">
-      <span>Students</span>
-      <p>Check official university guidance; use as a learning tool within assessment rules.</p>
-    </div>
-  </v-click>
+<div class="cols cols-3">
+  <div class="block">
+    <span class="tag">Data handling</span>
+    <p>Credentials, unpublished data, patient or commercial data, export controls.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Disclosure</span>
+    <p>Authorship, attribution, licensing, reproducibility obligations.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Students</span>
+    <p>A risk to skill-building <em>and</em> an excellent learning tool — within assessment rules.</p>
+  </div>
 </div>
 
-<v-click>
-  <div class="note-strip">
-    <p>Oxford ChatGPT Edu and Codex inputs are not used for model training; data residency is in the US.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">5. Failure modes and risks</div>
-<div class="slide-no">23</div>
+<p class="note">
+Oxford ChatGPT Edu and Codex inputs are <strong>not used for model training</strong>; data residency is in the US.
+</p>
 
 <!--
-Keep the student point nuanced: agents can weaken skill development if they produce
-code students do not understand, but can be excellent learning tools for tutoring,
-worked examples, and line-by-line explanation.
+Keep the student point nuanced: agents can weaken skill development if students don't
+understand the output, but are excellent for tutoring, worked examples, and explanation.
 -->
 
----
-layout: default
 ---
 
 <div class="eyebrow">Takeaway</div>
 
 # When to use agents
 
-<div class="use-table">
-  <div class="head">Use</div>
-  <div class="head">Be cautious</div>
-  <div class="head">Do not skip</div>
+| Use | Be cautious | Don't skip |
+|---|---|---|
+| Well-scoped implementation | Scientific decisions | Reference checks |
+| Tests, docs, scaffolding | Unverifiable outputs | Diff review |
+| Repository exploration | Sensitive data | Dependency review |
+| Mechanical multi-file changes | Long unsupervised runs | Scientific ownership |
 
-  <v-click>
-    <div>Well-scoped implementation</div>
-    <div>Scientific decisions</div>
-    <div>Reference checks</div>
-  </v-click>
-
-  <v-click>
-    <div>Tests, docs, scaffolding</div>
-    <div>Unverifiable outputs</div>
-    <div>Diff review</div>
-  </v-click>
-
-  <v-click>
-    <div>Repository exploration</div>
-    <div>Sensitive data</div>
-    <div>Dependency review</div>
-  </v-click>
-
-  <v-click>
-    <div>Mechanical multi-file changes</div>
-    <div>Long unsupervised runs</div>
-    <div>Scientific ownership</div>
-  </v-click>
-</div>
-
-<v-click>
-  <div class="summary-line">
-    Agents accelerate implementation; researchers remain responsible for correctness.
-  </div>
-</v-click>
-
-<div class="section-tag">5. Failure modes and risks</div>
-<div class="slide-no">24</div>
+<p class="lead accent">Agents accelerate implementation; researchers stay responsible for correctness.</p>
 
 <!--
-Use this as the summary reference before moving into the optional live demo. It
-should bring together the whole seminar: scope tightly, branch, verify, and keep
+The summary reference before the optional demo: scope tightly, branch, verify, and keep
 scientific judgement with the researcher.
 -->
 
 ---
-layout: default
+layout: center
+class: divider
+---
+
+<div class="divider">
+  <div class="dnum">PART SIX</div>
+  <h1>Live demo</h1>
+  <div class="title-rule"></div>
+  <p>Process, not spectacle.</p>
+</div>
+
 ---
 
 <div class="eyebrow">Live demo</div>
 
-# Process, not spectacle
+# A small model, a real workflow
 
-<div class="demo-frame">
-  <v-click>
-    <div class="demo-target">
-      <span>Target</span>
-      <p>Small scientific Python model; functional code, no tests.</p>
-    </div>
-  </v-click>
-
-  <v-click>
-    <div class="demo-script">
-      <div><span>1</span><p>Ask the agent to explain the codebase.</p></div>
-      <div><span>2</span><p>Show project instructions and scientific constraints.</p></div>
-      <div><span>3</span><p>Request a test plan before implementation.</p></div>
-      <div><span>4</span><p>Implement, inspect the diff, run the tests.</p></div>
-    </div>
-  </v-click>
+<div class="block" style="margin-top: 1.6rem;">
+  <span class="tag">Target</span>
+  <p>A ~200-line scientific Python model — a 1D advection or heat-equation solver. It works, but has no tests.</p>
 </div>
 
-<v-click>
-  <div class="demo-question">
-    <p>But are these tests sufficient?</p>
-  </div>
-</v-click>
+<ul class="steps">
+  <li>Ask the agent to explain the codebase.</li>
+  <li>Show CLAUDE.md — project instructions and a scientific constraint.</li>
+  <li>Request a test plan <em>before</em> implementation.</li>
+  <li>Implement, inspect the diff, run the tests.</li>
+</ul>
 
-<v-click>
-  <div class="note-strip">
-    <p>The demo should show the workflow: scope, context, plan, diff review, tests, and scientific judgement.</p>
-  </div>
-</v-click>
-
-<div class="section-tag">6. Live demo</div>
-<div class="slide-no">25</div>
+<p class="lead accent">But are these tests sufficient?</p>
 
 <!--
-Use the recommended demo from seminar_notes.md: codebase onboarding plus targeted
-test writing for a small scientific Python script such as a 1D advection or heat
-equation solver. Keep it low risk and reproducible. The debrief line is that the
-agent did useful work, but the researcher still judged test sufficiency and science.
+Low-risk, reproducible, honest. The debrief: the agent did useful work in 5 minutes, but
+the researcher judged test sufficiency and the science. Highlight the gap between passing
+tests and scientific validity.
+-->
+
+---
+layout: center
+class: takeaways
+---
+
+<div class="eyebrow">In closing</div>
+
+# Six things to take away
+
+<ul class="steps" style="max-width: 54rem;">
+  <li>Agent-driven development is real and useful — for well-scoped tasks with clear criteria.</li>
+  <li>The shift is from answering questions to taking actions.</li>
+  <li>You already have access — ChatGPT Edu and Codex via SSO, with OeRC support.</li>
+  <li>The bottleneck moves to task definition, context, and verification.</li>
+  <li>Scientific correctness is your responsibility.</li>
+  <li>Use Git as your safety net — branches, commits, diffs.</li>
+</ul>
+
+<!--
+Bring the whole seminar together before discussion. Points curated from notes §6.4.
+-->
+
+---
+layout: center
+class: discussion
+---
+
+<div class="eyebrow">Over to you</div>
+
+# Discussion
+
+<div class="qlist">
+  <div>
+    <span class="tag">Warm-up</span>
+    <p>Have you used an agent on real research code? What happened?</p>
+  </div>
+  <div>
+    <span class="tag">Practical</span>
+    <p>What's the most tedious part of your workflow — a candidate for an agent?</p>
+  </div>
+  <div>
+    <span class="tag">Conceptual</span>
+    <p>How would you verify that agent-written numerical code is scientifically correct?</p>
+  </div>
+  <div>
+    <span class="tag">Governance</span>
+    <p>What would you check before signing off a student's agent-written pipeline?</p>
+  </div>
+  <div>
+    <span class="tag">Sceptical</span>
+    <p>When is agent-driven development <em>not</em> the right choice?</p>
+  </div>
+  <div>
+    <span class="tag">Sceptical</span>
+    <p>What would make you trust agent-written code in a published result?</p>
+  </div>
+</div>
+
+<!--
+Questions curated from notes §6.3. Open with the warm-up to get people talking.
 -->
