@@ -275,3 +275,172 @@
   line-height: 1.25;
   margin-top: 1.5rem;
 }
+
+.landscape {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 0.9fr repeat(3, minmax(0, 1fr));
+  margin-top: 1.2rem;
+}
+
+.landscape > div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+}
+
+.landscape .axis {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  display: flex;
+  font-size: 0.82rem;
+  font-weight: 720;
+  justify-content: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landscape h2,
+.access-card h2,
+.tool-card h2,
+.decision-step h2 {
+  color: var(--ink);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.15rem;
+  margin: 0 0 0.45rem;
+}
+
+.landscape p,
+.access-card p,
+.tool-card p,
+.decision-step p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.access-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.45rem;
+}
+
+.access-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 13rem;
+  padding: 1rem;
+}
+
+.access-card span,
+.tool-card span {
+  color: var(--claude);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.access-card ul,
+.tool-card ul,
+.decision-step ul {
+  margin: 0.65rem 0 0;
+  padding-left: 1rem;
+}
+
+.access-card li,
+.tool-card li,
+.decision-step li {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.access-card li + li,
+.tool-card li + li,
+.decision-step li + li {
+  margin-top: 0.3rem;
+}
+
+.tool-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.25rem;
+}
+
+.tool-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tool-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 10rem;
+  padding: 1rem;
+}
+
+.tool-card.accent {
+  border-top: 4px solid var(--claude);
+}
+
+.tool-card.sage {
+  border-top: 4px solid var(--sage);
+}
+
+.tool-card.blue {
+  border-top: 4px solid var(--blue);
+}
+
+.tool-card.gold {
+  border-top: 4px solid var(--gold);
+}
+
+.note-strip {
+  background: var(--panel-soft);
+  border-left: 4px solid var(--claude);
+  color: var(--ink);
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.note-strip p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.decision-flow {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1.4rem;
+}
+
+.decision-step {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 11.4rem;
+  padding: 0.95rem;
+}
+
+.decision-step span {
+  align-items: center;
+  background: var(--claude);
+  border-radius: 50%;
+  color: var(--panel);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 720;
+  height: 1.55rem;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+  width: 1.55rem;
+}
