@@ -688,3 +688,228 @@
   font-size: 1.18rem;
   margin-top: 1rem;
 }
+
+.deep-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.deep-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 11rem;
+  padding: 1rem;
+}
+
+.deep-card.accent {
+  border-top: 4px solid var(--claude);
+}
+
+.deep-card.sage {
+  border-top: 4px solid var(--sage);
+}
+
+.deep-card.blue {
+  border-top: 4px solid var(--blue);
+}
+
+.deep-card span,
+.codex-surface span,
+.cost-callout span {
+  color: var(--claude);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.deep-card h2 {
+  color: var(--ink);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.18rem;
+  margin: 0 0 0.55rem;
+}
+
+.deep-card p,
+.codex-surface p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.phase-strip {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.phase-strip div {
+  background: var(--panel-soft);
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 620;
+  padding: 0.75rem 0.9rem;
+  text-align: center;
+}
+
+.codex-map {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.codex-surface {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 9.5rem;
+  padding: 1rem;
+}
+
+.codex-surface.app {
+  border-top: 4px solid var(--claude);
+}
+
+.codex-surface.cli {
+  border-top: 4px solid var(--sage);
+}
+
+.codex-surface.cloud {
+  border-top: 4px solid var(--gold);
+}
+
+.codex-surface.ide {
+  border-top: 4px solid var(--blue);
+}
+
+.codex-surface span {
+  color: var(--ink);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.15rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.codex-workflow {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.codex-workflow div {
+  background: var(--panel-soft);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 620;
+  padding: 0.7rem 0.65rem;
+  text-align: center;
+}
+
+.token-loop {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.token-loop div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 8rem;
+  padding: 0.85rem;
+}
+
+.token-loop span {
+  align-items: center;
+  background: var(--claude);
+  border-radius: 50%;
+  color: var(--panel);
+  display: inline-flex;
+  font-size: 0.74rem;
+  font-weight: 720;
+  height: 1.4rem;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  width: 1.4rem;
+}
+
+.token-loop p {
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.cost-callout {
+  align-items: center;
+  background: var(--panel-soft);
+  border-left: 4px solid var(--claude);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 13rem 1fr;
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+}
+
+.cost-callout span {
+  color: var(--claude-dark);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.45rem;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  text-transform: none;
+}
+
+.cost-callout p {
+  color: var(--ink);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.cost-table {
+  display: grid;
+  grid-template-columns: 1.05fr 1.45fr 1.2fr;
+  margin-top: 1.25rem;
+}
+
+.cost-table > div {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.9rem;
+  min-height: 3.2rem;
+  padding: 0.75rem 0.85rem;
+}
+
+.cost-table .head {
+  background: var(--panel-soft);
+  color: var(--claude);
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  min-height: 2.6rem;
+  text-transform: uppercase;
+}
+
+.cost-rules {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.cost-rules div {
+  background: var(--panel-soft);
+  color: var(--ink);
+  font-size: 0.9rem;
+  padding: 0.75rem 0.85rem;
+}

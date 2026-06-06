@@ -800,3 +800,201 @@ This is the bridge into the later failure-mode section. Scientific correctness
 gets a dedicated slide later, but this workflow section should already establish
 that verification is part of the task, not a separate optional step.
 -->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Claude Code in depth</div>
+
+# Use it like a controlled coding session
+
+<div class="deep-grid">
+  <v-click>
+    <div class="deep-card accent">
+      <span>Memory</span>
+      <h2>CLAUDE.md</h2>
+      <p>Purpose, conventions, tests, domain constraints, and boundaries.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="deep-card sage">
+      <span>Planning</span>
+      <h2>Read first, edit later</h2>
+      <p>Use plan mode for unclear, multi-file, or unfamiliar work.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="deep-card blue">
+      <span>Parallelism</span>
+      <h2>Worktrees</h2>
+      <p>Independent branches for parallel sessions or alternative approaches.</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="phase-strip">
+    <div>Explore</div>
+    <div>Plan</div>
+    <div>Implement</div>
+    <div>Commit</div>
+  </div>
+</v-click>
+
+<v-click>
+  <div class="note-strip">
+    <p>Common mistake: letting the session run too long without checkpoints, compaction, or scientific verification.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">4. Deep dives</div>
+<div class="slide-no">17</div>
+
+<!--
+This is a Claude Code workflow slide, not another feature list. Mention /init for
+CLAUDE.md, Shift+Tab for plan mode, Ctrl+G for editing a plan, /compact for long
+sessions, and worktrees for parallel isolation.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Codex in depth</div>
+
+# A family of coding agents
+
+<div class="codex-map">
+  <v-click>
+    <div class="codex-surface app"><span>App</span><p>Visual workspace for parallel local tasks.</p></div>
+  </v-click>
+  <v-click>
+    <div class="codex-surface cli"><span>CLI</span><p>Terminal-native and scriptable.</p></div>
+  </v-click>
+  <v-click>
+    <div class="codex-surface cloud"><span>Cloud</span><p>GitHub issue to pull request.</p></div>
+  </v-click>
+  <v-click>
+    <div class="codex-surface ide"><span>Extension</span><p>Agent work without leaving the editor.</p></div>
+  </v-click>
+</div>
+
+<div class="codex-workflow">
+  <v-click><div>Issue</div></v-click>
+  <v-click><div>Explore repo</div></v-click>
+  <v-click><div>Implement</div></v-click>
+  <v-click><div>Run tests</div></v-click>
+  <v-click><div>Open PR</div></v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>At Oxford, Codex uses the ChatGPT Edu weekly allowance; treat those tasks as scarce and review PRs carefully.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">4. Deep dives</div>
+<div class="slide-no">18</div>
+
+<!--
+Mention Codex Skills as modular project-specific capabilities, Automations for
+event-triggered behaviour, and worktrees as the safety mechanism for parallel
+tasks. For scientific issues, the PR still needs careful review.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Cost mechanics</div>
+
+# Agent cost is multiplicative
+
+<div class="token-loop">
+  <v-click><div><span>1</span><p>Read files</p></div></v-click>
+  <v-click><div><span>2</span><p>Reason and plan</p></div></v-click>
+  <v-click><div><span>3</span><p>Write code</p></div></v-click>
+  <v-click><div><span>4</span><p>Run commands</p></div></v-click>
+  <v-click><div><span>5</span><p>Read output</p></div></v-click>
+  <v-click><div><span>6</span><p>Correct mistakes</p></div></v-click>
+</div>
+
+<v-click>
+  <div class="cost-callout">
+    <span>100k-500k tokens</span>
+    <p>A complex task on a medium-sized codebase can land in this range.</p>
+  </div>
+</v-click>
+
+<v-click>
+  <div class="note-strip">
+    <p>Overspend usually comes from long context, mismatched models, redundant reads, runaway agents, or parallel agents without enough benefit.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">4. Deep dives</div>
+<div class="slide-no">19</div>
+
+<!--
+Use this to explain why agent costs do not feel like one prompt. Each action can
+create new input and output tokens. Mention that Opus 4.8 API pricing makes a
+single complex task plausibly $5-$50 in the notes' example.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Cost comparison</div>
+
+# Choose the cheapest reliable mode
+
+<div class="cost-table">
+  <div class="head">Mode</div>
+  <div class="head">Typical fit</div>
+  <div class="head">Watch for</div>
+
+  <v-click>
+    <div>Oxford ChatGPT Edu</div>
+    <div>Learning, scoping, limited Codex tasks</div>
+    <div>~30 Codex queries/week</div>
+  </v-click>
+
+  <v-click>
+    <div>Claude Pro / ChatGPT Plus</div>
+    <div>Occasional short coding sprints</div>
+    <div>Quota exhaustion on large repos</div>
+  </v-click>
+
+  <v-click>
+    <div>Claude Max / ChatGPT Pro</div>
+    <div>Regular agent-driven development</div>
+    <div>Soft limits, not hard caps</div>
+  </v-click>
+
+  <v-click>
+    <div>API billing</div>
+    <div>Automation, bulk, scripted workloads</div>
+    <div>Can spike without monitoring</div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="cost-rules">
+    <div>Match model to task before starting</div>
+    <div>Compact or clear long sessions</div>
+    <div>Monitor usage; batch non-interactive work</div>
+  </div>
+</v-click>
+
+<div class="section-tag">4. Deep dives</div>
+<div class="slide-no">20</div>
+
+<!--
+Keep this table intentionally coarse. The exact price list is in the notes and
+changes quickly. The actionable message is to choose the cheapest reliable mode,
+avoid retrying the same bad prompt on stronger models, and monitor spend.
+-->
