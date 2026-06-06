@@ -998,3 +998,180 @@ Keep this table intentionally coarse. The exact price list is in the notes and
 changes quickly. The actionable message is to choose the cheapest reliable mode,
 avoid retrying the same bad prompt on stronger models, and monitor spend.
 -->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Failure mode #1</div>
+
+# Scientific correctness
+
+<v-click>
+  <div class="science-risk">
+    <p>The code runs. The tests pass. The result looks plausible. The science is wrong.</p>
+  </div>
+</v-click>
+
+<div class="risk-grid">
+  <v-click><div><span>Sign</span><p>Wrong direction, right magnitude.</p></div></v-click>
+  <v-click><div><span>Units</span><p>Conversion error hidden by scale.</p></div></v-click>
+  <v-click><div><span>Indexing</span><p>Boundary or staggering mistake.</p></div></v-click>
+  <v-click><div><span>Physics</span><p>Missed conservation, positivity, or CFL constraints.</p></div></v-click>
+</div>
+
+<v-click>
+  <div class="warning-line compact">
+    Never deploy agent-written numerical code without validation against reference values.
+  </div>
+</v-click>
+
+<div class="section-tag">5. Failure modes and risks</div>
+<div class="slide-no">21</div>
+
+<!--
+This is the most important failure mode for the audience. Explain that the danger
+is not dramatic failure; it is plausible, confident, executable wrongness. The
+mitigation from the notes: test against known solutions and read consequential
+algorithms line by line.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Other technical failure modes</div>
+
+# Plausible, broken, or unreproducible
+
+<div class="failure-stack">
+  <v-click>
+    <div class="failure-row"><span>Hallucination</span><p>Invented APIs, constants, papers, or claims about existing code.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="failure-row"><span>Dependencies</span><p>Packages that do not exist, do not match the API, or add risk.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="failure-row"><span>Repository damage</span><p>Deleted files, scope creep, sensitive data, or unsafe Git operations.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="failure-row"><span>Reproducibility</span><p>Unrecorded environment assumptions, randomness, or changing data sources.</p></div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Run the code, check imports and dependencies, inspect <strong>git status</strong> and <strong>git diff</strong>, and record versions.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">5. Failure modes and risks</div>
+<div class="slide-no">22</div>
+
+<!--
+Use concrete examples from the notes. Agents can invent APIs, suggest problematic
+dependencies, modify files outside scope, or create code that only works in one
+environment. Keep the mitigation practical.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Security, governance, training</div>
+
+# Check the rules before the workflow
+
+<div class="governance-grid">
+  <v-click>
+    <div class="governance-card accent">
+      <span>Data handling</span>
+      <p>Credentials, unpublished data, patient data, commercial data, export controls.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="governance-card sage">
+      <span>Disclosure</span>
+      <p>Authorship, attribution, licensing, and reproducibility obligations.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="governance-card blue">
+      <span>Students</span>
+      <p>Check official university guidance; use as a learning tool within assessment rules.</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Oxford ChatGPT Edu and Codex inputs are not used for model training; data residency is in the US.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">5. Failure modes and risks</div>
+<div class="slide-no">23</div>
+
+<!--
+Keep the student point nuanced: agents can weaken skill development if they produce
+code students do not understand, but can be excellent learning tools for tutoring,
+worked examples, and line-by-line explanation.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Takeaway</div>
+
+# When to use agents
+
+<div class="use-table">
+  <div class="head">Use</div>
+  <div class="head">Be cautious</div>
+  <div class="head">Do not skip</div>
+
+  <v-click>
+    <div>Well-scoped implementation</div>
+    <div>Scientific decisions</div>
+    <div>Reference checks</div>
+  </v-click>
+
+  <v-click>
+    <div>Tests, docs, scaffolding</div>
+    <div>Unverifiable outputs</div>
+    <div>Diff review</div>
+  </v-click>
+
+  <v-click>
+    <div>Repository exploration</div>
+    <div>Sensitive data</div>
+    <div>Dependency review</div>
+  </v-click>
+
+  <v-click>
+    <div>Mechanical multi-file changes</div>
+    <div>Long unsupervised runs</div>
+    <div>Scientific ownership</div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="summary-line">
+    Agents accelerate implementation; researchers remain responsible for correctness.
+  </div>
+</v-click>
+
+<div class="section-tag">5. Failure modes and risks</div>
+<div class="slide-no">24</div>
+
+<!--
+Use this as the summary reference before moving into the optional live demo. It
+should bring together the whole seminar: scope tightly, branch, verify, and keep
+scientific judgement with the researcher.
+-->
