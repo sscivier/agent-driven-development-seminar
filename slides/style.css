@@ -35,7 +35,7 @@
 .slidev-layout h1 {
   font-family: var(--sans);
   color: var(--ink);
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: 600;
   line-height: 1.04;
   letter-spacing: -0.02em;
@@ -73,7 +73,7 @@
 
 .eyebrow {
   color: var(--claude);
-  font-size: 0.78rem;
+  font-size: 1.0rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -146,7 +146,7 @@
 .block .tag {
   display: block;
   color: var(--claude);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -293,7 +293,7 @@
 .spectrum .tag {
   display: block;
   color: var(--claude);
-  font-size: 0.72rem;
+  font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -329,7 +329,7 @@
 .slidev-layout th {
   text-align: left;
   color: var(--claude);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -381,14 +381,14 @@
 /* ---- Section dividers ---------------------------------------------------- */
 
 .divider .dnum {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--claude);
 }
 
 .divider h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   margin-top: 0.6rem;
   letter-spacing: -0.025em;
 }
@@ -418,7 +418,7 @@
 .qlist .tag {
   display: block;
   color: var(--claude);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
