@@ -552,3 +552,251 @@ layout: default
 This is the transition into practical workflows. Do not let the tool comparison
 become the point of the seminar; bring the audience back to workflow discipline.
 -->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Practical workflows</div>
+
+# Before you start: scope the task
+
+<div class="scope-list">
+  <v-click>
+    <div class="scope-item">
+      <span>01</span>
+      <p>What is the concrete deliverable?</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="scope-item">
+      <span>02</span>
+      <p>How will I know if it worked?</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="scope-item">
+      <span>03</span>
+      <p>What does the agent need to know?</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="scope-item">
+      <span>04</span>
+      <p>What should it not do?</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="scope-item">
+      <span>05</span>
+      <p>Is this the right tool for this task?</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="note-strip">
+    <p>Vague tasks fail the same way they fail with junior collaborators, just faster and more confidently.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">3. Practical workflows</div>
+<div class="slide-no">12</div>
+
+<!--
+Keep the five questions as the operational checklist. Give one concrete example:
+"a function that reads a NetCDF file and returns a masked numpy array" is a
+deliverable; "improve the data loading code" is not.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Providing context</div>
+
+# Make the brief unambiguous
+
+<div class="brief-grid">
+  <v-click>
+    <div class="brief-card accent">
+      <span>Persistent context</span>
+      <h2>Project instructions</h2>
+      <p><strong>CLAUDE.md</strong>, <strong>AGENTS.md</strong>, or <strong>.github/copilot-instructions.md</strong></p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="brief-card sage">
+      <span>Scientific context</span>
+      <h2>What code cannot infer</h2>
+      <p>Equations, expected ranges, numerical pitfalls, physical constraints.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="brief-card blue">
+      <span>Task context</span>
+      <h2>Point to the code</h2>
+      <p>Use file paths and function names, not vague descriptions.</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="prompt-example">
+    <p>Work on <strong>src/dynamics/advection.py::advect()</strong>. Preserve the public API. Add tests for mass conservation and boundary behaviour.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">3. Practical workflows</div>
+<div class="slide-no">13</div>
+
+<!--
+Emphasise that agents are good at repository context but poor at guessing domain
+constraints. Mention examples from the notes: divergence-free velocity fields,
+positive tracer values, and CFL-style timestep constraints.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Context management</div>
+
+# Context is a budget
+
+<div class="context-grid">
+  <v-click>
+    <div class="context-card">
+      <span>Cost</span>
+      <p>Every token in and out is paid for.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="context-card">
+      <span>Attention</span>
+      <p>Long histories accumulate stale detail.</p>
+    </div>
+  </v-click>
+
+  <v-click>
+    <div class="context-card">
+      <span>Strategy</span>
+      <p>Use compact tasks with clear endpoints.</p>
+    </div>
+  </v-click>
+</div>
+
+<div class="context-actions">
+  <v-click>
+    <div>Start fresh after a completed sub-task</div>
+  </v-click>
+  <v-click>
+    <div>Use <strong>/compact</strong> when the session is useful but long</div>
+  </v-click>
+  <v-click>
+    <div>Store persistent rules in instruction files</div>
+  </v-click>
+  <v-click>
+    <div>Give paths; do not paste full large files</div>
+  </v-click>
+</div>
+
+<div class="section-tag">3. Practical workflows</div>
+<div class="slide-no">14</div>
+
+<!--
+The message is not that context windows are small; they are large, but cost and
+attention still matter. Use this slide to normalise starting fresh and compacting
+instead of dragging every session forward forever.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Working safely</div>
+
+# Git is the safety net
+
+<div class="git-flow">
+  <v-click><div><span>1</span><p>Create a branch</p></div></v-click>
+  <v-click><div><span>2</span><p>Let the agent work</p></div></v-click>
+  <v-click><div><span>3</span><p>Commit checkpoints</p></div></v-click>
+  <v-click><div><span>4</span><p>Review the diff</p></div></v-click>
+  <v-click><div><span>5</span><p>Run tests, then merge or PR</p></div></v-click>
+</div>
+
+<v-click>
+
+<pre class="safe-workflow"><code>git checkout -b agent/feature-name
+# agent works and commits incrementally
+git diff
+npm test  # or pytest, cargo test, ...</code></pre>
+
+</v-click>
+
+<v-click>
+  <div class="note-strip">
+    <p>Keep <strong>.gitignore</strong> current so credentials, data files, and build artefacts do not become agent commits.</p>
+  </div>
+</v-click>
+
+<div class="section-tag">3. Practical workflows</div>
+<div class="slide-no">15</div>
+
+<!--
+Frame this as one of the most important practices. The agent's output should be
+treated like a pull request from a collaborator you respect but do not fully trust.
+-->
+
+---
+layout: default
+---
+
+<div class="eyebrow">Verifying outputs</div>
+
+# Trust comes from checks, not confidence
+
+<div class="verify-ladder">
+  <v-click>
+    <div class="verify-step"><span>Tests</span><p>Ask for tests alongside implementation.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="verify-step"><span>Reference</span><p>Compare to analytical, slower, literature, or previous results.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="verify-step"><span>Physics</span><p>Check conservation, positivity, boundaries, units.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="verify-step"><span>Suite</span><p>Run existing tests for shared-code regressions.</p></div>
+  </v-click>
+
+  <v-click>
+    <div class="verify-step"><span>Read</span><p>Read the code that enters your research software.</p></div>
+  </v-click>
+</div>
+
+<v-click>
+  <div class="warning-line compact">
+    Agent-written numerical code is not accepted until it is validated.
+  </div>
+</v-click>
+
+<div class="section-tag">3. Practical workflows</div>
+<div class="slide-no">16</div>
+
+<!--
+This is the bridge into the later failure-mode section. Scientific correctness
+gets a dedicated slide later, but this workflow section should already establish
+that verification is part of the task, not a separate optional step.
+-->

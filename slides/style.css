@@ -444,3 +444,247 @@
   margin-bottom: 0.7rem;
   width: 1.55rem;
 }
+
+.scope-list {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.scope-item {
+  align-items: center;
+  background: var(--panel);
+  border-left: 4px solid var(--line);
+  display: grid;
+  grid-template-columns: 3.3rem 1fr;
+  min-height: 3.75rem;
+  padding: 0.7rem 1rem;
+}
+
+.scope-item:nth-child(1),
+.scope-item:nth-child(3),
+.scope-item:nth-child(5) {
+  border-left-color: var(--claude);
+}
+
+.scope-item:nth-child(2) {
+  border-left-color: var(--sage);
+}
+
+.scope-item:nth-child(4) {
+  border-left-color: var(--blue);
+}
+
+.scope-item span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+}
+
+.scope-item p {
+  color: var(--ink);
+  font-size: 1.18rem;
+  margin: 0;
+}
+
+.brief-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.brief-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 12.2rem;
+  padding: 1rem;
+}
+
+.brief-card.accent {
+  border-top: 4px solid var(--claude);
+}
+
+.brief-card.sage {
+  border-top: 4px solid var(--sage);
+}
+
+.brief-card.blue {
+  border-top: 4px solid var(--blue);
+}
+
+.brief-card span,
+.context-card span,
+.verify-step span {
+  color: var(--claude);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+}
+
+.brief-card h2 {
+  color: var(--ink);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.15rem;
+  margin: 0 0 0.55rem;
+}
+
+.brief-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.prompt-example {
+  border: 1px solid var(--line);
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+}
+
+.prompt-example p {
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.context-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.context-card {
+  background: var(--panel);
+  border-top: 4px solid var(--line);
+  border-radius: 8px;
+  min-height: 7.5rem;
+  padding: 1rem;
+}
+
+.context-card:nth-child(1) {
+  border-top-color: var(--claude);
+}
+
+.context-card:nth-child(2) {
+  border-top-color: var(--gold);
+}
+
+.context-card:nth-child(3) {
+  border-top-color: var(--sage);
+}
+
+.context-card p {
+  color: var(--ink);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.context-actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.context-actions div {
+  background: var(--panel-soft);
+  color: var(--ink);
+  font-size: 0.98rem;
+  padding: 0.65rem 0.85rem;
+}
+
+.git-flow {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 1.25rem;
+}
+
+.git-flow div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 7.2rem;
+  padding: 0.9rem;
+}
+
+.git-flow span {
+  align-items: center;
+  background: var(--claude);
+  border-radius: 50%;
+  color: var(--panel);
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 720;
+  height: 1.45rem;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  width: 1.45rem;
+}
+
+.git-flow p {
+  color: var(--ink);
+  font-size: 0.94rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.slidev-layout pre,
+.safe-workflow {
+  border-radius: 8px;
+  font-size: 0.84rem;
+  margin-top: 1rem;
+}
+
+.verify-ladder {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.2rem;
+}
+
+.verify-step {
+  align-items: start;
+  background: var(--panel);
+  border-left: 4px solid var(--line);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 8.5rem 1fr;
+  min-height: 3.4rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.verify-step:nth-child(1),
+.verify-step:nth-child(5) {
+  border-left-color: var(--claude);
+}
+
+.verify-step:nth-child(2) {
+  border-left-color: var(--sage);
+}
+
+.verify-step:nth-child(3) {
+  border-left-color: var(--blue);
+}
+
+.verify-step:nth-child(4) {
+  border-left-color: var(--gold);
+}
+
+.verify-step span {
+  margin-bottom: 0;
+}
+
+.verify-step p {
+  color: var(--ink);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.warning-line.compact {
+  font-size: 1.18rem;
+  margin-top: 1rem;
+}
