@@ -233,51 +233,54 @@ layout: default
 
 <div class="eyebrow">Ecosystem</div>
 
-# The landscape, mid-2026
+# Four ways agents show up
 
-<div class="landscape">
-  <div class="axis"></div>
-  <div class="axis">Chat first</div>
-  <div class="axis">IDE first</div>
-  <div class="axis">Autonomy first</div>
-
-  <div class="axis">Lower setup</div>
+<div class="tool-grid">
   <v-click>
-    <div>
-      <h2>ChatGPT / Claude</h2>
-      <p>General help, code explanation, small snippets.</p>
-    </div>
-  </v-click>
-  <v-click>
-    <div>
-      <h2>Copilot</h2>
-      <p>Inline completions, chat, VS Code agent mode.</p>
-    </div>
-  </v-click>
-  <v-click>
-    <div>
-      <h2>Codex Cloud</h2>
-      <p>GitHub repo to pull request workflow.</p>
+    <div class="tool-card blue">
+      <span>In-editor agent</span>
+      <h2>Works where you code</h2>
+      <ul>
+        <li>Copilot agent mode</li>
+        <li>Cursor</li>
+        <li>Codex / Claude extensions</li>
+      </ul>
     </div>
   </v-click>
 
-  <div class="axis">Higher setup</div>
   <v-click>
-    <div>
-      <h2>Codex App / CLI</h2>
-      <p>Local agent work, parallel tasks, worktrees.</p>
+    <div class="tool-card sage">
+      <span>Local repo agent</span>
+      <h2>Reads, edits, tests locally</h2>
+      <ul>
+        <li>Claude Code</li>
+        <li>Codex CLI</li>
+        <li>Codex App worktrees</li>
+      </ul>
     </div>
   </v-click>
+
   <v-click>
-    <div>
-      <h2>Claude Code / Cursor</h2>
-      <p>Repository-aware edits, tests, terminal commands.</p>
+    <div class="tool-card gold">
+      <span>Cloud PR agent</span>
+      <h2>Delegated issue to PR</h2>
+      <ul>
+        <li>Codex Cloud</li>
+        <li>Copilot cloud agent</li>
+        <li>GitHub-assigned agents</li>
+      </ul>
     </div>
   </v-click>
+
   <v-click>
-    <div>
-      <h2>Devin Desktop</h2>
-      <p>Highest autonomy; designed for sustained software work.</p>
+    <div class="tool-card accent">
+      <span>High-autonomy agent</span>
+      <h2>Plans and executes longer tasks</h2>
+      <ul>
+        <li>Devin Desktop</li>
+        <li>Concurrent sessions</li>
+        <li>Higher review burden</li>
+      </ul>
     </div>
   </v-click>
 </div>
@@ -286,8 +289,8 @@ layout: default
 <div class="slide-no">6</div>
 
 <!--
-Use this as a map, not a ranking. The key point is that tools differ by setup,
-where they live, and how much autonomy they assume.
+Use this as a workflow map, not a ranking. The key point is that agent tools differ
+in where they run and how much autonomy they assume.
 -->
 
 ---
