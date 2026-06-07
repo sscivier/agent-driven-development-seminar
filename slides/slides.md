@@ -969,9 +969,9 @@ class: disclosure
 | Tool | How it was used |
 | --- | --- |
 | **Claude Code** — Claude Opus 4.8 | Slide design & build; content drafting & revision |
-| **ChatGPT** — OpenAI (incl. web browsing) | Research, fact-checking, ideation & structure |
-| **OpenAI Codex** — Oxford institutional access | Coding assistance |
-| **GitHub Copilot** — in VS Code | In-editor code completion |
+| **ChatGPT** — GPT 5.5 Thinking | Research, fact-checking, ideation & structure |
+| **OpenAI Codex** — Oxford institutional access, GPT 5.5 | Coding assistance |
+| **GitHub Copilot** — in VS Code, Claude Sonnet 4.6, GPT 5.5 | Project scaffolding |
 
 <p class="note">
 AI generated substantial portions of the design and text. I directed and supervised the
