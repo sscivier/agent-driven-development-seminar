@@ -33,9 +33,21 @@ University of Oxford · June 2026
 </div>
 
 <!--
-Position this as a practical seminar for experienced scientific programmers:
-what changes when the tool can read, edit, run, and iterate inside a real repository.
+**Title · 0:00.**
+
+Thanks everyone. Over the next half hour I want to talk about a shift that's already
+changing how research software gets written — coding agents: AI that doesn't just answer
+questions about code, but actually reads, edits, runs, and iterates inside a real
+repository.
+
+This is a practical talk for people who already write scientific code. The pitch isn't
+"AI will write your science for you" — it's that there's a new kind of collaborator
+available to you, you almost certainly already have access to it through Oxford, and there's
+a right and a wrong way to work with it. By the end I want you to know what these tools are,
+which to reach for, how to drive them safely, and — most importantly for us — where they
+will quietly get the science wrong.
 -->
+
 
 ---
 layout: center
@@ -48,6 +60,14 @@ class: divider
   <div class="title-rule"></div>
   <p>What actually changes when an AI can take actions, not just give advice.</p>
 </div>
+
+<!--
+**Part 1 · through ~5:00.**
+
+Let's start with what's actually new here — because the conceptual shift is the thing that,
+once it clicks, makes everything else make sense.
+-->
+
 
 ---
 
@@ -81,9 +101,23 @@ class: divider
 </v-click>
 
 <!--
-Use this as the impact anchor, then immediately reframe it as a workflow shift.
-The four-years figure is about the cognitive load of holding code context, not raw typing.
+I want to start with a number, because this is not a distant prospect — it's already
+happening in production at the places building these tools.
+
+As of May this year, Claude authored over 80% of the code merged into Anthropic's own
+production codebase. And to make that concrete: in one case in April, the agent
+autonomously shipped over 800 fixes for a single persistent class of API errors, and
+cut the error rate by a factor of a thousand. The engineer who looked at it estimated
+that same cleanup would have taken a human developer about four years — and notice that's
+not four years of typing. It's four years because of the cognitive load of holding all
+that code context in your head at once. That's exactly the kind of work an agent is good
+at carrying.
+
+So I'm not telling you this to say programmers are going away. I'm telling you because it
+reframes what we can ask a tool to do — and that shift is what the rest of the talk is
+about.
 -->
+
 
 ---
 
@@ -123,9 +157,19 @@ The four-years figure is about the cognitive load of holding code context, not r
 </v-click>
 
 <!--
-With chat, the human is the keyboard operator. With an agent, the model has tools
-and takes actions inside the codebase. That is the whole shift.
+Most of you have met AI coding as chat: you describe a problem, it suggests some code, you
+copy it, paste it, check it, and move on. That's genuinely useful — but you're still the
+one driving the keyboard. You're the operator; the AI gives advice.
+
+An agent is different. You give it a task, plus access to your repository and a set of
+tools — reading files, writing files, running shell commands, Git, web search — and it
+works through a plan on its own: reading the code, editing it, running the tests,
+iterating toward a result.
+
+So the unit of work moves from answering a question to carrying out a task. That is the
+whole shift, and everything else today follows from it — the power of it, and the risks.
 -->
+
 
 ---
 
@@ -161,9 +205,23 @@ and takes actions inside the codebase. That is the whole shift.
 </p>
 
 <!--
-Keep the audience away from both extremes: agents are useful, but they replace
-neither scientific judgement nor clear task definition.
+Because the agent can act, the temptation is to throw everything at it — but it isn't
+always the right choice. It adds overhead: time, money, and the risk of agent error.
+
+It's a good fit for work that's well-defined but tedious — boilerplate, tests,
+documentation, refactoring to a consistent style. It's excellent for exploring a codebase
+you've inherited, for cross-cutting changes like renaming something everywhere, for
+scaffolding a new project, and for porting Fortran or Matlab routines to Python.
+
+It's a poor fit when the task needs scientific judgement only you hold: novel decisions,
+outputs you can't test objectively, vague exploratory work, or anything where briefing the
+agent takes longer than just doing it.
+
+The heuristic I'd hold onto is this: if you could clearly brief a skilled programmer who
+doesn't know your field, an agent can probably help. If the task needs judgement only you
+have, the agent can assist but it cannot replace you.
 -->
+
 
 ---
 
@@ -200,9 +258,19 @@ neither scientific judgement nor clear task definition.
 </v-click>
 
 <!--
-This phrase — capable but junior collaborator — should carry through the workflow
-and failure-mode sections.
+If you take one mental model away from today, make it this one: an agent is a capable but
+junior collaborator.
+
+That means three things in practice. You brief it — give the task shape: the deliverable,
+the constraints, the files, the success criteria. You review what comes back as a draft —
+read the diff, run the tests, check the assumptions. And you keep the scientific judgement
+yourself — the reference values, the units, conservation, physical limits.
+
+The line I want to land is this: agents accelerate implementation, but they cannot certify
+scientific correctness. Hold that thought, because it comes back hard in the failure-modes
+section.
 -->
+
 
 ---
 layout: center
@@ -215,6 +283,15 @@ class: divider
   <div class="title-rule"></div>
   <p>Tools, pricing, and what Oxford researchers already have.</p>
 </div>
+
+<!--
+**Part 2 · through ~12:00.**
+
+So that's the idea. Now let's get concrete: what tools actually exist in mid-2026, what
+they cost, and — the part that matters most for this room — what you already have through
+Oxford.
+-->
+
 
 ---
 
@@ -264,9 +341,21 @@ class: divider
 </div>
 
 <!--
-A map, not a ranking. Tools differ in where they run and how much autonomy they assume.
-More autonomy buys leverage and demands more review discipline.
+Don't think of these tools as a ranking — think of it as a map, along a spectrum of
+autonomy.
+
+At the assistive end you have in-editor help: Copilot completions, inline chat, VS Code's
+agent mode. Then local repository agents that read, edit, and run tests on your machine —
+Claude Code, the Codex CLI and app. Then cloud or pull-request agents that take a GitHub
+issue and hand you back a PR — Codex Cloud, the Copilot cloud agent. And at the far end,
+the high-autonomy tools that plan and execute long tasks, like Devin Desktop, often several
+sessions at once.
+
+The thing to notice is the trade-off along that axis: more autonomy buys you more leverage,
+but it raises your review burden, not lowers it. Where a tool sits here tells you how often
+you need to be looking over its shoulder.
 -->
+
 
 ---
 
@@ -309,9 +398,25 @@ Practical start: <strong>ChatGPT Edu</strong> first; complete the <strong>Codex 
 </p>
 
 <!--
-Keep it concrete: SSO access, consent forms, OeRC support. Detailed URLs are in the
-notes — don't make the slide URL-heavy.
+This is the slide I most want you to remember, because most of you already have access and
+don't realise it.
+
+ChatGPT Edu is free at the point of use for every current Oxford staff member and student.
+You just sign in at chatgpt.com with your ox.ac.uk address — it's single sign-on. Your data
+isn't used for training, and it's covered by InfoSec's security assessment. There are weekly
+limits on the intensive features — roughly thirty Codex queries a week, for instance — but
+for getting started it costs you nothing.
+
+For an actual coding agent through Oxford, that's Codex — and it needs a consent form, one
+for Codex Local for the app and CLI, one for Codex Cloud to connect a GitHub repo. Those
+Codex tasks draw on the same weekly Edu allowance.
+
+And you're not on your own with this: the OeRC AI Competency Centre runs training, guides
+for AI-for-coding and for researchers, a "Getting Started with Codex" course, and regular
+workshops. So the practical starting point is: ChatGPT Edu first, then complete the Codex
+consent if you want to try the agentic side.
 -->
+
 
 ---
 
@@ -343,9 +448,22 @@ Best fit: researchers doing substantial development who want a repository-aware 
 </p>
 
 <!--
-Don't overload with every tier. The pricing anchor plus why it's distinctive:
-local execution, CLAUDE.md, large-codebase comprehension.
+Let me pick out a few of the main tools rather than march through all of them. First,
+Claude Code, from Anthropic.
+
+It runs locally, in your terminal — there's no remote index of your code. It searches and
+edits across the whole repository without you hand-picking files, and it runs your tests,
+your build tools, and Git for you. On price, it comes with the Pro plan at about seventeen
+dollars a month on the annual deal, and then Max at a hundred or two hundred a month for
+sustained heavy use.
+
+What makes it distinctive for us is two things: it genuinely comprehends large codebases,
+and it has the CLAUDE.md system — a file where you write persistent project instructions
+that it reads at the start of every session. So it's the best fit if you're doing
+substantial development and want a repository-aware local agent you can teach about your
+project once.
 -->
+
 
 ---
 
@@ -377,9 +495,21 @@ local execution, CLAUDE.md, large-codebase comprehension.
 </p>
 
 <!--
-The sign-up pause is a required content note. Frame Copilot as the easiest starting
-point for VS Code users, noting availability may change.
+If you live in VS Code, GitHub Copilot is the lowest-friction way in. The free tier already
+gives you completions and limited chat; Pro is listed at ten dollars a month. It's not
+locked to one model — there's a multi-model backend behind it — and it has tight GitHub
+integration.
+
+And it's not just autocomplete any more: VS Code's agent mode does multi-step file edits,
+has terminal access and MCP tools, and reads persistent instruction files, much like Claude
+Code but inside the editor.
+
+One caveat you should know about: new Copilot sign-ups — Pro, Pro+, Max, and the student
+plans — were paused from April to June this year. Existing plans can still upgrade, and this
+may well have changed by the time you check, so look at the Copilot page for current status.
+Still, for VS Code users it's the easiest first step.
 -->
+
 
 ---
 
@@ -413,9 +543,20 @@ Higher autonomy increases leverage <em>and</em> risk. Good Git workflow and revi
 </p>
 
 <!--
-Explicitly state the Windsurf → Devin Desktop rebrand. Cursor is the polished IDE route;
-Devin is the high-autonomy route.
+Two more worth knowing. Cursor is a polished fork of VS Code with the AI built deeply in —
+a free hobby tier, Pro at twenty dollars a month, agent mode, cloud agents, and its own
+code-review bot. If you want one cohesive all-in-one IDE-plus-agent, it's a strong choice.
+
+And then Devin — and I'll flag this explicitly because the naming changed: Windsurf, the IDE
+that used to be Codeium's, was acquired by Cognition and is now rebranded as Devin Desktop.
+Free light quota, Pro at twenty dollars. Devin is the highest-autonomy tool here — give it
+an issue and it'll plan, code, test, and open a PR.
+
+The general point: higher autonomy increases your leverage and your risk together. Which is
+exactly why a good Git workflow and review discipline matter more with these tools, not
+less — and that's the bridge into how to actually work with them.
 -->
+
 
 ---
 
@@ -435,9 +576,19 @@ The tool matters less than the workflow: <strong>scope tightly, work on branches
 </p>
 
 <!--
-Transition into practical workflows. Don't let the tool comparison become the point;
-bring the audience back to workflow discipline.
+So how do you choose? My advice is to start from access, not from hype.
+
+Use Oxford's provision first — ChatGPT Edu, then Codex once you've done the consent. If
+you're already in VS Code, try Copilot's agent mode or a Codex or Claude extension there.
+If you want deep local work on a real repository, that's Claude Code or the Codex CLI and
+app. And only if you're doing sustained, heavy development does it make sense to pay for the
+high-autonomy options like Cursor or Devin.
+
+But honestly, the tool matters less than the workflow. Whichever you pick, the same three
+habits carry you: scope the task tightly, work on branches, and verify the output. That's
+Part Three.
 -->
+
 
 ---
 layout: center
@@ -450,6 +601,14 @@ class: divider
   <div class="title-rule"></div>
   <p>How to actually work with an agent — scope, context, safety, verification.</p>
 </div>
+
+<!--
+**Part 3 · through ~18:00.**
+
+This is the practical heart of the talk: four habits that separate people who get real value
+from agents from people who get a mess. Scope, context, safety, verification.
+-->
+
 
 ---
 
@@ -484,9 +643,21 @@ Vague tasks fail the way they fail with junior collaborators — just faster, an
 </p>
 
 <!--
-The five questions are the operational checklist. The code makes the deliverable vs.
-non-deliverable distinction concrete.
+The single most common mistake new users make is throwing a loosely-defined problem at an
+agent and expecting a solution. Agents fail at vague tasks the same way junior programmers
+do — except faster, and more confidently.
+
+So before you start anything, five questions. What is the concrete deliverable? How will I
+know it worked — ideally something testable? What does the agent need to know that it can't
+infer from the code? What should it not do — what are the boundaries? And is this even the
+right tool for this task?
+
+The code on the right makes the key distinction concrete. "A function that reads a variable
+from a NetCDF file and returns a masked array" — that's a deliverable, an agent can act on
+it. "Improve the data loading code" is not a deliverable; it's a wish. Get the task to the
+top form before you hand it over.
 -->
+
 
 ---
 layout: two-cols-header
@@ -519,9 +690,24 @@ layoutClass: gap-10
 <<< @/snippets/CLAUDE.example.md
 
 <!--
-Agents are good at repository context, poor at guessing domain constraints: divergence-free
-velocity fields, positive tracers, CFL timestep limits. Persist that in the instruction file.
+Once you've scoped it, the agent needs context — and there are three kinds.
+
+Persistent context goes in a project instructions file — CLAUDE.md for Claude Code, AGENTS.md,
+or copilot-instructions.md. These are read at the start of every session, so you write them
+once: what the project does, the conventions, the test framework. Be specific — "this project
+uses pytest, black, and NumPy docstrings" beats "this is a scientific Python project."
+
+Scientific context is the part that's on us. Agents are genuinely good at repository context
+but poor at guessing your domain. They don't know that your velocity field must be
+divergence-free, that your tracer values must stay positive, or that your timestep has to
+satisfy the CFL condition. If you're implementing a parameterisation, give it the governing
+equations, the expected ranges, the known numerical pitfalls.
+
+And task context: point at the code precisely. "The advect function in
+src/dynamics/advection.py" is unambiguous; "the advection function" might not be. On the
+right is a trimmed real CLAUDE.md so you can see what that looks like in practice.
 -->
+
 
 ---
 
@@ -555,9 +741,20 @@ velocity fields, positive tracers, CFL timestep limits. Persist that in the inst
 </div>
 
 <!--
-Context windows are large, but cost and attention still matter. Normalise starting fresh
-and compacting instead of dragging every session forward forever.
+A quick but important idea: treat context as a budget, not as something free just because
+the windows are large now.
+
+It matters for two reasons. Cost — you pay for every token going in and coming out, and a
+long history re-sends itself every turn. And attention — over very long contexts the model
+accumulates stale detail and the quality actually degrades. The fix is to chain compact,
+well-scoped tasks with clear endpoints rather than running one enormous session.
+
+Concretely: start fresh after you finish a sub-task; use /compact when a session has been
+productive but is getting long; keep your standing rules in the instruction file so you're
+not re-explaining them; and give the agent paths rather than pasting whole files. Small
+habits, but they keep both your bill and your output quality healthy.
 -->
+
 
 ---
 
@@ -581,9 +778,20 @@ Keep <strong>.gitignore</strong> current so credentials, data files, and build a
 </p>
 
 <!--
-One of the most important practices. Commit checkpoints let you git checkout back to a
-known-good state if a session goes wrong.
+This is one of the most important practices in the whole talk, so I'll be blunt about it:
+Git is your safety net, and it's non-negotiable.
+
+The mindset is to treat the agent's output like a pull request from a collaborator you
+respect but don't yet fully trust. So: always work on a branch — never let an agent work on
+main. Let it commit incrementally as it goes, so you have checkpoints you can roll back to.
+Review every change with git diff before you accept it. And run your tests.
+
+One small thing that saves real pain: keep your .gitignore current, so credentials, data
+files, and build artefacts can never accidentally end up in an agent's commit. If a session
+goes off the rails, those commit checkpoints mean you just check out the last good state and
+carry on.
 -->
+
 
 ---
 
@@ -604,8 +812,21 @@ known-good state if a session goes wrong.
 </v-click>
 
 <!--
-The bridge into failure modes. Verification is part of the task, not an optional extra step.
+And then verification — because trust should come from checks, not from how confident the
+output looks. This is especially true for us, where a bug can produce a plausible-looking but
+wrong result.
+
+Five things. Ask for tests alongside the implementation — a function without a test is a
+function you can't verify. Compare against a reference: an analytical solution, a slower
+implementation, literature values, or your previous hand-written version. Check the physics —
+conservation, positivity, boundaries, units. Run your existing suite, because agents often
+break shared code in subtle ways. And read the code — actually read what went in, not just
+whether the tests went green. It's going into your research software; you own it.
+
+The line to hold: agent-written numerical code is not accepted until it's validated. And that
+takes us straight into what happens when it isn't.
 -->
+
 
 ---
 layout: center
@@ -618,6 +839,14 @@ class: divider
   <div class="title-rule"></div>
   <p>Claude Code and Codex — and the cost mechanics underneath.</p>
 </div>
+
+<!--
+**Part 4 · through ~23:00.**
+
+Now a bit deeper on the two tools you're most likely to actually use — Claude Code and Codex
+— and then the cost mechanics underneath all of them, because that surprises people.
+-->
+
 
 ---
 
@@ -655,9 +884,22 @@ Common mistake: letting a session run long without checkpoints, compaction, or s
 </p>
 
 <!--
-A workflow slide, not a feature list. /init for CLAUDE.md, Shift+Tab for plan mode,
-/compact for long sessions, worktrees for parallel isolation.
+With Claude Code, the trick is to run it like a controlled session rather than a free-for-all.
+Three features carry most of the value.
+
+Memory: the CLAUDE.md file we saw — project purpose, conventions, how to run the tests, your
+domain constraints, and the boundaries. Run /init and it'll draft you a starting one from the
+project. Planning: there's a dedicated plan mode — Shift+Tab — where it reads and proposes a
+plan but makes no changes until you approve. Use it whenever the work is unclear, spans
+several files, or is in code you don't know well. And parallelism: worktrees give you isolated
+branches, so you can run parallel sessions or try alternative approaches without them
+colliding.
+
+The rhythm that works is explore, plan, implement, commit. And the most common mistake — the
+one to avoid — is letting a session run on and on with no checkpoints, no compaction, and no
+scientific verification.
 -->
+
 
 ---
 
@@ -685,9 +927,21 @@ At Oxford, Codex draws on the ChatGPT Edu weekly allowance — treat those tasks
 </p>
 
 <!--
-Skills as modular capabilities, Automations for event-triggered behaviour, worktrees as the
-safety mechanism for parallel tasks. Scientific PRs still need careful review.
+Codex is OpenAI's coding agent, and the thing to understand is that it's not one product —
+it's a family sharing a backend. There's the app, a visual workspace for running parallel
+local tasks; the CLI, terminal-native and scriptable; Codex Cloud, which takes a GitHub issue
+and hands back a pull request; and an editor extension for working without leaving VS Code.
+
+The cloud flow is the headline one: it reads the issue, explores the repo, implements,
+runs the tests, and opens a PR. For routine, well-specified issues that's genuinely
+efficient.
+
+Two things specific to us. At Oxford, Codex draws on your weekly ChatGPT Edu allowance —
+around thirty queries a week — so treat those as scarce and spend them on tasks that are
+actually worth it. And for anything touching the science, review every PR carefully before
+merging — the agent followed the issue, but it doesn't know your physics.
 -->
+
 
 ---
 
@@ -713,9 +967,21 @@ Overspend usually comes from long context, mismatched models, redundant reads, r
 </p>
 
 <!--
-Each action creates new input and output tokens, so cost doesn't feel like one prompt.
-On subscription plans, a few large tasks can exhaust the monthly allocation.
+Here's the cost intuition that catches people out: agent cost is multiplicative, not linear.
+A single task isn't one prompt and one answer. The agent reads files, reasons and plans,
+writes code, runs commands, reads the output, corrects its mistakes — and every one of those
+steps is fresh input and output tokens.
+
+So a complex task on a medium codebase can run a hundred thousand to half a million tokens —
+which at Opus pricing is roughly five to fifty dollars for the one task. On a subscription
+plan, a few big tasks can eat your monthly allocation.
+
+Where the overspend usually comes from is predictable: dragging long context forward,
+reaching for an expensive model when a cheaper one would do, the agent re-reading the same
+files, a runaway session you weren't watching, or parallel agents running without a benefit
+to match. None of that is mysterious once you know to look for it.
 -->
+
 
 ---
 
@@ -735,9 +1001,20 @@ Match the model to the task <em>before</em> starting · compact or clear long se
 </p>
 
 <!--
-Intentionally coarse — exact prices are in the notes and move fast. The message: cheapest
-reliable mode, don't retry the same bad prompt on a stronger model, monitor spend.
+So the cost message in one line: use the cheapest mode that reliably does the job.
+
+This table is deliberately coarse — exact prices move fast, so I won't hold you to the
+numbers. The pattern is what matters. Oxford's Edu access is your free tier for learning,
+scoping, and limited Codex tasks, bounded by that weekly quota. A Claude Pro or ChatGPT Plus
+plan suits occasional short sprints. The Max or Pro tiers are for regular agent-driven work.
+And direct API billing is for automation and bulk jobs — powerful, but it can spike if you're
+not watching it.
+
+Three habits underneath all of it: match the model to the task before you start rather than
+retrying a bad prompt on a more expensive model; compact or clear long sessions; and actually
+look at your usage dashboard now and then.
 -->
+
 
 ---
 layout: center
@@ -750,6 +1027,14 @@ class: divider
   <div class="title-rule"></div>
   <p>The sober assessment — starting with the one that matters most here.</p>
 </div>
+
+<!--
+**Part 5 · through ~28:00.**
+
+Now the sober part — and I think the most important part for this room. Where do these tools
+fail? And I'm going to start with the one that matters most for scientists.
+-->
+
 
 ---
 
@@ -771,9 +1056,21 @@ Never deploy agent-written numerical code without validation against reference v
 </p>
 
 <!--
-The most important failure mode for this audience. The danger is not dramatic failure —
-it is plausible, confident, executable wrongness.
+This is the slide I'd most want you to remember from the whole talk. The code runs. The
+tests pass. The result looks plausible. And the science is wrong.
+
+That's what makes this dangerous. A normal software bug crashes, or gives you obvious
+nonsense. A scientific error doesn't announce itself — the agent is confident, the code
+executes, the numbers are in the right ballpark. The failure is plausible, confident, and
+executable, which is the worst combination.
+
+The forms it takes are familiar to you: a sign error — right magnitude, wrong direction; a
+unit conversion hidden by scale; a boundary or array-staggering mistake; a missed physical
+constraint like conservation, positivity, or the CFL condition. So the rule is firm: never
+deploy agent-written numerical code without validating it against reference values, and for
+any algorithm of consequence, read it line by line. This is the part that stays yours.
 -->
+
 
 ---
 
@@ -805,8 +1102,22 @@ Run the code · check imports & dependencies · inspect <code>git status</code> 
 </p>
 
 <!--
-Concrete examples from the notes. Keep the mitigation practical and routine.
+Beyond the science itself, there's a cluster of more ordinary technical failure modes worth
+naming.
+
+Hallucination: the agent invents an API that doesn't exist, a physical constant, a paper, or
+makes a confident but false claim about how your existing code behaves. Dependencies:
+it suggests packages that aren't real, don't match the API it assumes, or quietly add risk.
+Repository damage: deleted files, scope creep beyond what you asked, sensitive data committed,
+or unsafe Git operations. And reproducibility: unrecorded environments, unseeded randomness,
+data sources that shift under you.
+
+The mitigations are routine, and that's the point — make them habits. Run the code. Check the
+imports and any new dependencies actually exist. Look at git status and git diff before you
+commit. Record your versions and set your seeds. None of this is exotic; it's just the
+discipline you already apply, applied consistently.
 -->
+
 
 ---
 
@@ -834,9 +1145,23 @@ Oxford ChatGPT Edu and Codex inputs are <strong>not used for model training</str
 </p>
 
 <!--
-Keep the student point nuanced: agents can weaken skill development if students don't
-understand the output, but are excellent for tutoring, worked examples, and explanation.
+Last in this section: the rules around the work, which are easy to skip past but matter.
+
+On data handling — be careful what you expose: credentials, unpublished data, anything
+patient-related or commercial-in-confidence, anything under export controls. The reassuring
+news for Oxford is that ChatGPT Edu and Codex inputs are not used for model training, though
+data residency is in the US. On disclosure — think about authorship and attribution,
+licensing, and your reproducibility obligations if published results lean on agent-written
+code.
+
+And students — and I want to be even-handed here. There's a genuine risk: a student who
+leans on an agent to produce code they don't understand doesn't build the core skills. But
+the very same tool is an excellent learning aid — for tutoring, worked examples, walking
+through code line by line, answering "why does this work" in real time. So the nuance is:
+be thoughtful about agent use for assessed or production work, while actively encouraging it
+as a way to learn and explore.
 -->
+
 
 ---
 
@@ -854,9 +1179,18 @@ understand the output, but are excellent for tutoring, worked examples, and expl
 <p class="lead accent">Agents accelerate implementation; researchers stay responsible for correctness.</p>
 
 <!--
-The summary reference before the optional demo: scope tightly, branch, verify, and keep
-scientific judgement with the researcher.
+Let me pull Part Five together with a single reference grid you could screenshot.
+
+Use agents confidently for well-scoped implementation, for tests, docs and scaffolding, for
+exploring a codebase, and for mechanical multi-file changes. Be cautious wherever judgement
+or sensitivity enters: scientific decisions, outputs you can't verify, sensitive data, long
+unsupervised runs. And never skip the four things in the last column — reference checks, diff
+review, dependency review, and scientific ownership.
+
+If you remember nothing else from this section: agents accelerate implementation, but you stay
+responsible for correctness.
 -->
+
 
 ---
 layout: center
@@ -869,6 +1203,14 @@ class: divider
   <div class="title-rule"></div>
   <p>Process, not spectacle.</p>
 </div>
+
+<!--
+[OPTIONAL — not in the 30-min budget. ~5 min if time and appetite allow. The point is to
+show the *workflow*, not an impressive autonomous result. If you're not running it live,
+say one line — "I'll spare you the live demo, but here's the shape of it" — and advance to
+the close. Full step-by-step demo script is in seminar_notes.md §6.2.]
+-->
+
 
 ---
 
@@ -891,10 +1233,15 @@ class: divider
 <p class="lead accent">But are these tests sufficient?</p>
 
 <!--
-Low-risk, reproducible, honest. The debrief: the agent did useful work in 5 minutes, but
-the researcher judged test sufficiency and the science. Highlight the gap between passing
-tests and scientific validity.
+[OPTIONAL demo slide — facilitation cues, not a script. Walk the four steps live against the
+prepared ~200-line solver: (1) ask the agent to explain the codebase; (2) show the CLAUDE.md
+with one scientific constraint; (3) ask for a test plan *before* implementing; (4) implement,
+review the diff, run the tests. Then land the punchline on the slide — the tests pass, but
+"are these tests sufficient?" — to expose the gap between passing tests and scientific
+validity. Debrief in one line: the agent did useful work in five minutes; we supplied the
+scoping, the context, and the scientific judgement. Full script: seminar_notes.md §6.2.]
 -->
+
 
 ---
 layout: center
@@ -915,8 +1262,25 @@ class: takeaways
 </ul>
 
 <!--
-Bring the whole seminar together before discussion. Points curated from notes §6.4.
+**Close · ~28:00–30:00.**
+
+Let me bring it together with six things to take away.
+
+One: agent-driven development is real and useful — not hype, not magic — for well-scoped
+tasks with clear criteria. Two: the shift is from answering questions to taking actions, and
+that's where both the power and the risk come from. Three: you already have access — ChatGPT
+Edu and Codex through Oxford SSO, with OeRC there to help you start.
+
+Four: the bottleneck doesn't disappear, it moves — to task definition, context, and
+verification, and all three need your expertise. Five, and the one I'll keep repeating:
+scientific correctness is your responsibility; the agent will produce confident, plausible
+errors. And six: Git is your safety net — branches, commits, diffs.
+
+My honest advice is to start small and on something low-stakes — write some tests, scaffold
+a project, get an inherited codebase explained to you — and build your intuition before you
+put an agent anywhere near critical code. With that, let's open it up.
 -->
+
 
 ---
 layout: center
@@ -955,8 +1319,15 @@ class: discussion
 </div>
 
 <!--
-Questions curated from notes §6.3. Open with the warm-up to get people talking.
+[DISCUSSION — facilitation, not scripted; ~20 min, separate from the 30-min talk. Open with
+the warm-up to get people talking — "has anyone actually used one of these on real research
+code?" — and let a few war stories surface. Then steer toward the conceptual and governance
+questions, and make sure the two sceptical ones get aired: when is this *not* the right
+choice, and what would make you trust agent-written code in a published result. If the room
+is quiet, the CLAUDE.md question ("what would you put in one for your codebase right now?")
+is a reliable starter. Full bank of ten questions in seminar_notes.md §6.3.]
 -->
+
 
 ---
 class: disclosure
@@ -985,7 +1356,12 @@ AI Disclosure (AID) Framework.
 </p>
 
 <!--
-Closing transparency slide — fitting for a talk about agent-driven development. Structure
-follows the standard disclosure recipe: tools (product · model/service), roles, extent, and
-a statement of human verification and responsibility.
+[Closing / hand-off slide — show during questions.]
+
+And in the spirit of the talk: this seminar was itself built with these tools. The slides,
+the research, and the scaffolding were done with Claude Code, ChatGPT, Codex, and Copilot —
+listed here with the models. I directed and verified all of it, and I'm responsible for the
+content. It felt only right to practise the disclosure I'd ask of anyone else. Happy to take
+questions.
 -->
+
