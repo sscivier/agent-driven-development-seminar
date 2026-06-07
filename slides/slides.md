@@ -29,7 +29,7 @@ without outsourcing the scientific judgement.
 </p>
 
 <div class="meta abs-bl ml-[4.2rem] mb-12">
-University of Oxford · 30–40 min + discussion
+University of Oxford · June 2026
 </div>
 
 <!--
