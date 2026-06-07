@@ -957,3 +957,35 @@ class: discussion
 <!--
 Questions curated from notes §6.3. Open with the warm-up to get people talking.
 -->
+
+---
+class: disclosure
+---
+
+<div class="eyebrow">AI disclosure</div>
+
+# How this talk was made
+
+| Tool | How it was used |
+| --- | --- |
+| **Claude Code** — Claude Opus 4.8 | Slide design & build; content drafting & revision |
+| **ChatGPT** — OpenAI (incl. web browsing) | Research, fact-checking, ideation & structure |
+| **OpenAI Codex** — Oxford institutional access | Coding assistance |
+| **GitHub Copilot** — in VS Code | In-editor code completion |
+
+<p class="note">
+AI generated substantial portions of the design and text. I directed and supervised the
+work throughout — setting the framing and focus, iterating on research, plan and content,
+and curating and verifying all outputs. I am responsible for the final content.
+</p>
+
+<p class="meta">
+Disclosed following emerging norms for generative-AI use — ICMJE recommendations and the
+AI Disclosure (AID) Framework.
+</p>
+
+<!--
+Closing transparency slide — fitting for a talk about agent-driven development. Structure
+follows the standard disclosure recipe: tools (product · model/service), roles, extent, and
+a statement of human verification and responsibility.
+-->
