@@ -1053,6 +1053,13 @@ which at frontier-model pricing is roughly three to thirty dollars for the one t
 4.8 is now five dollars in, twenty-five out per million tokens, and Fable 5 is ten and
 fifty. On a subscription plan, a few big tasks can eat your monthly allocation.
 
+[If pressed on "multiplicative": strictly, uncached cost grows roughly *quadratically* with
+session length — the model is stateless, so every step re-sends the whole history as input.
+Prompt caching (automatic in Claude Code) discounts those re-sends to about a tenth of the
+input price, so the dollar curve is much gentler in practice — but the shape, the quota
+consumption, and the attention degradation remain. That's the mechanism behind the next
+slide's "context is a budget".]
+
 Where the overspend usually comes from is predictable: dragging long context forward,
 reaching for an expensive model when a cheaper one would do, the agent re-reading the same
 files, a runaway session you weren't watching, or parallel agents running without a benefit

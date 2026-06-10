@@ -766,6 +766,8 @@ Token consumption in agent workflows is **multiplicative**, not linear. A single
 
 A complex task on a medium-sized codebase can easily consume 100,000–500,000 tokens. At frontier-model pricing that is roughly $2–$25 at Opus 4.8 rates ($5 input / $25 output per million tokens), or $3–$30 at Fable 5 rates ($10/$50). On a subscription plan with usage credits, you may exhaust your monthly allocation with a few large tasks.
 
+Strictly, the growth is worse than multiplicative: models are stateless, so every step re-sends the entire conversation history as input tokens, making uncached cost roughly *quadratic* in session length. In practice, **prompt caching** — applied automatically by Claude Code and Codex — bills the re-sent, unchanged prefix of the conversation at ~10% of the normal input price, which flattens the dollar curve considerably. Caching is distinct from `/compact`: caching makes re-sending the same history cheaper without changing it; `/compact` summarises the history so there is less of it to send. Caching does nothing for attention degradation over long contexts — only shorter context (fresh sessions, `/compact`) helps with that.
+
 **Common causes of unnecessary expenditure:**
 
 - **Long context accumulation**: Not clearing old conversation history. Each message in a long conversation re-sends the entire history.
