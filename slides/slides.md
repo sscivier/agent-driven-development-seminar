@@ -35,19 +35,13 @@ University of Oxford · June 2026
 <!--
 **Title · 0:00.**
 
-Thanks everyone. Over the next half hour I want to talk about a shift that's already
-changing how research software gets written — coding agents: AI that doesn't just answer
+Thanks everyone. I'd like to talk about a shift that's already changing how research software gets written — coding agents: AI that doesn't just answer
 questions about code, but actually reads, edits, runs, and iterates inside a real
 repository.
 
-This is a practical talk for people who already write scientific code. The pitch isn't
-"AI will write your science for you" — it's that there's a new kind of collaborator
-available to you, you almost certainly already have access to it through Oxford, and there's
-a right and a wrong way to work with it. By the end I want you to know what these tools are,
-which to reach for, how to drive them safely, and — most importantly for us — where they
-will quietly get the science wrong.
+My aim is for this to be practical for people who already write scientific code. By the end I want you to know what these tools are,
+which to reach for, and how to drive them safely.
 -->
-
 
 ---
 layout: center
@@ -64,10 +58,8 @@ class: divider
 <!--
 **Part 1 · through ~5:00.**
 
-Let's start with what's actually new here — because the conceptual shift is the thing that,
-once it clicks, makes everything else make sense.
+Let's start with what's actually new here — the key aspect that's changed even over the past few months.
 -->
-
 
 ---
 
@@ -108,16 +100,12 @@ As of May this year, Claude authored over 80% of the code merged into Anthropic'
 production codebase. And to make that concrete: in one case in April, the agent
 autonomously shipped over 800 fixes for a single persistent class of API errors, and
 cut the error rate by a factor of a thousand. The engineer who looked at it estimated
-that same cleanup would have taken a human developer about four years — and notice that's
-not four years of typing. It's four years because of the cognitive load of holding all
-that code context in your head at once. That's exactly the kind of work an agent is good
+that same cleanup would have taken a human developer about four years. That's exactly the kind of work an agent is good
 at carrying.
 
-So I'm not telling you this to say programmers are going away. I'm telling you because it
-reframes what we can ask a tool to do — and that shift is what the rest of the talk is
-about.
+I'm not telling you this to say programmers are going away. I'm telling you because it
+reframes what we can ask a tool to do.
 -->
-
 
 ---
 
@@ -163,13 +151,11 @@ one driving the keyboard. You're the operator; the AI gives advice.
 
 An agent is different. You give it a task, plus access to your repository and a set of
 tools — reading files, writing files, running shell commands, Git, web search — and it
-works through a plan on its own: reading the code, editing it, running the tests,
+works through a plan under your supervision: reading the code, editing it, running the tests, and
 iterating toward a result.
 
-So the unit of work moves from answering a question to carrying out a task. That is the
-whole shift, and everything else today follows from it — the power of it, and the risks.
+So the unit of work moves from answering a question to carrying out a task.
 -->
-
 
 ---
 
@@ -206,7 +192,7 @@ whole shift, and everything else today follows from it — the power of it, and 
 
 <!--
 Because the agent can act, the temptation is to throw everything at it — but it isn't
-always the right choice. It adds overhead: time, money, and the risk of agent error.
+always the right choice.
 
 It's a good fit for work that's well-defined but tedious — boilerplate, tests,
 documentation, refactoring to a consistent style. It's excellent for exploring a codebase
@@ -221,7 +207,6 @@ The heuristic I'd hold onto is this: if you could clearly brief a skilled progra
 doesn't know your field, an agent can probably help. If the task needs judgement only you
 have, the agent can assist but it cannot replace you.
 -->
-
 
 ---
 
@@ -1533,4 +1518,3 @@ listed here with the models. I directed and verified all of it, and I'm responsi
 content. It felt only right to practise the disclosure I'd ask of anyone else. Happy to take
 questions.
 -->
-
