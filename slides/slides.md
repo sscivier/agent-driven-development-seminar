@@ -3,7 +3,7 @@ theme: seriph
 title: Agent-Driven Software Development for Computational Geoscientists
 info: |
   Seminar for computational geoscientists at the University of Oxford.
-  Source material: seminar_notes.md.
+  Source material: docs/seminar_notes.md.
 layout: default
 class: deck
 colorSchema: light
@@ -1306,7 +1306,7 @@ class: divider
 show the *workflow*, not an impressive autonomous result. If you're not running it live,
 say one line — "I'll spare you the live demo, but here's the shape of it" — and advance to
 the close. The two background slides are quick (~1–2 min) so the audience knows what we're
-building. Prompts are in d8_prompts.md; full demo script in seminar_notes.md §6.2.]
+building. Prompts are in docs/d8_prompts.md; full demo script in docs/seminar_notes.md §6.2.]
 -->
 
 
@@ -1478,7 +1478,7 @@ this to validate against.
 
 <div class="block" style="margin-top: 1.2rem;">
   <span class="tag">Setup</span>
-  <p>Start from a scaffolded repo on a fresh branch (<code>demo-live</code> off <code>demo-start</code>). Prompts prepared in <code>d8_prompts.md</code>; the finished package waits on <code>demo-solution</code> as a safety net.</p>
+  <p>Start from a scaffolded repo on a fresh branch (<code>demo-live</code> off <code>demo-start</code>). Prompts prepared in <code>docs/d8_prompts.md</code>; the finished package waits on <code>demo-solution</code> as a safety net.</p>
 </div>
 
 <ul class="steps">
@@ -1492,7 +1492,7 @@ this to validate against.
 
 <!--
 [OPTIONAL demo slide — facilitation cues, not a script. The demo builds the d8demo package
-live from a clean scaffold, using the staged, well-scoped prompts in d8_prompts.md. Branch
+live from a clean scaffold, using the staged, well-scoped prompts in docs/d8_prompts.md. Branch
 demo-live off demo-start first; demo-solution holds the finished package if you run out of
 time or it goes awry.
 
@@ -1505,7 +1505,7 @@ persistent context goes into CLAUDE.md/AGENTS.md up front. Then review the diff 
 Land the punchline: the tests pass and the plot looks plausible — "but is the science right?"
 — and point back to the hand-checkable cases from the previous slide. Debrief in one line:
 the agent did real work, fast; we supplied the scoping, the context, and the scientific
-judgement. Full script: seminar_notes.md §6.2.]
+judgement. Full script: docs/seminar_notes.md §6.2.]
 -->
 
 
@@ -1597,7 +1597,7 @@ scientific decision would you never hand to an agent, and why? — probes the ta
 tension directly, and the published-result question tests whether the verification message
 landed. If the room is quiet, the CLAUDE.md question ("what would you put in one for your
 codebase right now?") is a reliable starter. Full bank of ten questions in
-seminar_notes.md §6.3.]
+docs/seminar_notes.md §6.3.]
 -->
 
 
