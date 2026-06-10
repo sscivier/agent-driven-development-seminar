@@ -109,6 +109,67 @@ reframes what we can ask a tool to do.
 
 ---
 
+<div class="eyebrow">The frontier is moving</div>
+
+# Not just the code — the science
+
+<div class="cols cols-2">
+  <v-click>
+    <div class="block">
+      <span class="tag">Mathematics</span>
+      <p><strong>"Claude's Cycles"</strong> — Donald Knuth published after Claude solved a graph-theory conjecture he'd worked on for decades (Mar 2026).</p>
+    </div>
+  </v-click>
+  <v-click>
+    <div class="block">
+      <span class="tag">Mathematics</span>
+      <p><strong>Erdős #728</strong> — solved "more or less autonomously" (Tao, Jan 2026). His caveat: speed, not depth — ~1–2% of open problems in reach.</p>
+    </div>
+  </v-click>
+  <v-click>
+    <div class="block">
+      <span class="tag">Across the sciences</span>
+      <p><strong>"A fast reasoning partner"</strong> — OpenAI's GPT-5 science report: credited ideas in maths, physics, biology; every step human-verified.</p>
+    </div>
+  </v-click>
+  <v-click>
+    <div class="block">
+      <span class="tag">Hypotheses</span>
+      <p><strong>Preferred 4 times in 5</strong> — blinded comparison of Claude Mythos 5's molecular-biology hypotheses; one mechanism independently validated (Jun 2026).</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <p class="lead">The pattern in every case: <span v-mark="{ at: 5, type: 'underline', color: '#C15F3C' }">AI proposes — humans verify and decide</span>.</p>
+</v-click>
+
+<!--
+And just in the last six months, the story has moved beyond the code into the science
+itself.
+
+In March, Donald Knuth — Donald Knuth — published a paper after Claude solved an open
+graph-theory conjecture he'd worked on for decades. The model spotted the underlying
+structure, a Cayley digraph, in about an hour. In January, Terence Tao reported an open
+Erdős problem solved more or less autonomously — and his caveats are worth keeping: it says
+more about speed than depth, and he reckons only one or two percent of open Erdős problems
+are within reach of today's AI without serious human involvement.
+
+OpenAI published a whole report of early science experiments — credited ideas in maths,
+physics, and biology — where the researchers' own framing was a "fast reasoning partner",
+with every step independently verified. And just this month, in blinded comparisons,
+scientists preferred Claude Mythos 5's molecular-biology hypotheses about four times in
+five, and one proposed mechanism has since been validated experimentally.
+
+I'll add my own experience: these models now routinely catch scientific and mathematical
+errors in my work that I hadn't caught — and I learn science from them, not just syntax.
+
+But notice the pattern in every one of these: the AI proposes, and humans verify and
+decide. That division of labour is the theme of this whole talk.
+-->
+
+---
+
 <div class="eyebrow">What actually changes</div>
 
 # From chat to agent
@@ -170,24 +231,24 @@ So the unit of work moves from answering a question to carrying out a task.
       <li>Well-defined but tedious work</li>
       <li>Boilerplate, tests, documentation</li>
       <li>Codebase exploration and mapping</li>
-      <li>Cross-cutting refactors</li>
-      <li>Scaffolding and Fortran/Matlab → Python ports</li>
+      <li>Cross-cutting refactors and ports</li>
+      <li>Scientific sparring — derive, check, critique, explain</li>
     </ul>
   </div>
   <div class="block cool">
-    <span class="tag">Poor fit</span>
+    <span class="tag">Still yours</span>
     <ul>
-      <li>Novel scientific decisions</li>
-      <li>Outputs you cannot test objectively</li>
+      <li>Decisions only you can own</li>
+      <li>What counts as a valid result</li>
+      <li>Outputs neither of you can check</li>
       <li>Vague, exploratory tasks</li>
-      <li>Algorithms you cannot validate</li>
       <li>Work quicker to do than to brief</li>
     </ul>
   </div>
 </div>
 
 <p class="note">
-<strong>Heuristic:</strong> if you could brief a skilled programmer who doesn't know your field, an agent can probably help. If it needs judgement only you hold, it cannot.
+<strong>Heuristic, 2026 edition:</strong> the agent increasingly <em>does</em> know your field. The boundary isn't domain knowledge any more — it's <strong>who owns the decisions and the verification</strong>. That's you.
 </p>
 
 <!--
@@ -195,24 +256,26 @@ Because the agent can act, the temptation is to throw everything at it — but i
 always the right choice.
 
 It's a good fit for work that's well-defined but tedious — boilerplate, tests,
-documentation, refactoring to a consistent style. It's excellent for exploring a codebase
-you've inherited, for cross-cutting changes like renaming something everywhere, for
-scaffolding a new project, and for porting Fortran or Matlab routines to Python.
+documentation, refactoring, exploring an inherited codebase, porting Fortran or Matlab to
+Python. And — this is the part that's changed recently — it's genuinely good as a
+scientific sparring partner: deriving and checking equations, critiquing a method,
+explaining an unfamiliar technique, reviewing your code for scientific errors.
 
-It's a poor fit when the task needs scientific judgement only you hold: novel decisions,
-outputs you can't test objectively, vague exploratory work, or anything where briefing the
-agent takes longer than just doing it.
+What stays yours isn't a capability boundary so much as an ownership boundary: decisions
+about research direction and acceptable approximations, what counts as a valid result,
+anything neither you nor the agent can check objectively, vague exploratory work, and
+anything where briefing takes longer than doing.
 
-The heuristic I'd hold onto is this: if you could clearly brief a skilled programmer who
-doesn't know your field, an agent can probably help. If the task needs judgement only you
-have, the agent can assist but it cannot replace you.
+The heuristic used to be "if you could brief a skilled programmer who doesn't know your
+field, an agent can help." That's out of date — the agent increasingly does know your
+field. The boundary now is who owns the decisions and the verification. That's you.
 -->
 
 ---
 
 <div class="eyebrow">Mental model</div>
 
-# A capable, junior collaborator
+# A capable collaborator — junior in <em>your</em> project
 
 <div class="cols cols-3">
   <v-click>
@@ -239,21 +302,31 @@ have, the agent can assist but it cannot replace you.
 </div>
 
 <v-click>
-  <p class="lead accent">Agents accelerate implementation. They cannot <span v-mark="{ at: 4, type: 'circle', color: '#C15F3C' }">certify scientific correctness</span>.</p>
+  <p class="lead">Junior in your codebase and your problem — <span v-mark="{ at: 4, type: 'underline', color: '#C15F3C' }">less junior in the science with every release</span>. It will catch errors you didn't.</p>
+</v-click>
+
+<v-click>
+  <p class="lead accent">Agents increasingly engage with the science. <span v-mark="{ at: 5, type: 'circle', color: '#C15F3C' }">You certify its correctness</span>.</p>
 </v-click>
 
 <!--
-If you take one mental model away from today, make it this one: an agent is a capable but
-junior collaborator.
+If you take one mental model away from today, make it this one: an agent is a capable
+collaborator that's junior in *your* project — it doesn't know your conventions, your data
+quirks, your unstated constraints.
 
 That means three things in practice. You brief it — give the task shape: the deliverable,
 the constraints, the files, the success criteria. You review what comes back as a draft —
 read the diff, run the tests, check the assumptions. And you keep the scientific judgement
 yourself — the reference values, the units, conservation, physical limits.
 
-The line I want to land is this: agents accelerate implementation, but they cannot certify
-scientific correctness. Hold that thought, because it comes back hard in the failure-modes
-section.
+But notice what the "junior" label does and doesn't cover. It's junior in your project. In
+the science, it's less junior with every release — in my own work these models now catch
+mathematical and scientific errors I hadn't spotted, and I learn from them. So don't treat
+it as a typist you have to keep away from the science; treat it as a collaborator whose
+scientific contributions you check.
+
+The line I want to land: agents increasingly engage with the science — but you certify its
+correctness. Hold that, because it comes back hard in the failure-modes section.
 -->
 
 
@@ -790,6 +863,7 @@ carry on.
   <v-click><li><strong>Physics</strong> — conservation, positivity, boundaries, units.</li></v-click>
   <v-click><li><strong>Suite</strong> — run existing tests to catch shared-code regressions.</li></v-click>
   <v-click><li><strong>Read</strong> — read the code that enters your research software.</li></v-click>
+  <v-click><li><strong>Second reviewer</strong> — a fresh agent checks the science: signs, units, derivations. It catches <em>your</em> errors too.</li></v-click>
 </ul>
 
 <v-click>
@@ -801,12 +875,17 @@ And then verification — because trust should come from checks, not from how co
 output looks. This is especially true for us, where a bug can produce a plausible-looking but
 wrong result.
 
-Five things. Ask for tests alongside the implementation — a function without a test is a
+Six things. Ask for tests alongside the implementation — a function without a test is a
 function you can't verify. Compare against a reference: an analytical solution, a slower
 implementation, literature values, or your previous hand-written version. Check the physics —
 conservation, positivity, boundaries, units. Run your existing suite, because agents often
-break shared code in subtle ways. And read the code — actually read what went in, not just
+break shared code in subtle ways. Read the code — actually read what went in, not just
 whether the tests went green. It's going into your research software; you own it.
+
+And the sixth is new, and it cuts the other way: use a fresh agent session — ideally a
+different model — as a second scientific reviewer. Ask it to check the signs, the units, the
+derivation. It will catch errors in the agent's work *and in yours* — in my experience it
+finds mistakes I'd have shipped. A second reviewer, never the only one.
 
 The line to hold: agent-written numerical code is not accepted until it's validated. And that
 takes us straight into what happens when it isn't.
@@ -1040,6 +1119,12 @@ fail? And I'm going to start with the one that matters most for scientists.
 Never deploy agent-written numerical code without validation against reference values. For any algorithm of consequence, read it line by line.
 </p>
 
+<v-click>
+  <p class="note">
+  <strong>It cuts both ways:</strong> an agent reviewing <em>your</em> derivation will catch errors you missed. Use it as a second reviewer — never the only one.
+  </p>
+</v-click>
+
 <!--
 This is the slide I'd most want you to remember from the whole talk. The code runs. The
 tests pass. The result looks plausible. And the science is wrong.
@@ -1054,6 +1139,11 @@ unit conversion hidden by scale; a boundary or array-staggering mistake; a misse
 constraint like conservation, positivity, or the CFL condition. So the rule is firm: never
 deploy agent-written numerical code without validating it against reference values, and for
 any algorithm of consequence, read it line by line. This is the part that stays yours.
+
+And to be fair to the tools — the same capability cuts both ways. The model that produces a
+confident sign error is also remarkably good at *finding* one, including in your own
+hand-written code and derivations. So fold it into the process: a fresh agent as a second
+scientific reviewer. Second — never the only one.
 -->
 
 
@@ -1121,7 +1211,7 @@ discipline you already apply, applied consistently.
   </div>
   <div class="block">
     <span class="tag">Students</span>
-    <p>A risk to skill-building <em>and</em> an excellent learning tool — within assessment rules.</p>
+    <p>A risk to skill-building <em>and</em> an excellent tutor — for the science, not just the code — within assessment rules.</p>
   </div>
 </div>
 
@@ -1141,10 +1231,11 @@ code.
 
 And students — and I want to be even-handed here. There's a genuine risk: a student who
 leans on an agent to produce code they don't understand doesn't build the core skills. But
-the very same tool is an excellent learning aid — for tutoring, worked examples, walking
-through code line by line, answering "why does this work" in real time. So the nuance is:
-be thoughtful about agent use for assessed or production work, while actively encouraging it
-as a way to learn and explore.
+the very same tool is an excellent tutor — and not just for programming. Worked examples,
+walking through code line by line, explaining why a method works, the reasoning behind a
+derivation — people increasingly learn the science itself this way, and I include myself in
+that. So the nuance is: be thoughtful about agent use for assessed or production work, while
+actively encouraging it as a way to learn and explore.
 -->
 
 
@@ -1408,10 +1499,10 @@ class: takeaways
 
 <ul class="steps" style="max-width: 54rem;">
   <li>Agent-driven development is real and useful — for well-scoped tasks with clear criteria.</li>
-  <li>The shift is from answering questions to taking actions.</li>
+  <li>Agents are becoming scientific collaborators — propose, check, teach — while decisions stay yours.</li>
   <li>You already have access — ChatGPT Edu and Codex via SSO, with OeRC support.</li>
   <li>The bottleneck moves to task definition, context, and verification.</li>
-  <li>Scientific correctness is your responsibility.</li>
+  <li>Scientific correctness is your responsibility — an agent is a second reviewer, never the only one.</li>
   <li>Use Git as your safety net — branches, commits, diffs.</li>
 </ul>
 
@@ -1420,19 +1511,23 @@ class: takeaways
 
 Let me bring it together with six things to take away.
 
-One: agent-driven development is real and useful — not hype, not magic — for well-scoped
-tasks with clear criteria. Two: the shift is from answering questions to taking actions, and
-that's where both the power and the risk come from. Three: you already have access — ChatGPT
-Edu and Codex through Oxford SSO, with OeRC there to help you start.
+One: agent-driven development is real and useful — not hype, not magic — the shift from
+answering questions to taking actions, for well-scoped tasks with clear criteria. Two, and
+this is the part that's changed most recently: agents are becoming scientific collaborators,
+not just coders — they propose approaches, check derivations, catch errors you missed, and
+teach — while the decisions stay yours. Three: you already have access — ChatGPT Edu and
+Codex through Oxford SSO, with OeRC there to help you start.
 
 Four: the bottleneck doesn't disappear, it moves — to task definition, context, and
 verification, and all three need your expertise. Five, and the one I'll keep repeating:
-scientific correctness is your responsibility; the agent will produce confident, plausible
-errors. And six: Git is your safety net — branches, commits, diffs.
+scientific correctness is your responsibility — and verification cuts both ways, so use an
+agent as a second reviewer of your own work too; second, never the only one. And six: Git is
+your safety net — branches, commits, diffs.
 
 My honest advice is to start small and on something low-stakes — write some tests, scaffold
-a project, get an inherited codebase explained to you — and build your intuition before you
-put an agent anywhere near critical code. With that, let's open it up.
+a project, get an inherited codebase explained to you, have it check a derivation — and
+build your intuition before you put an agent anywhere near critical code. With that, let's
+open it up.
 -->
 
 
@@ -1493,7 +1588,7 @@ class: disclosure
 
 | Tool | How it was used |
 | --- | --- |
-| **Claude Code** — Claude Opus 4.8 | Slide design & build; content drafting & revision |
+| **Claude Code** — Claude Opus 4.8, Fable 5 | Slide design & build; content drafting & revision |
 | **ChatGPT** — GPT 5.5 Thinking | Research, fact-checking, ideation & structure |
 | **OpenAI Codex** — Oxford institutional access, GPT 5.5 | Coding assistance |
 | **GitHub Copilot** — in VS Code, Claude Sonnet 4.6, GPT 5.5 | Project scaffolding |
