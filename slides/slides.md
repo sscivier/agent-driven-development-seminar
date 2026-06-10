@@ -24,7 +24,7 @@ drawings:
 <div class="title-rule"></div>
 
 <p class="subtitle">
-Using coding agents as practical research-software collaborators —
+Using coding agents as practical research collaborators —
 without outsourcing the scientific judgement.
 </p>
 
@@ -56,7 +56,7 @@ class: divider
 </div>
 
 <!--
-**Part 1 · through ~5:00.**
+**Part 1 · through ~6:00.**
 
 Let's start with what's actually new here — the key aspect that's changed even over the past few months.
 -->
@@ -116,7 +116,7 @@ reframes what we can ask a tool to do.
 <div class="cols cols-2">
   <v-click>
     <div class="block">
-      <span class="tag">Mathematics</span>
+      <span class="tag">Graph theory</span>
       <p><strong>"Claude's Cycles"</strong> — Donald Knuth published after Claude solved a graph-theory conjecture he'd worked on for decades (Mar 2026).</p>
     </div>
   </v-click>
@@ -161,8 +161,15 @@ with every step independently verified. And just this month, in blinded comparis
 scientists preferred Claude Mythos 5's molecular-biology hypotheses about four times in
 five, and one proposed mechanism has since been validated experimentally.
 
+And this isn't slowing down — Anthropic released Fable 5 just this week, a Mythos-class
+model in general availability, pitched explicitly on its science gains. "Less junior with
+every release" is not a figure of speech.
+
 I'll add my own experience: these models now routinely catch scientific and mathematical
 errors in my work that I hadn't caught — and I learn science from them, not just syntax.
+
+You'll notice none of these examples is geoscience. As far as I know there's no credited
+result in our field yet — which I'd read as an opportunity: you could be early.
 
 But notice the pattern in every one of these: the AI proposes, and humans verify and
 decide. That division of labour is the theme of this whole talk.
@@ -302,11 +309,7 @@ field. The boundary now is who owns the decisions and the verification. That's y
 </div>
 
 <v-click>
-  <p class="lead">Junior in your codebase and your problem — <span v-mark="{ at: 4, type: 'underline', color: '#C15F3C' }">less junior in the science with every release</span>. It will catch errors you didn't.</p>
-</v-click>
-
-<v-click>
-  <p class="lead accent">Agents increasingly engage with the science. <span v-mark="{ at: 5, type: 'circle', color: '#C15F3C' }">You certify its correctness</span>.</p>
+  <p class="lead accent">Junior in your project, less junior in the science every release — it catches errors you didn't. <span v-mark="{ at: 4, type: 'circle', color: '#C15F3C' }">You certify correctness</span>.</p>
 </v-click>
 
 <!--
@@ -343,7 +346,8 @@ class: divider
 </div>
 
 <!--
-**Part 2 · through ~12:00.**
+**Part 2 · through ~13:00.** [If running long, the Cursor/Devin slide is the flex point —
+compress it to one sentence each.]
 
 So that's the idea. Now let's get concrete: what tools actually exist in mid-2026, what
 they cost, and — the part that matters most for this room — what you already have through
@@ -520,6 +524,11 @@ and it has the CLAUDE.md system — a file where you write persistent project in
 that it reads at the start of every session. So it's the best fit if you're doing
 substantial development and want a repository-aware local agent you can teach about your
 project once.
+
+One very current note: Anthropic released Fable 5 this week — their newest flagship — and
+it runs in Claude Code. It's included on the subscription plans until the 22nd of June,
+after which it moves behind usage credits. So if you want to try one frontier model this
+month, that's the one to ask about.
 -->
 
 
@@ -549,7 +558,7 @@ project once.
 </div>
 
 <p class="note">
-<strong>Note:</strong> new Copilot sign-ups (Pro, Pro+, Max, student) were <span v-mark="{ at: 1, type: 'highlight', color: 'rgba(193,95,60,0.18)' }">paused April–June 2026</span>. Existing plans can still upgrade.
+<strong>Note:</strong> new Copilot sign-ups (Pro, Pro+, Max, student) <span v-mark="{ at: 1, type: 'highlight', color: 'rgba(193,95,60,0.18)' }">paused since April 2026 — still in effect</span>; check current status. Existing plans can upgrade.
 </p>
 
 <!--
@@ -563,9 +572,11 @@ has terminal access and MCP tools, and reads persistent instruction files, much 
 Code but inside the editor.
 
 One caveat you should know about: new Copilot sign-ups — Pro, Pro+, Max, and the student
-plans — were paused from April to June this year. Existing plans can still upgrade, and this
-may well have changed by the time you check, so look at the Copilot page for current status.
-Still, for VS Code users it's the easiest first step.
+plans — have been paused since April, and as of this week that's still in effect; GitHub
+says they'll reopen "in the coming weeks", so check the Copilot page. Existing plans can
+still upgrade. And a billing note: since the first of June, all Copilot plans bill through
+GitHub's AI Credits, with a monthly allowance included. Still, for VS Code users it's the
+easiest first step.
 -->
 
 
@@ -661,7 +672,7 @@ class: divider
 </div>
 
 <!--
-**Part 3 · through ~18:00.**
+**Part 3 · through ~19:00.**
 
 This is the practical heart of the talk: four habits that separate people who get real value
 from agents from people who get a mess. Scope, context, safety, verification.
@@ -755,11 +766,12 @@ or copilot-instructions.md. These are read at the start of every session, so you
 once: what the project does, the conventions, the test framework. Be specific — "this project
 uses pytest, black, and NumPy docstrings" beats "this is a scientific Python project."
 
-Scientific context is the part that's on us. Agents are genuinely good at repository context
-but poor at guessing your domain. They don't know that your velocity field must be
-divergence-free, that your tracer values must stay positive, or that your timestep has to
-satisfy the CFL condition. If you're implementing a parameterisation, give it the governing
-equations, the expected ranges, the known numerical pitfalls.
+Scientific context is the part that's on us. A frontier agent often knows the physics in
+general — what it cannot know is which constraints apply to *your* configuration. It knows
+divergence-free velocity fields exist; it doesn't know yours must be one. It doesn't know
+your tracer values must stay positive, or that your timestep has to satisfy the CFL
+condition, unless you say so. If you're implementing a parameterisation, give it the
+governing equations, the expected ranges, the known numerical pitfalls.
 
 And task context: point at the code precisely. "The advect function in
 src/dynamics/advection.py" is unambiguous; "the advection function" might not be. On the
@@ -905,7 +917,7 @@ class: divider
 </div>
 
 <!--
-**Part 4 · through ~23:00.**
+**Part 4 · through ~24:00.**
 
 Now a bit deeper on the two tools you're most likely to actually use — Claude Code and Codex
 — and then the cost mechanics underneath all of them, because that surprises people.
@@ -1003,7 +1015,7 @@ efficient.
 Two things specific to us. At Oxford, Codex draws on your weekly ChatGPT Edu allowance —
 around thirty queries a week — so treat those as scarce and spend them on tasks that are
 actually worth it. And for anything touching the science, review every PR carefully before
-merging — the agent followed the issue, but it doesn't know your physics.
+merging — the agent followed the issue, but it can't know which physics you intended.
 -->
 
 
@@ -1023,7 +1035,7 @@ merging — the agent followed the issue, but it doesn't know your physics.
 </div>
 
 <v-click>
-  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">100k–500k tokens</span> — roughly $5–$50 at Opus pricing.</p>
+  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">100k–500k tokens</span> — roughly $3–$30 at frontier-model pricing.</p>
 </v-click>
 
 <p class="note">
@@ -1037,8 +1049,16 @@ writes code, runs commands, reads the output, corrects its mistakes — and ever
 steps is fresh input and output tokens.
 
 So a complex task on a medium codebase can run a hundred thousand to half a million tokens —
-which at Opus pricing is roughly five to fifty dollars for the one task. On a subscription
-plan, a few big tasks can eat your monthly allocation.
+which at frontier-model pricing is roughly three to thirty dollars for the one task: Opus
+4.8 is now five dollars in, twenty-five out per million tokens, and Fable 5 is ten and
+fifty. On a subscription plan, a few big tasks can eat your monthly allocation.
+
+[If pressed on "multiplicative": strictly, uncached cost grows roughly *quadratically* with
+session length — the model is stateless, so every step re-sends the whole history as input.
+Prompt caching (automatic in Claude Code) discounts those re-sends to about a tenth of the
+input price, so the dollar curve is much gentler in practice — but the shape, the quota
+consumption, and the attention degradation remain. That's the mechanism behind the next
+slide's "context is a budget".]
 
 Where the overspend usually comes from is predictable: dragging long context forward,
 reaching for an expensive model when a cheaper one would do, the agent re-reading the same
@@ -1093,7 +1113,7 @@ class: divider
 </div>
 
 <!--
-**Part 5 · through ~28:00.**
+**Part 5 · through ~29:00.**
 
 Now the sober part — and I think the most important part for this room. Where do these tools
 fail? And I'm going to start with the one that matters most for scientists.
@@ -1116,7 +1136,7 @@ fail? And I'm going to start with the one that matters most for scientists.
 </div>
 
 <p class="note">
-Never deploy agent-written numerical code without validation against reference values. For any algorithm of consequence, read it line by line.
+Never deploy without validation against reference values; read any algorithm of consequence line by line.
 </p>
 
 <v-click>
@@ -1247,24 +1267,25 @@ actively encouraging it as a way to learn and explore.
 
 | Use | Be cautious | Don't skip |
 |---|---|---|
-| Well-scoped implementation | Scientific decisions | Reference checks |
+| Well-scoped implementation | Decisions that are yours | Reference checks |
 | Tests, docs, scaffolding | Unverifiable outputs | Diff review |
-| Repository exploration | Sensitive data | Dependency review |
-| Mechanical multi-file changes | Long unsupervised runs | Scientific ownership |
+| Exploration & mechanical changes | Sensitive data | Dependency review |
+| Scientific sparring & second review | Long unsupervised runs | Scientific ownership |
 
-<p class="lead accent">Agents accelerate implementation; researchers stay responsible for correctness.</p>
+<p class="lead accent">Agents propose, check, and teach — decisions and verification stay yours.</p>
 
 <!--
 Let me pull Part Five together with a single reference grid you could screenshot.
 
 Use agents confidently for well-scoped implementation, for tests, docs and scaffolding, for
-exploring a codebase, and for mechanical multi-file changes. Be cautious wherever judgement
-or sensitivity enters: scientific decisions, outputs you can't verify, sensitive data, long
+exploring a codebase and mechanical multi-file changes — and, as we've seen, as a scientific
+sparring partner and second reviewer. Be cautious wherever judgement or sensitivity enters:
+the decisions that are yours to own, outputs you can't verify, sensitive data, long
 unsupervised runs. And never skip the four things in the last column — reference checks, diff
 review, dependency review, and scientific ownership.
 
-If you remember nothing else from this section: agents accelerate implementation, but you stay
-responsible for correctness.
+If you remember nothing else from this section: agents propose, check, and teach — but the
+decisions and the verification stay yours.
 -->
 
 
@@ -1507,7 +1528,7 @@ class: takeaways
 </ul>
 
 <!--
-**Close · ~28:00–30:00.**
+**Close · ~29:00–31:00.**
 
 Let me bring it together with six things to take away.
 
@@ -1559,7 +1580,7 @@ class: discussion
   </div>
   <div>
     <span class="tag">Sceptical</span>
-    <p>When is agent-driven development <em>not</em> the right choice?</p>
+    <p>What scientific decision would you never delegate to an agent — and why?</p>
   </div>
   <div>
     <span class="tag">Sceptical</span>
@@ -1571,10 +1592,12 @@ class: discussion
 [DISCUSSION — facilitation, not scripted; ~20 min, separate from the 30-min talk. Open with
 the warm-up to get people talking — "has anyone actually used one of these on real research
 code?" — and let a few war stories surface. Then steer toward the conceptual and governance
-questions, and make sure the two sceptical ones get aired: when is this *not* the right
-choice, and what would make you trust agent-written code in a published result. If the room
-is quiet, the CLAUDE.md question ("what would you put in one for your codebase right now?")
-is a reliable starter. Full bank of ten questions in seminar_notes.md §6.3.]
+questions, and make sure the two sceptical ones get aired: the delegation boundary — what
+scientific decision would you never hand to an agent, and why? — probes the talk's central
+tension directly, and the published-result question tests whether the verification message
+landed. If the room is quiet, the CLAUDE.md question ("what would you put in one for your
+codebase right now?") is a reliable starter. Full bank of ten questions in
+seminar_notes.md §6.3.]
 -->
 
 
