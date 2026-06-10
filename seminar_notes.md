@@ -922,37 +922,42 @@ Agent-Driven Software Development for Computational Geoscientists
 
 **Goal:** Illustrate good agent workflow, not impressive autonomous output. Demonstrate the *process*, not just the result.
 
-**Recommended demonstration: codebase onboarding + targeted test writing**
+**Recommended demonstration: building `d8demo` from a scaffold with staged, scoped prompts**
+
+The demo builds `d8demo`, a tiny educational package for D8 flow routing and flow accumulation on synthetic DEMs, live from a clean scaffold. The point is the *workflow* — scoping, persistent context, plan-before-code, diff review, verification — not an impressive autonomous result. The prepared prompts live in `d8_prompts.md`.
 
 **Setup (prepare in advance):**
 
-- A small (~200 line) scientific Python script, e.g., a 1D advection solver or a simple finite-difference heat equation solver. The code should be functional but have no tests.
-- Claude Code installed and authenticated.
-- A Git repository with the code committed.
+- The `d8demo` repository, with the scaffolded starting point committed on `demo-start` (a LICENSE, a placeholder README, and a short repository description — no implementation).
+- The staged prompts ready to paste, in `d8_prompts.md` (scaffold → source + tests → example → docs).
+- The finished package on `demo-solution` as a safety net, in case the live run runs long or goes awry.
+- Claude Code installed and authenticated; `uv` installed.
+
+Brief the audience first with the two background slides (DEM, D8 routing, flow accumulation; the hand-checkable 3×3 valley) so they know what is being built.
 
 **Demonstration script:**
 
-1. **Show the code** (30 sec): "Here is a small geophysical model — a 1D advection scheme. It works, but there are no tests."
+You will not run all four stages in five minutes — branch `demo-live` off `demo-start`, then pick one or two stages that best show the workflow (the scaffold and source-and-tests prompts are the richest). For each prompt, narrate the workflow beats rather than the code.
 
-2. **Codebase onboarding** (1 min): Show Claude Code being asked to explain the codebase: `"Describe what this code does, its structure, and any potential issues you notice."` The audience sees how the agent reads and summarises the code accurately.
+0. **Branch** (15 sec): `git checkout demo-start && git checkout -b demo-live`. "We never let an agent work on `main` — and we have a finished solution on another branch as a fallback."
 
-3. **Show the CLAUDE.md file** (30 sec): Display a short CLAUDE.md that describes the project, the testing convention, and a scientific constraint ("outputs must be between 0 and 1 for a normalised tracer field"). Explain why this exists.
+1. **Scaffold** (1 min): Paste the scaffold prompt. The agent sets up the `uv` package, minimal dependencies, a short README, and `CLAUDE.md` / `AGENTS.md`. Point out that persistent context (educational style, explicit NumPy, tests-first, scientific assumptions in docstrings, no new dependencies without asking) goes in *up front*.
 
-4. **Ask for a plan before implementation** (1 min): `"Write a plan for adding unit tests to this code. Do not write any tests yet. Describe what you would test and why."` Review the plan with the audience. Point out what it got right and what it missed (e.g., did it identify the physical conservation property?).
+2. **Source + tests** (1–2 min): Paste the source prompt. The agent first researches D8, asks clarifying questions, proposes a package design and tests, states its scientific assumptions, and proposes a plan — *before* writing code. Highlight this: scoping and plan-first are doing the work. Then it implements DEM generation, D8 routing, and flow accumulation with tiny deterministic tests.
 
-5. **Execute** (1–2 min): Ask the agent to implement the plan. Show the tests being written. Show the `git diff`. Point out something to correct or improve.
+3. **Review and run** (1 min): Show the `git diff`. Run `uv run pytest`. Tests pass. Ask: "But are these tests sufficient? Is the science right?" Point back to the hand-checkable cases from the background slide — that is how we validate, not by trusting green tests.
 
-6. **Run the tests** (30 sec): Run the test suite. Tests pass (they were written to pass). Ask: "But are these tests sufficient? What else would you want to test?" Highlight the gap between passing tests and scientific validity.
+4. **(If time) Example / docs**: The remaining prompts add an end-to-end CLI example that plots DEM → directions → accumulation, and a short background note. Mention these exist rather than running them live.
 
-7. **Debrief** (1 min): "This took 5 minutes. But notice what we did: we scoped the task, provided context, asked for a plan first, reviewed the diff, and asked whether the tests were sufficient. The agent did the work; we provided the scientific judgement."
+5. **Debrief** (1 min): "Notice what we did: scoped each stage tightly, gave persistent context once, made the agent plan and state assumptions before coding, reviewed the diff, and ran the tests — then asked whether the science was right. The agent did the work; we kept the scientific judgement."
 
 **Why this demonstration works:**
 
-- Low risk: no complex task, no live internet, no large codebase, no chance of dramatic failure
-- Illustrates the *workflow*, not just the output
-- Naturally raises the discussion of scientific correctness
-- Reproducible: same results every time
-- Honest: shows an agent doing something useful, but also shows its limits
+- Low risk: small synthetic package, no live internet, deterministic — and a finished `demo-solution` branch as a fallback
+- Illustrates the *workflow* (scope → context → plan → review → verify), not just the output
+- Naturally raises the discussion of scientific correctness, with hand-checkable cases as the answer
+- Reproducible: same prompts, same results every time
+- Honest: shows an agent doing genuinely useful work, but also where our judgement is required
 
 ---
 

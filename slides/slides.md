@@ -1208,7 +1208,168 @@ class: divider
 [OPTIONAL — not in the 30-min budget. ~5 min if time and appetite allow. The point is to
 show the *workflow*, not an impressive autonomous result. If you're not running it live,
 say one line — "I'll spare you the live demo, but here's the shape of it" — and advance to
-the close. Full step-by-step demo script is in seminar_notes.md §6.2.]
+the close. The two background slides are quick (~1–2 min) so the audience knows what we're
+building. Prompts are in d8_prompts.md; full demo script in seminar_notes.md §6.2.]
+-->
+
+
+---
+
+<div class="eyebrow">Demo background · the science</div>
+
+# Where does the water go?
+
+<p class="lead">Given a landscape's elevation, <span v-mark="{ at: 1, type: 'underline', color: '#C15F3C' }">where does water flow, and where does it collect?</span></p>
+
+<div class="flow">
+  <span>Elevation grid (DEM)</span><span class="arrow">→</span>
+  <span>Flow directions</span><span class="arrow">→</span>
+  <span>Flow accumulation</span><span class="arrow">→</span>
+  <span>Rivers &amp; catchments</span>
+</div>
+
+<v-click>
+  <p class="note" style="margin-top: 1.6rem;">
+  This is the basis of <strong>drainage networks, catchments (watersheds), erosion, and flood routing</strong>. Our demo — <strong>d8demo</strong> — is a tiny <em>educational</em> version on small synthetic landscapes, not a production hydrology tool.
+  </p>
+</v-click>
+
+<!--
+**Demo background 1 · ~30s.**
+
+First, the wider picture — what is the package even for. This is hydrological flow modelling:
+you start from a landscape's elevation and you want to know where water flows and where it
+collects. The input is a DEM — a digital elevation model, just a grid of heights. From that
+you derive, first, a flow direction for every cell, and then flow accumulation — how much
+drains through each cell — which is what gives you rivers, channels, and catchment boundaries.
+
+It underpins drainage networks, catchment delineation, erosion and flood modelling. The thing
+we'll build, d8demo, is a deliberately tiny, educational version of this on small synthetic
+landscapes — not a production hydrology package.
+-->
+
+
+---
+
+<div class="eyebrow">Demo background · the method</div>
+
+# D8 flow routing
+
+<div class="cols cols-3">
+  <v-click>
+    <div class="block">
+      <span class="tag">The rule</span>
+      <h3>Steepest of eight</h3>
+      <p>Water runs downhill: each cell sends <em>all</em> its flow to the single lowest of its eight surrounding neighbours. One cell → one downstream cell.</p>
+    </div>
+  </v-click>
+  <v-click>
+    <div class="block">
+      <span class="tag">Accumulation</span>
+      <h3>Count what drains through</h3>
+      <p>For each cell, count how many cells drain through it. Totals grow downstream, so the large values trace out the channels.</p>
+    </div>
+  </v-click>
+  <v-click>
+    <div class="block">
+      <span class="tag">Outlets</span>
+      <h3>Where flow leaves</h3>
+      <p>The lowest cells have no downhill neighbour — water leaves the grid there.</p>
+    </div>
+  </v-click>
+</div>
+
+<v-click>
+  <p class="note">"D8" = <strong>deterministic, eight directions</strong>. It is the simplest of a family of routing methods — and the building block the real tools elaborate on.</p>
+</v-click>
+
+<!--
+**Demo background 2 · ~45s.**
+
+So how does D8 actually decide where the water goes? The rule is deliberately simple. Water
+runs downhill, so each cell just sends all of its flow to whichever of its eight surrounding
+neighbours is lowest — the steepest way down. One cell, one downstream cell. That's the "D8":
+deterministic, eight directions.
+
+Once every cell has a direction, accumulation is just bookkeeping: for each cell, count how
+many cells ultimately drain through it. Those totals grow as you go downstream, so the big
+numbers light up the channels. And the lowest cells — the ones with no lower neighbour — are
+outlets, where water leaves the grid. That's the whole method; the production tools add
+machinery on top, but this is the core.
+-->
+
+
+---
+
+<div class="eyebrow">Demo background · worked example</div>
+
+# Small enough to check by hand
+
+<div class="d8-fig">
+  <div class="d8-panel">
+    <div class="d8-cap">Elevation (DEM)</div>
+    <div class="d8-grid d8-dem">
+      <div class="d8-cell">1.2</div><div class="d8-cell d8-ch">0.2</div><div class="d8-cell">1.2</div>
+      <div class="d8-cell">1.1</div><div class="d8-cell d8-ch">0.1</div><div class="d8-cell">1.1</div>
+      <div class="d8-cell">1.0</div><div class="d8-cell d8-ch">0.0</div><div class="d8-cell">1.0</div>
+    </div>
+  </div>
+  <div class="d8-sep">→</div>
+  <div class="d8-panel">
+    <div class="d8-cap">Flow direction</div>
+    <div class="d8-grid d8-flow">
+      <div class="d8-cell">→</div><div class="d8-cell">↓</div><div class="d8-cell">←</div>
+      <div class="d8-cell">→</div><div class="d8-cell">↓</div><div class="d8-cell">←</div>
+      <div class="d8-cell">→</div><div class="d8-cell d8-outlet"><span class="d8-dot"></span></div><div class="d8-cell">←</div>
+    </div>
+  </div>
+  <div class="d8-sep">→</div>
+  <div class="d8-panel">
+    <div class="d8-cap">Accumulation</div>
+    <div class="d8-grid d8-acc">
+      <div class="d8-cell d8-a1">1</div><div class="d8-cell d8-a3">3</div><div class="d8-cell d8-a1">1</div>
+      <div class="d8-cell d8-a1">1</div><div class="d8-cell d8-a6">6</div><div class="d8-cell d8-a1">1</div>
+      <div class="d8-cell d8-a1">1</div><div class="d8-cell d8-a9">9</div><div class="d8-cell d8-a1">1</div>
+    </div>
+  </div>
+</div>
+
+<style scoped>
+.d8-fig { display: flex; align-items: center; justify-content: center; gap: 1.1rem; margin: 1.6rem 0 1.2rem; }
+.d8-panel { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+.d8-cap { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: #8a8178; font-weight: 600; }
+.d8-grid { display: grid; grid-template-columns: repeat(3, 50px); grid-template-rows: repeat(3, 50px); gap: 4px; }
+.d8-cell { display: flex; align-items: center; justify-content: center; border-radius: 7px; font-size: 1rem; font-weight: 600; color: #2c2a28; font-variant-numeric: tabular-nums; }
+.d8-dem .d8-cell { background: #ddc9ad; }
+.d8-dem .d8-ch { background: #9cc0d2; color: #1d3b48; }
+.d8-flow .d8-cell { background: #f1ece5; color: #C15F3C; font-size: 1.35rem; font-weight: 700; }
+.d8-flow .d8-outlet { background: #C15F3C; }
+.d8-flow .d8-outlet .d8-dot { width: 13px; height: 13px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.4); }
+.d8-acc .d8-cell { background: rgba(193,95,60,.10); }
+.d8-acc .d8-a3 { background: rgba(193,95,60,.32); }
+.d8-acc .d8-a6 { background: rgba(193,95,60,.58); color: #fff; }
+.d8-acc .d8-a9 { background: rgba(193,95,60,.85); color: #fff; }
+.d8-sep { font-size: 1.5rem; color: #c0b7ac; align-self: center; margin-top: 1.3rem; }
+</style>
+
+<p>A 3×3 valley: a central channel falling south, with walls either side. The wall cells drain inward, the channel drains south, and the bottom-centre cell is the outlet (●) where flow leaves.</p>
+
+<v-click>
+  <p class="lead accent">Accumulation builds to 9 — every cell — at the outlet. Tiny, deterministic cases like this are how we check the agent's numerical code.</p>
+</v-click>
+
+<!--
+**Demo background 3 · ~30s. (Cut this slide if short on time.)**
+
+And because the grids are tiny, we can check the whole thing by hand — which is exactly the
+point. Here's a three-by-three valley: a channel falling south, walls either side. The wall
+cells drain inward to the channel, the channel drains south, and the bottom-centre cell is
+the outlet, where water leaves. Follow the accumulation: each wall cell is one, and the
+channel builds up — three, six, nine — until the outlet collects all nine cells in the grid.
+
+Hold onto that, because it's the answer to the question the demo ends on. When the agent's
+tests pass, "is the science right?" isn't a leap of faith — we have hand-checkable cases like
+this to validate against.
 -->
 
 
@@ -1216,30 +1377,38 @@ the close. Full step-by-step demo script is in seminar_notes.md §6.2.]
 
 <div class="eyebrow">Live demo</div>
 
-# A small model, a real workflow
+# Building a package, the right way
 
-<div class="block" style="margin-top: 1.6rem;">
-  <span class="tag">Target</span>
-  <p>A ~200-line scientific Python model — a 1D advection or heat-equation solver. It works, but has no tests.</p>
+<div class="block" style="margin-top: 1.2rem;">
+  <span class="tag">Setup</span>
+  <p>Start from a scaffolded repo on a fresh branch (<code>demo-live</code> off <code>demo-start</code>). Prompts prepared in <code>d8_prompts.md</code>; the finished package waits on <code>demo-solution</code> as a safety net.</p>
 </div>
 
 <ul class="steps">
-  <li>Ask the agent to explain the codebase.</li>
-  <li>Show CLAUDE.md — project instructions and a scientific constraint.</li>
-  <li>Request a test plan <em>before</em> implementation.</li>
-  <li>Implement, inspect the diff, run the tests.</li>
+  <li><strong>Scaffold</strong> — uv package, minimal deps, README, CLAUDE.md / AGENTS.md.</li>
+  <li><strong>Source + tests</strong> — agent researches D8, asks questions, proposes a plan and states assumptions <em>before</em> coding.</li>
+  <li><strong>Example</strong> — end-to-end CLI script: DEM → route → accumulate → plot.</li>
+  <li><strong>Docs</strong> — a short background note.</li>
 </ul>
 
-<p class="lead accent">But are these tests sufficient?</p>
+<p class="lead accent">Review the diff, run <code>uv run pytest</code> — the tests pass and the figure looks right. But is the science right?</p>
 
 <!--
-[OPTIONAL demo slide — facilitation cues, not a script. Walk the four steps live against the
-prepared ~200-line solver: (1) ask the agent to explain the codebase; (2) show the CLAUDE.md
-with one scientific constraint; (3) ask for a test plan *before* implementing; (4) implement,
-review the diff, run the tests. Then land the punchline on the slide — the tests pass, but
-"are these tests sufficient?" — to expose the gap between passing tests and scientific
-validity. Debrief in one line: the agent did useful work in five minutes; we supplied the
-scoping, the context, and the scientific judgement. Full script: seminar_notes.md §6.2.]
+[OPTIONAL demo slide — facilitation cues, not a script. The demo builds the d8demo package
+live from a clean scaffold, using the staged, well-scoped prompts in d8_prompts.md. Branch
+demo-live off demo-start first; demo-solution holds the finished package if you run out of
+time or it goes awry.
+
+You won't run all four stages in five minutes — pick one or two that show the workflow. The
+scaffold prompt and the source+tests prompt are the richest: the agent researches D8, asks
+clarifying questions, proposes a plan and states its assumptions *before* writing code, and
+persistent context goes into CLAUDE.md/AGENTS.md up front. Then review the diff and run
+`uv run pytest`.
+
+Land the punchline: the tests pass and the plot looks plausible — "but is the science right?"
+— and point back to the hand-checkable cases from the previous slide. Debrief in one line:
+the agent did real work, fast; we supplied the scoping, the context, and the scientific
+judgement. Full script: seminar_notes.md §6.2.]
 -->
 
 
