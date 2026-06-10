@@ -40,6 +40,24 @@ This is not a story about AI replacing programmers. It is a story about a change
 
 ---
 
+### The frontier is moving into the science
+
+The software-engineering results above are no longer the whole story. Over the first half of 2026, frontier models began making credited contributions to science itself — not just to the code around it.
+
+- **Mathematics — "Claude's Cycles" (March 2026).** Donald Knuth published a paper after Claude Opus 4.6 solved an open graph-theory conjecture he had worked on for decades, in roughly an hour across 31 guided explorations. The key step — recognising the problem's structure as a Cayley digraph — came from the model. (Stanford: `www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf`)
+- **Mathematics — Erdős problem #728 (January 2026).** Terence Tao reported that GPT-5.2 Pro solved an open Erdős problem "more or less autonomously", with the proof subsequently formalised in Lean. Tao's caveats matter: the achievement is more about *speed* than depth; he estimates only ~1–2% of open Erdős problems are simple enough for today's AI to solve with minimal human involvement, and on hard problems humans still map the strategy.
+- **Across the sciences — OpenAI's GPT-5 science report.** OpenAI's "Early experiments in accelerating science with GPT-5" documents contributions across mathematics, physics, and biology — including a case where GPT-5 contributed the key idea that completed a proof for researchers Sawhney and Sellke. The researchers' framing: a "fast reasoning partner", with every step independently verified by humans.
+- **Hypothesis generation — Anthropic Mythos 5 (June 2026).** In blinded comparisons, scientists preferred Mythos 5's molecular-biology hypotheses ~80% of the time over earlier models, and one proposed mechanism received independent experimental validation. In a week-long autonomous genomics run, it compiled single-cell data across 138 species and designed a cross-species cell-type model reportedly outperforming a recently published *Science* model at a fraction of the size. (Mythos 5 is a limited-release research model; Claude Fable 5, released 9 June 2026, brings Mythos-class capability to general availability.)
+
+Two things are simultaneously true and should both be presented:
+
+1. Agents are becoming genuine **scientific collaborators**: they propose approaches, check derivations, catch sign, unit, and mathematical errors that the researcher missed, and teach unfamiliar material effectively.
+2. In every credited case above, **verification and final judgement remained human**. The pattern is "AI proposes, human verifies and decides" — not autonomous science.
+
+The practical consequence for researchers: it is no longer accurate to treat an agent as *only* a junior software engineer that must be kept away from the science. Engaging it with the science — as a sparring partner, second reviewer, and tutor — is increasingly where the value is, provided the verification discipline described in Parts 3 and 5 is maintained.
+
+---
+
 ### The conceptual shift
 
 Most researchers will have encountered AI coding assistance as **chat-based help**: you describe a problem, the model produces a suggestion, you copy and paste it, you check it, you move on. This is genuinely useful, but it is fundamentally a *conversation*. You remain the operator of the keyboard; the AI offers advice.
@@ -53,7 +71,7 @@ The practical consequences of this shift are significant:
 - Multi-step workflows — clone a repository, understand the codebase, identify a bug, write a fix, run tests, commit, open a pull request — can be executed without constant human direction.
 - But the agent can also make persistent mistakes, consume significant resources, and produce plausible-sounding but subtly wrong results.
 
-The key mental model for researchers to internalise: **an agent is a capable but junior collaborator who needs good briefs, produces output that must be reviewed, and should not be trusted on scientific correctness without verification**.
+The key mental model for researchers to internalise: **an agent is a capable collaborator who needs good briefs, produces output that must be reviewed, and should not be trusted on scientific correctness without verification**. It is junior *in your project and your specific problem* — it does not know your conventions, your data quirks, or your unstated constraints. But it is markedly less junior in the science with every model generation: a current frontier agent will often propose sound scientific approaches and catch mathematical or physical errors that you missed. The human role is therefore best described not as "the only one who can engage with the science" but as **the one who decides and verifies**.
 
 ### How this differs from traditional coding assistance
 
@@ -76,15 +94,15 @@ Agent-driven development is **not always the right choice**. It adds overhead (t
 - **Cross-cutting changes**: "rename this function everywhere and update all callers."
 - **Scaffolding**: setting up a new project, CI/CD pipeline, packaging, installation scripts.
 - **Port/translation**: converting Fortran or Matlab routines to Python.
+- **Scientific sparring**: deriving and checking equations, critiquing a method, explaining unfamiliar techniques, reviewing code or derivations for scientific errors.
 
 It is **less suited** to:
 
-- Tasks requiring deep scientific domain knowledge to verify.
-- Novel algorithm design (agents can scaffold and implement, but the scientific decisions remain yours).
+- Decisions that are yours to make: research direction, which approximation is acceptable, what counts as a valid result (agents can inform and critique these decisions, but cannot own them).
 - Extremely exploratory or poorly-scoped work.
-- Tasks where the output cannot be tested objectively.
+- Tasks where the output cannot be tested or checked objectively — if neither you nor the agent can verify it, neither of you should trust it.
 
-A useful heuristic: **if you could describe the task clearly to a skilled programmer who doesn't know your field, an agent can probably do it**. If the task requires scientific judgement that only you hold, an agent can help but cannot replace that judgement.
+A useful heuristic — updated for 2026: the old advice was "if you could brief a skilled programmer who doesn't know your field, an agent can do it." Frontier agents increasingly *do* know the field, so the boundary has moved. The boundary now is **ownership of decisions and verification**: an agent can engage with the science — propose, derive, check, explain — but the decision about what is scientifically acceptable, and the final verification, are yours.
 
 ---
 
@@ -523,6 +541,8 @@ git merge --no-ff agent/feature-name
 
 6. **Use version control as a review tool.** `git diff` before accepting any agent commit.
 
+7. **Use an agent as a second scientific reviewer.** Verification cuts both ways: a fresh agent session (ideally a different model from the one that wrote the code) asked to review code or a derivation for scientific errors will routinely catch sign errors, unit mistakes, and slips in the mathematics — in agent-written *and* human-written work. This is an addition to the checks above, never a replacement for reference values and your own reading: a second reviewer, not the only one.
+
 ### 3.7 Reproducibility considerations
 
 Agents can introduce reproducibility risks:
@@ -776,6 +796,8 @@ This is the most important failure mode for researchers. Agents can:
 
 **Mitigation:** Test against known solutions. Never deploy agent-written numerical code without validation against reference values. For any algorithm of consequence, read the implementation line by line.
 
+**The check cuts both ways.** The same capability that produces confident errors also catches them: an agent asked to *review* a derivation or a numerical routine will frequently find sign errors, unit mistakes, and mathematical slips that the human author missed. Use an agent as an additional scientific reviewer of your own work as well as of agent output — a second reviewer, never the only one.
+
 #### Plausible but incorrect outputs (hallucination in code)
 
 Agents can:
@@ -858,7 +880,7 @@ Research groups should consider:
 - **Attribution and authorship:** If an agent wrote substantial portions of code in a published software package, how is this disclosed? Some journals and conference proceedings are beginning to require disclosure.
 - **Code ownership and licensing:** Code generated by an AI tool may have unclear licensing status in some jurisdictions. Review your institution's policy.
 - **Reproducibility obligations:** If your published results depend on agent-written code, is that code sufficiently documented and tested for others to reproduce?
-- **Student training:** This cuts both ways. Students who rely on agents to *produce* code without understanding it may fail to develop core computational skills. However, agents can also be excellent **learning tools**: for tutoring, explaining concepts interactively, walking through code line-by-line, generating worked examples, and answering "why does this work?" questions in real time. Research groups should think carefully about when agent use is pedagogically appropriate for production or assessment work, while actively encouraging its use as a learning and exploration tool.
+- **Student training:** This cuts both ways. Students who rely on agents to *produce* code without understanding it may fail to develop core computational skills. However, agents can also be excellent **learning tools** — and not only for programming: for tutoring, explaining concepts interactively, walking through code line-by-line, generating worked examples, and answering "why does this work?" questions in real time. Researchers increasingly report learning *science* from agent dialogue — unfamiliar methods, the reasoning behind a derivation, the trade-offs between approaches — not just syntax. Research groups should think carefully about when agent use is pedagogically appropriate for production or assessment work, while actively encouraging its use as a learning and exploration tool.
 - **Data handling policies:** Before using any cloud tool with research data, check whether the data can be sent off-site and what governance applies.
 
 ---
@@ -872,12 +894,13 @@ Research groups should consider:
 **Slide 1: Title**
 Agent-Driven Software Development for Computational Geoscientists
 
-**Slides 2–5: The conceptual shift (5 min)**
+**Slides 2–6: The conceptual shift (5–6 min)**
 
 - Slide 2: Real-world impact — Anthropic's 80%/800 stat as an opening anchor
-- Slide 3: Chat → Agent: what changes? (diagram)
-- Slide 4: What kinds of tasks benefit from agents? (decision framework table)
-- Slide 5: The mental model: "capable junior collaborator"
+- Slide 3: The frontier is moving into the science — Knuth's "Claude's Cycles", Erdős #728 (with Tao's caveats), the GPT-5 science report, Mythos 5 hypothesis generation; verification stayed human in every case
+- Slide 4: Chat → Agent: what changes? (diagram)
+- Slide 5: What kinds of tasks benefit from agents? (decision framework table)
+- Slide 6: The mental model: a capable collaborator — junior in your project, less junior in the science every release; you decide and verify
 
 **Slides 5–10: The ecosystem (8 min)**
 
@@ -994,15 +1017,17 @@ You will not run all four stages in five minutes — branch `demo-live` off `dem
 
 2. **The shift is from answering questions to taking actions** — this creates both power and risk, and requires a more careful workflow.
 
-3. **You already have access** — ChatGPT Edu and Codex are available to all Oxford staff and students via SSO, with training and guidance from the OeRC AI Competency Centre.
+3. **Agents are becoming scientific collaborators, not just coders** — they propose approaches, check derivations, catch errors you missed, and teach. Engage them with the science; keep the decisions and the verification yours.
 
-4. **The bottleneck shifts, but does not disappear** — agents accelerate implementation; the bottleneck moves to task definition, context provision, and scientific verification. These require your expertise.
+4. **You already have access** — ChatGPT Edu and Codex are available to all Oxford staff and students via SSO, with training and guidance from the OeRC AI Competency Centre.
 
-5. **Scientific correctness is your responsibility** — agents do not know your science and will confidently produce plausible-looking errors. The review process matters more, not less, when using agents.
+5. **The bottleneck shifts, but does not disappear** — agents accelerate implementation; the bottleneck moves to task definition, context provision, and scientific verification. These require your expertise.
 
-6. **Start small and build trust** — try an agent on a low-stakes task (writing tests, generating boilerplate, explaining an inherited codebase). Build your intuition for its strengths and failure modes before using it on critical code.
+6. **Scientific correctness is your responsibility** — agents can confidently produce plausible-looking errors, and review matters more, not less. But verification cuts both ways: an agent makes an excellent *second* scientific reviewer of your own work — never the only one.
 
-7. **Use Git as your safety net** — branches, commits, diffs. This is non-negotiable.
+7. **Start small and build trust** — try an agent on a low-stakes task (writing tests, generating boilerplate, explaining an inherited codebase). Build your intuition for its strengths and failure modes before using it on critical code.
+
+8. **Use Git as your safety net** — branches, commits, diffs. This is non-negotiable.
 
 ---
 
