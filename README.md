@@ -1,4 +1,4 @@
-# Agent-Driven Software Development for Computational Geoscientists
+# Agent-Driven Software Development for Computational Geoscientists (June 2026)
 
 Materials for a 30–40 minute seminar (plus ~20 minutes of discussion) on
 agent-driven software development, given at the University of Oxford. The
