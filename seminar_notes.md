@@ -125,13 +125,16 @@ A useful heuristic — updated for 2026: the old advice was "if you could brief 
 | Team | Contact | Yes | Centralised billing, SSO, admin controls |
 | Enterprise | Contact | Yes | Custom deployment, Bedrock/Vertex support |
 
-**API pricing (for Claude Console / pay-as-you-go use):**
+**API pricing (as of 10 June 2026 — Anthropic cut Opus pricing with the Fable 5 launch):**
 
-- Haiku 4.5: ~$0.80/$4.00 per million input/output tokens (small, fast, cheap)
-- Sonnet 4.6: standard mid-tier pricing
-- Opus 4.8: $15/$75 per million tokens (standard); fast mode $30/$150 per million tokens
+- Haiku 4.5: $1/$5 per million input/output tokens (small, fast, cheap)
+- Sonnet 4.6: $3/$15 per million tokens
+- Opus 4.8: $5/$25 per million tokens (standard); fast mode $10/$50 per million tokens
+- Fable 5: $10/$50 per million tokens (newest flagship, released 9 June 2026)
 
-Note: "fast mode" for Opus 4.8 makes the model 2.5× faster at approximately 2× the token cost. It is available in research preview in Claude Code and on consumption-based plans.
+Note: "fast mode" makes Opus models faster at approximately 2× the token cost (Opus 4.6/4.7 fast mode remains $30/$150). It is available in research preview in Claude Code and on consumption-based plans.
+
+**Fable 5:** Anthropic's newest generally available flagship (Mythos-class capability), released 9 June 2026. It runs in Claude Code, and is included on subscription plans until 22 June 2026, after which it moves behind usage credits.
 
 **Claude Code — what it actually does:**
 
@@ -147,7 +150,7 @@ Claude Code runs locally in your terminal (no remote code index). It:
 - Supports "routines": scheduled or event-triggered tasks
 - Can be run in parallel instances via the desktop app
 
-**Models available in Claude Code:** Haiku 4.5, Sonnet 4.6, Opus 4.8.
+**Models available in Claude Code:** Haiku 4.5, Sonnet 4.6, Opus 4.8, Fable 5.
 
 **Strengths:**
 
@@ -225,7 +228,9 @@ Codex is powered by models in the GPT-5.x-Codex series (e.g. GPT-5.2-Codex, GPT-
 
 **Pricing (June 2026):**
 
-> **Important note:** As of April–June 2026, new sign-ups for Copilot Pro, Pro+, Max, and student plans are **temporarily paused**. Existing plans can be upgraded. Self-serve Business sign-ups on GitHub Free/Team are also paused. This situation may change; check github.com/features/copilot for current status.
+> **Important note:** New sign-ups for Copilot Pro, Pro+, Max, and student plans have been **temporarily paused since April 2026 and remain paused as of 10 June 2026**, with GitHub promising to reopen them "in the coming weeks". Existing plans can be upgraded. Self-serve Business sign-ups on GitHub Free/Team are also paused. This situation may change; check github.com/features/copilot for current status.
+>
+> Separately, from **1 June 2026** all Copilot plans bill via **GitHub AI Credits**, with each plan including a monthly usage allowance.
 
 | Plan | Price | Key features |
 |---|---|---|
@@ -236,7 +241,7 @@ Codex is powered by models in the GPT-5.x-Codex series (e.g. GPT-5.2-Codex, GPT-
 | Business | $19/seat/mo | Team management; pooled AI credits; policy controls |
 | Enterprise | $39/seat/mo | All Business features plus larger credit pool, priority models |
 
-**AI Credits model:** GitHub Copilot now operates on a hybrid model — plans include a monthly AI credit allowance for agent and premium model usage. Overage is charged at usage-based rates.
+**AI Credits model:** As of 1 June 2026, all Copilot plans bill based on AI Credits consumed — each plan includes a monthly credit allowance for agent and premium model usage. Overage is charged at usage-based rates.
 
 **Models available** (varies by plan): Claude Haiku 4.5, Claude Sonnet 4.6, Claude Opus 4.7/4.8, Gemini 2.5 Pro, Gemini 3.x series, GPT-5 mini, GPT-5.2 through GPT-5.5 series, MAI-Code-1-Flash (Microsoft's own model), and others.
 
@@ -370,10 +375,11 @@ For researchers who want fine-grained control and pay-per-use (e.g., for scripte
 
 | Model | Input ($/M tokens) | Output ($/M tokens) | Typical use |
 |---|---|---|---|
-| Haiku 4.5 | ~$0.80 | ~$4.00 | High volume, simple tasks |
-| Sonnet 4.6 | ~$3.00 | ~$15.00 | General coding and analysis |
-| Opus 4.8 | $15.00 | $75.00 | Complex reasoning, hardest tasks |
-| Opus 4.8 (fast) | $30.00 | $150.00 | When speed matters more than cost |
+| Haiku 4.5 | $1.00 | $5.00 | High volume, simple tasks |
+| Sonnet 4.6 | $3.00 | $15.00 | General coding and analysis |
+| Opus 4.8 | $5.00 | $25.00 | Complex reasoning, hardest tasks |
+| Opus 4.8 (fast) | $10.00 | $50.00 | When speed matters more than cost |
+| Fable 5 | $10.00 | $50.00 | Newest flagship; frontier capability |
 
 For comparison, a 1M-token context is roughly 750,000 words — about 10–15 typical research papers. A complex agentic task on a medium-sized codebase might consume 50,000–500,000 tokens depending on scope.
 
@@ -456,8 +462,8 @@ Agents work best when they have the right context. This means:
 
 **Scientific and domain context:**
 
-- Agents generally do not know your scientific domain well. If you are implementing a physical parameterisation, briefly explain the governing equations, the expected range of inputs and outputs, and any known numerical pitfalls.
-- Don't assume the agent knows that your velocity field must be divergence-free, that your tracer values must be positive, or that your time step must satisfy the CFL condition.
+- Frontier agents often know your scientific domain in general — but they cannot know which constraints apply to *your* configuration or which modelling choices you have made. If you are implementing a physical parameterisation, briefly state the governing equations, the expected range of inputs and outputs, and any known numerical pitfalls.
+- Don't assume the agent knows that *your* velocity field must be divergence-free, that *your* tracer values must be positive, or that *your* time step must satisfy the CFL condition — it knows these constraints exist, but not which ones you intend to apply.
 
 **Task context:**
 
@@ -729,7 +735,7 @@ Codex's deepest value is in its **GitHub integration**. You can assign a GitHub 
 4. Run tests
 5. Open a PR with the changes
 
-For routine issues (bug reports with clear reproduction steps, small feature requests, documentation updates), this workflow can be very efficient. For scientific correctness issues, **the PR must be carefully reviewed before merging** — the agent does not know your science.
+For routine issues (bug reports with clear reproduction steps, small feature requests, documentation updates), this workflow can be very efficient. For scientific correctness issues, **the PR must be carefully reviewed before merging** — the agent followed the issue, but it cannot know which physics you intended.
 
 #### Context management in Codex
 
@@ -758,12 +764,12 @@ Token consumption in agent workflows is **multiplicative**, not linear. A single
 5. The agent correcting mistakes (further output tokens)
 6. The agent reading more context to understand an error (more input tokens)
 
-A complex task on a medium-sized codebase can easily consume 100,000–500,000 tokens. At Opus 4.8 pricing ($15 input / $75 output per million tokens), a single complex task might cost $5–$50. On a subscription plan with usage credits, you may exhaust your monthly allocation with a few large tasks.
+A complex task on a medium-sized codebase can easily consume 100,000–500,000 tokens. At frontier-model pricing that is roughly $2–$25 at Opus 4.8 rates ($5 input / $25 output per million tokens), or $3–$30 at Fable 5 rates ($10/$50). On a subscription plan with usage credits, you may exhaust your monthly allocation with a few large tasks.
 
 **Common causes of unnecessary expenditure:**
 
 - **Long context accumulation**: Not clearing old conversation history. Each message in a long conversation re-sends the entire history.
-- **Mismatched model selection**: Using Opus 4.8 ($15/$75 per M tokens) for tasks that Haiku 4.5 (~$0.80/$4 per M tokens) handles equally well, or retrying a failed task on a more expensive model rather than adjusting the prompt.
+- **Mismatched model selection**: Using a flagship model like Fable 5 ($10/$50 per M tokens) or Opus 4.8 ($5/$25) for tasks that Haiku 4.5 ($1/$5 per M tokens) handles equally well, or retrying a failed task on a more expensive model rather than adjusting the prompt.
 - **Redundant reads**: The agent reading the same large file multiple times in a session.
 - **Verbose prompts**: Unnecessary context, full file pastes, long preambles.
 - **Runaway agents**: An agent stuck in a loop that you are not watching.
@@ -1006,7 +1012,7 @@ You will not run all four stages in five minutes — branch `demo-live` off `dem
 8. "If you publish a software paper for a codebase that was significantly developed with agent assistance, how would you handle attribution and reproducibility?"
 
 **Sceptical questions (important to ask):**
-9. "When is agent-driven development *not* the right choice? Can you think of research tasks where you would actively avoid it?"
+9. "What scientific decision would you never delegate to an agent — and why?"
 10. "What would have to be true for you to trust agent-written code in a published, peer-reviewed scientific result?"
 
 ---
@@ -1119,17 +1125,18 @@ for exoplanet climate research. The core is in `src/pyatmos/`. Data files are in
 | **Claude Pro** | $17/mo (annual) / $20/mo | Claude Code; Sonnet & Opus | Good for occasional use |
 | **Claude Max 5x** | $100/mo | 5× usage; all models | Recommended for regular coding use |
 | **Claude Max 20x** | $200/mo | 20× usage; all models; priority | Power users |
-| **Claude API — Haiku 4.5** | Pay per use | $0.80/$4 per M tok | Cheap, fast |
-| **Claude API — Sonnet 4.6** | Pay per use | ~$3/$15 per M tok | General purpose |
-| **Claude API — Opus 4.8** | Pay per use | $15/$75 per M tok | Most capable |
+| **Claude API — Haiku 4.5** | Pay per use | $1/$5 per M tok | Cheap, fast |
+| **Claude API — Sonnet 4.6** | Pay per use | $3/$15 per M tok | General purpose |
+| **Claude API — Opus 4.8** | Pay per use | $5/$25 per M tok | Price cut June 2026 |
+| **Claude API — Fable 5** | Pay per use | $10/$50 per M tok | Newest flagship (June 2026) |
 | **ChatGPT Edu (Oxford)** | Free | GPT-5.5 unlimited; weekly limits on Thinking/Codex | SSO; no training data use |
 | **ChatGPT Plus** | £20/mo | GPT-5.5 Thinking; expanded Codex | UK pricing |
 | **ChatGPT Pro** | From £89/mo | 5× or 20× usage; GPT-5.5 Pro; max Codex | UK pricing |
 | **OpenAI API — GPT-5.4** | Pay per use | $2.50/$15 per M tok | Good general use |
 | **OpenAI API — GPT-5.5** | Pay per use | $5/$30 per M tok | Flagship |
 | **GitHub Copilot Free** | $0 | 2,000 completions/mo; limited chat | No cloud agent |
-| **GitHub Copilot Pro** | $10/mo | Unlimited completions; cloud agent; $15 AI credits | New sign-ups paused (June 2026) |
-| **GitHub Copilot Pro+** | $39/mo | Premium models; $70 AI credits; audit logs | New sign-ups paused |
+| **GitHub Copilot Pro** | $10/mo | Unlimited completions; cloud agent; $15 AI credits | Sign-ups still paused (10 June 2026); credits billing from 1 June |
+| **GitHub Copilot Pro+** | $39/mo | Premium models; $70 AI credits; audit logs | Sign-ups still paused |
 | **GitHub Copilot Max** | $100/mo | $200 AI credits; priority models | Upgrade from existing only (June 2026) |
 | **GitHub Copilot Business** | $19/seat/mo | Team management; pooled credits | New self-serve paused (June 2026) |
 | **Cursor Hobby** | $0 | Limited agents; limited Tab | Good starting point |
