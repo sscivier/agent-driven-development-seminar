@@ -8,7 +8,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 
 ## Repository structure
 
-- `seminar_notes.md` — the full seminar content: all talking points, tool details,
+- `docs/seminar_notes.md` — the full seminar content: all talking points, tool details,
   Oxford-specific access info, workflows, failure modes, demo script, and discussion
   questions. This is the source of truth. **Read this before writing any slides.**
 - `slides/` — Slidev presentation. Entry point: `slides/slides.md`.
@@ -35,7 +35,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 | 6. Live demo (optional) | 5 min |
 | Discussion | 20 min |
 
-## Slide structure (from seminar_notes.md §6.1)
+## Slide structure (from docs/seminar_notes.md §6.1)
 
 - Slide 1: Title
 - Slides 2–5: Conceptual shift (open with Anthropic 80%/800 stat; chat vs agent diagram;
@@ -76,14 +76,14 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 
 ## What you should NOT do
 
-- Do not invent pricing, features, or product details — use only what is in seminar_notes.md
+- Do not invent pricing, features, or product details — use only what is in docs/seminar_notes.md
 - Do not use external image URLs that require internet access during the presentation
-- Do not add slides for content not in seminar_notes.md without flagging it
-- Do not modify seminar_notes.md unless asked
+- Do not add slides for content not in docs/seminar_notes.md without flagging it
+- Do not modify docs/seminar_notes.md unless asked
 
 ## Suggested approach for a multi-step agent session
 
-1. Read seminar_notes.md in full (plan mode first)
+1. Read docs/seminar_notes.md in full (plan mode first)
 2. Propose a slide-by-slide outline for approval before writing any content
 3. Implement one section at a time; commit after each section passes review
 4. Use a feature branch for each section: `git checkout -b slides/section-name`
