@@ -100,8 +100,7 @@ As of May this year, Claude authored over 80% of the code merged into Anthropic'
 production codebase. And to make that concrete: in one case in April, the agent
 autonomously shipped over 800 fixes for a single persistent class of API errors, and
 cut the error rate by a factor of a thousand. The engineer who looked at it estimated
-that same cleanup would have taken a human developer about four years. That's exactly the kind of work an agent is good
-at carrying.
+that same cleanup would have taken a human developer about four years.
 
 I'm not telling you this to say programmers are going away. I'm telling you because it
 reframes what we can ask a tool to do.
@@ -148,31 +147,23 @@ reframes what we can ask a tool to do.
 And just in the last six months, the story has moved beyond the code into the science
 itself.
 
-In March, Donald Knuth — Donald Knuth — published a paper after Claude solved an open
+In March, Donald Knuth published a paper after Claude solved an open
 graph-theory conjecture he'd worked on for decades. The model spotted the underlying
 structure, a Cayley digraph, in about an hour. In January, Terence Tao reported an open
-Erdős problem solved more or less autonomously — and his caveats are worth keeping: it says
+Erdős problem was solved more or less autonomously — and his caveats are worth keeping: it says
 more about speed than depth, and he reckons only one or two percent of open Erdős problems
 are within reach of today's AI without serious human involvement.
 
-OpenAI published a whole report of early science experiments — credited ideas in maths,
-physics, and biology — where the researchers' own framing was a "fast reasoning partner",
+OpenAI published a whole report of early science experiments, where the researchers' own framing was a "fast reasoning partner",
 with every step independently verified. And just this month, in blinded comparisons,
 scientists preferred Claude Mythos 5's molecular-biology hypotheses about four times in
 five, and one proposed mechanism has since been validated experimentally.
 
 And this isn't slowing down — Anthropic released Fable 5 just this week, a Mythos-class
-model in general availability, pitched explicitly on its science gains. "Less junior with
-every release" is not a figure of speech.
+model in general availability, pitched explicitly on its science gains.
 
 I'll add my own experience: these models now routinely catch scientific and mathematical
 errors in my work that I hadn't caught — and I learn science from them, not just syntax.
-
-You'll notice none of these examples is geoscience. As far as I know there's no credited
-result in our field yet — which I'd read as an opportunity: you could be early.
-
-But notice the pattern in every one of these: the AI proposes, and humans verify and
-decide. That division of labour is the theme of this whole talk.
 -->
 
 ---
@@ -215,7 +206,7 @@ decide. That division of labour is the theme of this whole talk.
 <!--
 Most of you have met AI coding as chat: you describe a problem, it suggests some code, you
 copy it, paste it, check it, and move on. That's genuinely useful — but you're still the
-one driving the keyboard. You're the operator; the AI gives advice.
+one driving the keyboard.
 
 An agent is different. You give it a task, plus access to your repository and a set of
 tools — reading files, writing files, running shell commands, Git, web search — and it
@@ -264,7 +255,7 @@ always the right choice.
 
 It's a good fit for work that's well-defined but tedious — boilerplate, tests,
 documentation, refactoring, exploring an inherited codebase, porting Fortran or Matlab to
-Python. And — this is the part that's changed recently — it's genuinely good as a
+Python. And — this is the part that's changed recently — it's also genuinely good as a
 scientific sparring partner: deriving and checking equations, critiquing a method,
 explaining an unfamiliar technique, reviewing your code for scientific errors.
 
@@ -322,16 +313,12 @@ the constraints, the files, the success criteria. You review what comes back as 
 read the diff, run the tests, check the assumptions. And you keep the scientific judgement
 yourself — the reference values, the units, conservation, physical limits.
 
-But notice what the "junior" label does and doesn't cover. It's junior in your project. In
+In
 the science, it's less junior with every release — in my own work these models now catch
 mathematical and scientific errors I hadn't spotted, and I learn from them. So don't treat
 it as a typist you have to keep away from the science; treat it as a collaborator whose
 scientific contributions you check.
-
-The line I want to land: agents increasingly engage with the science — but you certify its
-correctness. Hold that, because it comes back hard in the failure-modes section.
 -->
-
 
 ---
 layout: center
@@ -414,10 +401,8 @@ the high-autonomy tools that plan and execute long tasks, like Devin Desktop, of
 sessions at once.
 
 The thing to notice is the trade-off along that axis: more autonomy buys you more leverage,
-but it raises your review burden, not lowers it. Where a tool sits here tells you how often
-you need to be looking over its shoulder.
+but it raises your review burden, not lowers it.
 -->
-
 
 ---
 
@@ -460,17 +445,13 @@ Practical start: <strong>ChatGPT Edu</strong> first; complete the <strong>Codex 
 </p>
 
 <!--
-This is the slide I most want you to remember, because most of you already have access and
-don't realise it.
-
 ChatGPT Edu is free at the point of use for every current Oxford staff member and student.
 You just sign in at chatgpt.com with your ox.ac.uk address — it's single sign-on. Your data
 isn't used for training, and it's covered by InfoSec's security assessment. There are weekly
-limits on the intensive features — roughly thirty Codex queries a week, for instance — but
-for getting started it costs you nothing.
+limits on the intensive features, such as "thinking" mode.
 
 For an actual coding agent through Oxford, that's Codex — and it needs a consent form, one
-for Codex Local for the app and CLI, one for Codex Cloud to connect a GitHub repo. Those
+for Codex Local for the app and CLI, one for Codex Cloud to connect a GitHub repo (staff only). Those
 Codex tasks draw on the same weekly Edu allowance.
 
 And you're not on your own with this: the OeRC AI Competency Centre runs training, guides
@@ -478,7 +459,6 @@ for AI-for-coding and for researchers, a "Getting Started with Codex" course, an
 workshops. So the practical starting point is: ChatGPT Edu first, then complete the Codex
 consent if you want to try the agentic side.
 -->
-
 
 ---
 
@@ -510,7 +490,7 @@ Best fit: researchers doing substantial development who want a repository-aware 
 </p>
 
 <!--
-Let me pick out a few of the main tools rather than march through all of them. First,
+Let me pick out a few of the main tools rather than marching through all of them. First,
 Claude Code, from Anthropic.
 
 It runs locally, in your terminal — there's no remote index of your code. It searches and
@@ -527,10 +507,8 @@ project once.
 
 One very current note: Anthropic released Fable 5 this week — their newest flagship — and
 it runs in Claude Code. It's included on the subscription plans until the 22nd of June,
-after which it moves behind usage credits. So if you want to try one frontier model this
-month, that's the one to ask about.
+after which it moves behind usage credits.
 -->
-
 
 ---
 
@@ -575,10 +553,9 @@ One caveat you should know about: new Copilot sign-ups — Pro, Pro+, Max, and t
 plans — have been paused since April, and as of this week that's still in effect; GitHub
 says they'll reopen "in the coming weeks", so check the Copilot page. Existing plans can
 still upgrade. And a billing note: since the first of June, all Copilot plans bill through
-GitHub's AI Credits, with a monthly allowance included. Still, for VS Code users it's the
+GitHub's AI Credits, with a monthly allowance included. To be honest, this has priced me out, and seems more designed for corporate customers. Still, for VS Code users it's the
 easiest first step.
 -->
-
 
 ---
 
@@ -620,12 +597,7 @@ And then Devin — and I'll flag this explicitly because the naming changed: Win
 that used to be Codeium's, was acquired by Cognition and is now rebranded as Devin Desktop.
 Free light quota, Pro at twenty dollars. Devin is the highest-autonomy tool here — give it
 an issue and it'll plan, code, test, and open a PR.
-
-The general point: higher autonomy increases your leverage and your risk together. Which is
-exactly why a good Git workflow and review discipline matter more with these tools, not
-less — and that's the bridge into how to actually work with them.
 -->
-
 
 ---
 
@@ -645,19 +617,18 @@ The tool matters less than the workflow: <strong>scope tightly, work on branches
 </p>
 
 <!--
-So how do you choose? My advice is to start from access, not from hype.
+So how do you choose? My advice is to start from access.
 
 Use Oxford's provision first — ChatGPT Edu, then Codex once you've done the consent. If
-you're already in VS Code, try Copilot's agent mode or a Codex or Claude extension there.
+you're already in VS Code, you could try Copilot's agent mode or a Codex or Claude extension there.
 If you want deep local work on a real repository, that's Claude Code or the Codex CLI and
 app. And only if you're doing sustained, heavy development does it make sense to pay for the
 high-autonomy options like Cursor or Devin.
 
-But honestly, the tool matters less than the workflow. Whichever you pick, the same three
+Whichever you pick, the same three
 habits carry you: scope the task tightly, work on branches, and verify the output. That's
 Part Three.
 -->
-
 
 ---
 layout: center
