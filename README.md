@@ -3,8 +3,7 @@
 Materials for a 30–40 minute seminar (plus ~20 minutes of discussion) on
 agent-driven software development, given at the University of Oxford. The
 audience is PhD students, postdoctoral researchers, research software
-engineers, and faculty in computational geoscience — experienced scientific
-programmers, most of whom are not advanced AI users.
+engineers, and faculty in computational geoscience.
 
 ## Repository contents
 
@@ -12,8 +11,7 @@ programmers, most of whom are not advanced AI users.
   Entry point: [`slides/slides.md`](slides/slides.md).
 - [`docs/seminar_notes.md`](docs/seminar_notes.md) — the full seminar notes:
   talking points, tool details, Oxford-specific access information, workflows,
-  failure modes, demo script, and discussion questions. This is the content
-  source of truth for the slides.
+  failure modes, demo script, and discussion questions.
 - [`docs/d8_prompts.md`](docs/d8_prompts.md) — the staged prompts used in the
   live demo.
 
