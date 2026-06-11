@@ -245,7 +245,7 @@ So the unit of work moves from answering a question to carrying out a task.
 </div>
 
 <p class="note">
-<strong>Heuristic, 2026 edition:</strong> the agent increasingly <em>does</em> know your field. The boundary isn't domain knowledge any more — it's <strong>who owns the decisions and the verification</strong>. That's you.
+<strong>Heuristic:</strong> the agent increasingly <em>does</em> know your field. The boundary isn't domain knowledge any more — it's <strong>who owns the decisions and the verification</strong>. That's you.
 </p>
 
 <!--
