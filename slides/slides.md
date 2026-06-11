@@ -684,10 +684,10 @@ Vague tasks fail the way they fail with junior collaborators — just faster, an
 
 <!--
 The single most common mistake new users make is throwing a loosely-defined problem at an
-agent and expecting a solution. Agents fail at vague tasks the same way junior programmers
+agent and expecting a solution. Agents can fail at vague tasks the same way junior programmers
 do — except faster, and more confidently.
 
-So before you start anything, five questions. What is the concrete deliverable? How will I
+So before you start anything, ensure you can answer five questions. What is the concrete deliverable? How will I
 know it worked — ideally something testable? What does the agent need to know that it can't
 infer from the code? What should it not do — what are the boundaries? And is this even the
 right tool for this task?
@@ -697,7 +697,6 @@ from a NetCDF file and returns a masked array" — that's a deliverable, an agen
 it. "Improve the data loading code" is not a deliverable; it's a wish. Get the task to the
 top form before you hand it over.
 -->
-
 
 ---
 layout: two-cols-header
@@ -734,21 +733,18 @@ Once you've scoped it, the agent needs context — and there are three kinds.
 
 Persistent context goes in a project instructions file — CLAUDE.md for Claude Code, AGENTS.md,
 or copilot-instructions.md. These are read at the start of every session, so you write them
-once: what the project does, the conventions, the test framework. Be specific — "this project
-uses pytest, black, and NumPy docstrings" beats "this is a scientific Python project."
+once, and possibly update them periodically: what the project does, the conventions, the test framework. Be specific — e.g., "this project
+uses pytest, black, and NumPy docstrings."
 
 Scientific context is the part that's on us. A frontier agent often knows the physics in
-general — what it cannot know is which constraints apply to *your* configuration. It knows
-divergence-free velocity fields exist; it doesn't know yours must be one. It doesn't know
-your tracer values must stay positive, or that your timestep has to satisfy the CFL
+general — what it cannot know is which constraints apply to *your* configuration. It doesn't necessarily know that your timestep has to satisfy the CFL
 condition, unless you say so. If you're implementing a parameterisation, give it the
 governing equations, the expected ranges, the known numerical pitfalls.
 
 And task context: point at the code precisely. "The advect function in
 src/dynamics/advection.py" is unambiguous; "the advection function" might not be. On the
-right is a trimmed real CLAUDE.md so you can see what that looks like in practice.
+right is a trimmed CLAUDE.md so you can see what that looks like in practice.
 -->
-
 
 ---
 
@@ -782,20 +778,18 @@ right is a trimmed real CLAUDE.md so you can see what that looks like in practic
 </div>
 
 <!--
-A quick but important idea: treat context as a budget, not as something free just because
-the windows are large now.
+A quick but important idea: treat context as a budget.
 
-It matters for two reasons. Cost — you pay for every token going in and coming out, and a
-long history re-sends itself every turn. And attention — over very long contexts the model
+It matters for two reasons. Cost — you pay for (or have count towards your usage limits) every token going in and coming out, and a
+long history can re-send itself every turn. And attention — over very long contexts the model
 accumulates stale detail and the quality actually degrades. The fix is to chain compact,
 well-scoped tasks with clear endpoints rather than running one enormous session.
 
-Concretely: start fresh after you finish a sub-task; use /compact when a session has been
+Concretely: start fresh after you finish a sub-task; use `/compact` when a session has been
 productive but is getting long; keep your standing rules in the instruction file so you're
 not re-explaining them; and give the agent paths rather than pasting whole files. Small
 habits, but they keep both your bill and your output quality healthy.
 -->
-
 
 ---
 
@@ -867,13 +861,8 @@ whether the tests went green. It's going into your research software; you own it
 
 And the sixth is new, and it cuts the other way: use a fresh agent session — ideally a
 different model — as a second scientific reviewer. Ask it to check the signs, the units, the
-derivation. It will catch errors in the agent's work *and in yours* — in my experience it
-finds mistakes I'd have shipped. A second reviewer, never the only one.
-
-The line to hold: agent-written numerical code is not accepted until it's validated. And that
-takes us straight into what happens when it isn't.
+derivation. It will catch errors in the agent's work *and in yours*.
 -->
-
 
 ---
 layout: center
