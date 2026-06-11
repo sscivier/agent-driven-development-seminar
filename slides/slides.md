@@ -1000,32 +1000,24 @@ Scale: a complex task ≈ <strong>50k–500k tokens</strong>, roughly $3–$30 a
 </p>
 
 <!--
-Here's the cost intuition that catches people out. You'll hear agent cost called
-"multiplicative" — a task isn't one prompt and one answer but a loop of reads, plans, edits,
-commands, and corrections, each step fresh tokens. But strictly it's worse, and the mechanism
-is worth having: the model is *stateless*. It remembers nothing between steps, so every step
+Here's the cost intuition that catches people out. The agent model is *stateless*. It remembers nothing between steps, so every step
 re-sends the entire history so far as input. Turn one sends one turn's worth; turn ten sends
 ten. Uncached, the cost of a session grows roughly quadratically with its length.
 
 What rescues this is prompt caching — automatic in both Claude Code and Codex: the unchanged
 prefix of the conversation is re-billed at about a tenth of the normal input price, which
 flattens the dollar curve, and the quota burn, considerably. Caching is not the same thing
-as /compact: caching makes re-sending the same history cheaper; /compact summarises the
+as `/compact`: caching makes re-sending the same history cheaper; `/compact` summarises the
 history so there's less of it to send.
 
 And caching does nothing for the third cost — attention. Over very long contexts quality
 degrades regardless of what you're billed; only shorter context helps. That's the mechanism
-behind "context is a budget" back in Part Three: fresh sessions, /compact, paths not pastes.
+behind "context is a budget" back in Part Three: fresh sessions, `/compact`, paths not pastes.
 
 For scale: a complex task on a medium codebase can run fifty thousand to half a million
 tokens — roughly three to thirty dollars at frontier pricing: Opus 4.8 is five dollars in,
 twenty-five out per million tokens, and Fable 5 is ten and fifty. On a subscription plan, a
 few big tasks can eat your weekly or monthly allocation.
-
-Where the overspend usually comes from is predictable: dragging long context forward,
-reaching for an expensive model when a cheaper one would do, the agent re-reading the same
-files, a runaway session you weren't watching, or parallel agents running without a benefit
-to match. None of that is mysterious once you know to look for it.
 -->
 
 ---
@@ -1048,16 +1040,14 @@ Match the model to the task <em>before</em> starting · compact or clear long se
 <!--
 So the cost message in one line: use the cheapest mode that reliably does the job.
 
-This table is deliberately coarse — exact prices move fast, so I won't hold you to the
-numbers. The pattern is what matters. Oxford's Edu access is your free tier for learning,
+Oxford's Edu access is your free tier for learning,
 scoping, and limited Codex tasks, bounded by that weekly quota. A Claude Pro or ChatGPT Plus
-plan suits occasional short sprints. The Max or Pro tiers are for regular agent-driven work.
+plan suits occasional short sprints to medium-usage agent-drive work. The Max or Pro tiers are for high-usage agent-driven work.
 And direct API billing is for automation and bulk jobs — powerful, but it can spike if you're
 not watching it.
 
 Three habits underneath all of it: match the model to the task before you start rather than
-retrying a bad prompt on a more expensive model; compact or clear long sessions; and actually
-look at your usage dashboard now and then.
+retrying a bad prompt on a more expensive model; compact or clear long sessions; and monitor your usage dashboard.
 -->
 
 ---
@@ -1105,7 +1095,7 @@ Never deploy without validation against reference values; read any algorithm of 
 </v-click>
 
 <!--
-This is the slide I'd most want you to remember from the whole talk. The code runs. The
+This is the slide I'd most want you to remember from the whole talk. So, the code runs. The
 tests pass. The result looks plausible. And the science is wrong.
 
 That's what makes this dangerous. A normal software bug crashes, or gives you obvious
@@ -1119,10 +1109,8 @@ constraint like conservation, positivity, or the CFL condition. So the rule is f
 deploy agent-written numerical code without validating it against reference values, and for
 any algorithm of consequence, read it line by line. This is the part that stays yours.
 
-And to be fair to the tools — the same capability cuts both ways. The model that produces a
-confident sign error is also remarkably good at *finding* one, including in your own
-hand-written code and derivations. So fold it into the process: a fresh agent as a second
-scientific reviewer. Second — never the only one.
+And to be fair to the tools — the same capability cuts both ways. So fold it into the process: a fresh agent as a second
+scientific reviewer.
 -->
 
 ---
@@ -1167,8 +1155,7 @@ data sources that shift under you.
 
 The mitigations are routine, and that's the point — make them habits. Run the code. Check the
 imports and any new dependencies actually exist. Look at git status and git diff before you
-commit. Record your versions and set your seeds. None of this is exotic; it's just the
-discipline you already apply, applied consistently.
+commit. Record your versions and set your seeds. Use instructions files.
 -->
 
 ---
@@ -1200,13 +1187,13 @@ Oxford ChatGPT Edu and Codex inputs are <strong>not used for model training</str
 Last in this section: the rules around the work, which are easy to skip past but matter.
 
 On data handling — be careful what you expose: credentials, unpublished data, anything
-patient-related or commercial-in-confidence, anything under export controls. The reassuring
+confidential, anything under export controls. The reassuring
 news for Oxford is that ChatGPT Edu and Codex inputs are not used for model training, though
 data residency is in the US. On disclosure — think about authorship and attribution,
 licensing, and your reproducibility obligations if published results lean on agent-written
 code.
 
-And students — and I want to be even-handed here. There's a genuine risk: a student who
+And students for students, there's a genuine risk: a student who
 leans on an agent to produce code they don't understand doesn't build the core skills. But
 the very same tool is an excellent tutor — and not just for programming. Worked examples,
 walking through code line by line, explaining why a method works, the reasoning behind a
@@ -1231,17 +1218,12 @@ actively encouraging it as a way to learn and explore.
 <p class="lead accent">Agents propose, check, and teach — decisions and verification stay yours.</p>
 
 <!--
-Let me pull Part Five together with a single reference grid you could screenshot.
-
-Use agents confidently for well-scoped implementation, for tests, docs and scaffolding, for
+To pull this together, use agents confidently for well-scoped implementation, for tests, docs and scaffolding, for
 exploring a codebase and mechanical multi-file changes — and, as we've seen, as a scientific
 sparring partner and second reviewer. Be cautious wherever judgement or sensitivity enters:
 the decisions that are yours to own, outputs you can't verify, sensitive data, long
 unsupervised runs. And never skip the four things in the last column — reference checks, diff
 review, dependency review, and scientific ownership.
-
-If you remember nothing else from this section: agents propose, check, and teach — but the
-decisions and the verification stay yours.
 -->
 
 ---
