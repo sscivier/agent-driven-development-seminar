@@ -44,7 +44,6 @@ which to reach for, and how to drive them safely.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -322,7 +321,6 @@ scientific contributions you check.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -632,7 +630,6 @@ Part Three.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -700,7 +697,6 @@ top form before you hand it over.
 -->
 
 ---
-
 layout: two-cols-header
 layoutClass: gap-10
 ---
@@ -866,7 +862,6 @@ derivation. It will catch errors in the agent's work *and in yours*.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -1062,7 +1057,6 @@ look at your usage dashboard now and then.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -1247,7 +1241,6 @@ decisions and the verification stay yours.
 -->
 
 ---
-
 layout: center
 class: divider
 ---
@@ -1463,7 +1456,6 @@ judgement. Full script: docs/seminar_notes.md §6.2.]
 -->
 
 ---
-
 layout: center
 class: takeaways
 ---
@@ -1506,7 +1498,6 @@ open it up.
 -->
 
 ---
-
 layout: center
 class: discussion
 ---
@@ -1555,7 +1546,6 @@ docs/seminar_notes.md §6.3.]
 -->
 
 ---
-
 class: disclosure
 ---
 
