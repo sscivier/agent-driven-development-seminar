@@ -702,6 +702,12 @@ Codex is not a single product: it is a family of tools sharing a backend:
 - **Codex Cloud** is best for GitHub-centric workflows — assign issues, receive PRs.
 - The **Codex IDE extension** is best for those who want agent capabilities without leaving their editor.
 
+#### AGENTS.md files
+
+Codex reads persistent project instructions from **AGENTS.md** files, with the same layered structure as Claude Code's CLAUDE.md: a global `~/.codex/AGENTS.md` for personal preferences across all projects, a project-root AGENTS.md for team conventions, and nested per-directory files that refine or override broader guidance for specific subsystems. Everything in §4.1 about writing a good CLAUDE.md applies directly.
+
+The remaining differences are minor mechanics: CLAUDE.md supports `@path/to/import` imports; AGENTS.md instead supports `AGENTS.override.md` files and caps the combined instruction size (32 KiB by default, configurable via `project_doc_max_bytes`).
+
 #### Skills in Codex
 
 The Codex App supports **Skills** — reusable, project-specific capabilities that the agent can invoke. Skills can encode:
@@ -711,7 +717,11 @@ The Codex App supports **Skills** — reusable, project-specific capabilities th
 - How to update documentation when code changes
 - Domain-specific patterns (e.g., "when writing a scientific function, always include a physical units check")
 
-This is the Codex analogue of CLAUDE.md, but more modular.
+Like Claude Code's skills, these load on demand, complementing the always-loaded AGENTS.md rather than replacing it.
+
+#### Sandboxing and approvals
+
+Where Claude Code mediates safety through permission modes (plan mode, per-action approval, auto mode — see §4.1), Codex's distinctive mechanism is **sandboxing**: local tasks execute inside an OS-level sandbox, with approval settings controlling which file writes and network access reach outside it. Codex Cloud tasks run in isolated containers. The goal is the same — contained agents whose actions you control — achieved by a different mechanism.
 
 #### Automations
 
@@ -746,6 +756,8 @@ Codex supports a `/compact` command analogous to Claude Code's — it summarises
 Codex uses the ChatGPT Edu weekly allowance at Oxford (~30 queries/week). Beyond that, usage charges at API rates. For the free/institutional tier, budget your 30 queries as if they are valuable — use them for genuinely useful tasks, not exploratory chat.
 
 For Pro/paid users, Codex costs are included in the plan allowance, with overage at API pricing.
+
+**Relative token economics (mid-2026 comparisons; moves fast):** independent comparisons consistently report that Claude models consume more tokens per task than Codex on equivalent work, and that message allowances at the same subscription price stretch further on Codex. Benchmarks place the two near parity on capability, so treat allowances and throughput — not capability — as the cost variable when choosing.
 
 ---
 

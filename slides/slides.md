@@ -902,11 +902,13 @@ Learn the <strong>concepts</strong> once — instruction files · plan first · 
 </p>
 
 <!--
-Rather than a tour of each product, I'll give an overview of their shared features, and then some differents.
+Rather than a tour of each product, I'll give an overview of their shared features, and then some differences.
 
 Both ship as a CLI, an app, a cloud agent, and an editor extension. Both read a persistent
 instruction file at the start of every session — CLAUDE.md for Claude Code, where `/init`
-drafts you a starter from the project; AGENTS.md for Codex. Both have skills — modular,
+drafts you a starter from the project; AGENTS.md for Codex. And the parity runs deep: both
+support nested per-directory files for subsystem-specific rules and a global personal file
+that applies across all your projects. Both have skills — modular,
 on-demand knowledge that loads when relevant instead of every session. Both let you plan
 before any code is written: plan mode in Claude Code, Shift+Tab, where it reads and proposes
 but changes nothing until you approve; the `/plan` command in Codex. That plan step is where
@@ -932,8 +934,8 @@ automatic PR review.
     <p><strong>Claude Code:</strong> interactive local session in your terminal. <strong>Codex:</strong> headline flow is dispatch — issue in, PR out.</p>
   </div>
   <div class="block">
-    <span class="tag">Teaching it your project</span>
-    <p><strong>CLAUDE.md</strong> goes deep: nested per-module files, <code>@imports</code>, a global file. <strong>Codex</strong> spreads the same job across modular skills.</p>
+    <span class="tag">Safety model</span>
+    <p><strong>Claude Code</strong> mediates each action through permission modes — plan, ask, auto. <strong>Codex</strong> runs tasks inside an OS-level sandbox.</p>
   </div>
   <div class="block">
     <span class="tag">Token economics</span>
@@ -959,8 +961,11 @@ local session: you in the terminal, supervising as it works. Codex leans towards
 its headline flow takes a GitHub issue, explores the repo, implements, runs the tests, and
 hands you back a pull request. For routine, well-specified issues that's genuinely efficient.
 
-Teaching it your project — CLAUDE.md is the deeper system: nested per-module files, imports,
-a global file across all your projects. Codex spreads the same job across its modular skills.
+Safety model — both keep you in the loop, by different mechanisms. Claude Code mediates each
+action through permission modes: plan mode, where it can't change anything; the default,
+asking before it acts; and an auto mode for long runs. Codex's distinctive move is
+sandboxing — tasks execute inside an OS-level sandbox, with approval settings controlling
+what reaches your real files and network. Same goal, contained agents; two mechanisms.
 
 And token economics — this one's from the mid-2026 comparison reports rather than gospel,
 and it moves fast: Claude tends to burn more tokens per task, and Codex's message allowances
