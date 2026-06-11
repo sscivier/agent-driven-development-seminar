@@ -965,57 +965,62 @@ Safety model — both keep you in the loop, by different mechanisms. Claude Code
 action through permission modes: plan mode, where it can't change anything; the default,
 asking before it acts; and an auto mode for long runs. Codex's distinctive move is
 sandboxing — tasks execute inside an OS-level sandbox, with approval settings controlling
-what reaches your real files and network. Same goal, contained agents; two mechanisms.
+what reaches your real files and network.
 
 And token economics — this one's from the mid-2026 comparison reports rather than gospel,
 and it moves fast: Claude tends to burn more tokens per task, and Codex's message allowances
 stretch further at the same price tier. Worth checking before you commit to heavy use.
 
 On raw capability the benchmarks have them near parity — so choose by access and workflow.
-And whichever you choose, the rule from Part Three stands: the agent followed the issue, but
-it can't know which physics you intended. Review every PR for the science.
 -->
 
 ---
 
 <div class="eyebrow">Cost mechanics</div>
 
-# Agent cost is multiplicative
+# The model is stateless — you pay to re-send the chat
 
 <div class="flow">
-  <span>Read files</span><span class="arrow">→</span>
-  <span>Reason & plan</span><span class="arrow">→</span>
-  <span>Write code</span><span class="arrow">→</span>
-  <span>Run commands</span><span class="arrow">→</span>
-  <span>Read output</span><span class="arrow">→</span>
-  <span>Correct mistakes</span>
+  <span>turn 1 sends <strong>1</strong></span><span class="arrow">→</span>
+  <span>turn 2 sends <strong>1·2</strong></span><span class="arrow">→</span>
+  <span>turn 3 sends <strong>1·2·3</strong></span><span class="arrow">→</span>
+  <span>uncached cost grows <strong>~quadratically</strong></span>
 </div>
 
 <v-click>
-  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">50k–500k tokens</span> — roughly $3–$30 at frontier-model pricing.</p>
+  <p class="lead">Prompt caching — automatic in Claude Code <em>and</em> Codex — re-bills the unchanged prefix at <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">~10% of input price</span>.</p>
+</v-click>
+
+<v-click>
+  <p class="lead">Caching flattens the bill, <span v-mark="{ at: 2, type: 'underline', color: '#C15F3C' }">not the attention degradation</span> — only shorter context fixes that. <em>Context is a budget</em> (Part 3).</p>
 </v-click>
 
 <p class="note">
-Overspend usually comes from long context, mismatched models, redundant reads, runaway agents, or parallel agents without the benefit to match.
+Scale: a complex task ≈ <strong>50k–500k tokens</strong>, roughly $3–$30 at frontier pricing. Overspend comes from long context, mismatched models, redundant reads, runaway or parallel agents.
 </p>
 
 <!--
-Here's the cost intuition that catches people out: agent cost is multiplicative, not linear.
-A single task isn't one prompt and one answer. The agent reads files, reasons and plans,
-writes code, runs commands, reads the output, corrects its mistakes — and every one of those
-steps is fresh input and output tokens.
+Here's the cost intuition that catches people out. You'll hear agent cost called
+"multiplicative" — a task isn't one prompt and one answer but a loop of reads, plans, edits,
+commands, and corrections, each step fresh tokens. But strictly it's worse, and the mechanism
+is worth having: the model is *stateless*. It remembers nothing between steps, so every step
+re-sends the entire history so far as input. Turn one sends one turn's worth; turn ten sends
+ten. Uncached, the cost of a session grows roughly quadratically with its length.
 
-So a complex task on a medium codebase can run a hundred thousand to half a million tokens —
-which at frontier-model pricing is roughly three to thirty dollars for the one task: Opus
-4.8 is now five dollars in, twenty-five out per million tokens, and Fable 5 is ten and
-fifty. On a subscription plan, a few big tasks can eat your monthly allocation.
+What rescues this is prompt caching — automatic in both Claude Code and Codex: the unchanged
+prefix of the conversation is re-billed at about a tenth of the normal input price, which
+flattens the dollar curve, and the quota burn, considerably. Caching is not the same thing
+as /compact: caching makes re-sending the same history cheaper; /compact summarises the
+history so there's less of it to send.
 
-[If pressed on "multiplicative": strictly, uncached cost grows roughly *quadratically* with
-session length — the model is stateless, so every step re-sends the whole history as input.
-Prompt caching (automatic in Claude Code) discounts those re-sends to about a tenth of the
-input price, so the dollar curve is much gentler in practice — but the shape, the quota
-consumption, and the attention degradation remain. That's the mechanism behind the next
-slide's "context is a budget".]
+And caching does nothing for the third cost — attention. Over very long contexts quality
+degrades regardless of what you're billed; only shorter context helps. That's the mechanism
+behind "context is a budget" back in Part Three: fresh sessions, /compact, paths not pastes.
+
+For scale: a complex task on a medium codebase can run fifty thousand to half a million
+tokens — roughly three to thirty dollars at frontier pricing: Opus 4.8 is five dollars in,
+twenty-five out per million tokens, and Fable 5 is ten and fifty. On a subscription plan, a
+few big tasks can eat your weekly or monthly allocation.
 
 Where the overspend usually comes from is predictable: dragging long context forward,
 reaching for an expensive model when a cheaper one would do, the agent re-reading the same
