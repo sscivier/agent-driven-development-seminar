@@ -684,10 +684,10 @@ Vague tasks fail the way they fail with junior collaborators — just faster, an
 
 <!--
 The single most common mistake new users make is throwing a loosely-defined problem at an
-agent and expecting a solution. Agents fail at vague tasks the same way junior programmers
+agent and expecting a solution. Agents can fail at vague tasks the same way junior programmers
 do — except faster, and more confidently.
 
-So before you start anything, five questions. What is the concrete deliverable? How will I
+So before you start anything, ensure you can answer five questions. What is the concrete deliverable? How will I
 know it worked — ideally something testable? What does the agent need to know that it can't
 infer from the code? What should it not do — what are the boundaries? And is this even the
 right tool for this task?
@@ -697,7 +697,6 @@ from a NetCDF file and returns a masked array" — that's a deliverable, an agen
 it. "Improve the data loading code" is not a deliverable; it's a wish. Get the task to the
 top form before you hand it over.
 -->
-
 
 ---
 layout: two-cols-header
@@ -734,21 +733,18 @@ Once you've scoped it, the agent needs context — and there are three kinds.
 
 Persistent context goes in a project instructions file — CLAUDE.md for Claude Code, AGENTS.md,
 or copilot-instructions.md. These are read at the start of every session, so you write them
-once: what the project does, the conventions, the test framework. Be specific — "this project
-uses pytest, black, and NumPy docstrings" beats "this is a scientific Python project."
+once, and possibly update them periodically: what the project does, the conventions, the test framework. Be specific — e.g., "this project
+uses pytest, black, and NumPy docstrings."
 
 Scientific context is the part that's on us. A frontier agent often knows the physics in
-general — what it cannot know is which constraints apply to *your* configuration. It knows
-divergence-free velocity fields exist; it doesn't know yours must be one. It doesn't know
-your tracer values must stay positive, or that your timestep has to satisfy the CFL
+general — what it cannot know is which constraints apply to *your* configuration. It doesn't necessarily know that your timestep has to satisfy the CFL
 condition, unless you say so. If you're implementing a parameterisation, give it the
 governing equations, the expected ranges, the known numerical pitfalls.
 
 And task context: point at the code precisely. "The advect function in
 src/dynamics/advection.py" is unambiguous; "the advection function" might not be. On the
-right is a trimmed real CLAUDE.md so you can see what that looks like in practice.
+right is a trimmed CLAUDE.md so you can see what that looks like in practice.
 -->
-
 
 ---
 
@@ -782,20 +778,18 @@ right is a trimmed real CLAUDE.md so you can see what that looks like in practic
 </div>
 
 <!--
-A quick but important idea: treat context as a budget, not as something free just because
-the windows are large now.
+A quick but important idea: treat context as a budget.
 
-It matters for two reasons. Cost — you pay for every token going in and coming out, and a
-long history re-sends itself every turn. And attention — over very long contexts the model
+It matters for two reasons. Cost — you pay for (or have count towards your usage limits) every token going in and coming out, and a
+long history can re-send itself every turn. And attention — over very long contexts the model
 accumulates stale detail and the quality actually degrades. The fix is to chain compact,
 well-scoped tasks with clear endpoints rather than running one enormous session.
 
-Concretely: start fresh after you finish a sub-task; use /compact when a session has been
+Concretely: start fresh after you finish a sub-task; use `/compact` when a session has been
 productive but is getting long; keep your standing rules in the instruction file so you're
 not re-explaining them; and give the agent paths rather than pasting whole files. Small
 habits, but they keep both your bill and your output quality healthy.
 -->
-
 
 ---
 
@@ -867,13 +861,8 @@ whether the tests went green. It's going into your research software; you own it
 
 And the sixth is new, and it cuts the other way: use a fresh agent session — ideally a
 different model — as a second scientific reviewer. Ask it to check the signs, the units, the
-derivation. It will catch errors in the agent's work *and in yours* — in my experience it
-finds mistakes I'd have shipped. A second reviewer, never the only one.
-
-The line to hold: agent-written numerical code is not accepted until it's validated. And that
-takes us straight into what happens when it isn't.
+derivation. It will catch errors in the agent's work *and in yours*.
 -->
-
 
 ---
 layout: center
@@ -884,109 +873,111 @@ class: divider
   <div class="dnum">PART FOUR</div>
   <h1>Deep dives</h1>
   <div class="title-rule"></div>
-  <p>Claude Code and Codex — and the cost mechanics underneath.</p>
+  <p>What Claude Code and Codex share, where they differ — and the cost mechanics underneath.</p>
 </div>
 
 <!--
 **Part 4 · through ~24:00.**
 
-Now a bit deeper on the two tools you're most likely to actually use — Claude Code and Codex
-— and then the cost mechanics underneath all of them, because that surprises people.
+Now a bit deeper on the two tools you're most likely to actually use — Claude Code and Codex.
+The headline is that they've converged: same concepts, same shapes, different emphasis. So
+I'll show you the shared anatomy once, then the differences that actually matter, and then
+the cost mechanics underneath all of them.
 -->
-
 
 ---
 
-<div class="eyebrow">Claude Code in depth</div>
+<div class="eyebrow">Claude Code &amp; Codex · what's shared</div>
 
-# Run it like a controlled session
+# Two products, one anatomy
 
-<div class="cols cols-3">
-  <div class="block">
-    <span class="tag">Memory</span>
-    <h3>CLAUDE.md</h3>
-    <p>Purpose, conventions, tests, domain constraints, boundaries. <code>/init</code> to start.</p>
-  </div>
-  <div class="block">
-    <span class="tag">Planning</span>
-    <h3>Read first, edit later</h3>
-    <p>Plan mode (<code>Shift+Tab</code>) for unclear, multi-file, or unfamiliar work.</p>
-  </div>
-  <div class="block">
-    <span class="tag">Parallelism</span>
-    <h3>Worktrees</h3>
-    <p>Isolated branches for parallel sessions or alternative approaches.</p>
-  </div>
-</div>
-
-<div class="flow">
-  <span>Explore</span><span class="arrow">→</span>
-  <span>Plan</span><span class="arrow">→</span>
-  <span>Implement</span><span class="arrow">→</span>
-  <span>Commit</span>
-</div>
+| Concept | Claude Code | Codex |
+|---|---|---|
+| Surfaces | CLI · desktop app · web · IDE extension | app · CLI · cloud · IDE extension |
+| Persistent instructions | **CLAUDE.md** — <code>/init</code> to draft | **AGENTS.md** |
+| On-demand knowledge | Skills | Skills |
+| Plan before code | Plan mode (<code>Shift+Tab</code>) | <code>/plan</code> |
+| Parallel work | Worktrees, parallel sessions | Worktree per task |
+| Runs unprompted | Routines | Automations |
 
 <p class="note">
-Common mistake: letting a session run long without checkpoints, compaction, or scientific verification.
+Learn the <strong>concepts</strong> once — instruction files · plan first · skills · worktrees · <strong>explore → plan → implement → commit</strong> — and they transfer to whichever agent you use.
 </p>
 
 <!--
-With Claude Code, the trick is to run it like a controlled session rather than a free-for-all.
-Three features carry most of the value.
+Rather than a tour of each product, here's the honest picture in mid-2026: the two have
+converged. Same concepts, near-identical shapes — what differs is the name on the tin.
 
-Memory: the CLAUDE.md file we saw — project purpose, conventions, how to run the tests, your
-domain constraints, and the boundaries. Run /init and it'll draft you a starting one from the
-project. Planning: there's a dedicated plan mode — Shift+Tab — where it reads and proposes a
-plan but makes no changes until you approve. Use it whenever the work is unclear, spans
-several files, or is in code you don't know well. And parallelism: worktrees give you isolated
-branches, so you can run parallel sessions or try alternative approaches without them
-colliding.
+Both ship as a CLI, an app, a cloud agent, and an editor extension. Both read a persistent
+instruction file at the start of every session — CLAUDE.md for Claude Code, where `/init`
+drafts you a starter from the project; AGENTS.md for Codex. Both have skills — modular,
+on-demand knowledge that loads when relevant instead of every session. Both let you plan
+before any code is written: plan mode in Claude Code, Shift+Tab, where it reads and proposes
+but changes nothing until you approve; the /plan command in Codex. That plan step is where
+you catch misunderstandings early — before the tokens are spent and the diff exists. Both run
+parallel sessions safely via Git worktrees. And both now run unprompted, scheduled or
+event-triggered — Routines in Claude Code, Automations in Codex: nightly test triage,
+automatic PR review.
 
-The rhythm that works is explore, plan, implement, commit. And the most common mistake — the
-one to avoid — is letting a session run on and on with no checkpoints, no compaction, and no
-scientific verification.
+So the skill you're building isn't "how to use Claude Code" — it's how to drive this class
+of tool. The rhythm is the same in both: explore, plan, implement, commit. And the most
+common mistake is the same in both: letting a session run on and on with no checkpoints, no
+compaction, and no scientific verification.
 -->
-
 
 ---
 
-<div class="eyebrow">Codex in depth</div>
+<div class="eyebrow">Claude Code &amp; Codex · what differs</div>
 
-# A family of coding agents
+# Same anatomy, different centre of gravity
 
-<div class="cols cols-4 tight">
-  <div class="block"><span class="tag">App</span><p>Visual workspace for parallel local tasks.</p></div>
-  <div class="block"><span class="tag">CLI</span><p>Terminal-native and scriptable.</p></div>
-  <div class="block"><span class="tag">Cloud</span><p>GitHub issue → pull request.</p></div>
-  <div class="block"><span class="tag">Extension</span><p>Agent work without leaving the editor.</p></div>
-</div>
-
-<div class="flow">
-  <span>Issue</span><span class="arrow">→</span>
-  <span>Explore repo</span><span class="arrow">→</span>
-  <span>Implement</span><span class="arrow">→</span>
-  <span>Run tests</span><span class="arrow">→</span>
-  <span>Open PR</span>
+<div class="cols cols-2">
+  <div class="block">
+    <span class="tag">Access at Oxford</span>
+    <p><strong>Codex</strong> comes with ChatGPT Edu — consent forms, ~30 queries/week. <strong>Claude Code</strong> needs a personal plan, from $17/mo.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Default workflow</span>
+    <p><strong>Claude Code:</strong> interactive local session in your terminal. <strong>Codex:</strong> headline flow is dispatch — issue in, PR out.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Teaching it your project</span>
+    <p><strong>CLAUDE.md</strong> goes deep: nested per-module files, <code>@imports</code>, a global file. <strong>Codex</strong> spreads the same job across modular skills.</p>
+  </div>
+  <div class="block">
+    <span class="tag">Token economics</span>
+    <p>Mid-2026 reports: Claude burns more tokens per task; Codex allowances stretch further at the same price tier.</p>
+  </div>
 </div>
 
 <p class="note">
-At Oxford, Codex draws on the ChatGPT Edu weekly allowance — treat those tasks as scarce, and review every PR for the science.
+Benchmarks have them near parity — choose by <strong>access and workflow</strong>, not capability. Either way: review every PR for the science.
 </p>
 
 <!--
-Codex is OpenAI's coding agent, and the thing to understand is that it's not one product —
-it's a family sharing a backend. There's the app, a visual workspace for running parallel
-local tasks; the CLI, terminal-native and scriptable; Codex Cloud, which takes a GitHub issue
-and hands back a pull request; and an editor extension for working without leaving VS Code.
+So if they're the same shape, what actually decides between them? Four things.
 
-The cloud flow is the headline one: it reads the issue, explores the repo, implements,
-runs the tests, and opens a PR. For routine, well-specified issues that's genuinely
-efficient.
+Access — for this room, probably the decisive one. Codex is the agent Oxford already gives
+you: it comes with ChatGPT Edu once you've done the consent forms, drawing on the weekly
+allowance of around thirty queries — treat those as scarce and spend them on tasks that are
+worth it. Claude Code has no institutional route; it needs a personal plan, from about
+seventeen dollars a month.
 
-Two things specific to us. At Oxford, Codex draws on your weekly ChatGPT Edu allowance —
-around thirty queries a week — so treat those as scarce and spend them on tasks that are
-actually worth it. And for anything touching the science, review every PR carefully before
-merging — the agent followed the issue, but it can't know which physics you intended.
+Workflow — the centre of gravity differs. Claude Code's natural home is the interactive
+local session: you in the terminal, supervising as it works. Codex leans towards dispatch:
+its headline flow takes a GitHub issue, explores the repo, implements, runs the tests, and
+hands you back a pull request. For routine, well-specified issues that's genuinely efficient.
+
+Teaching it your project — CLAUDE.md is the deeper system: nested per-module files, imports,
+a global file across all your projects. Codex spreads the same job across its modular skills.
+
+And token economics — this one's from the mid-2026 comparison reports rather than gospel,
+and it moves fast: Claude tends to burn more tokens per task, and Codex's message allowances
+stretch further at the same price tier. Worth checking before you commit to heavy use.
+
+On raw capability the benchmarks have them near parity — so choose by access and workflow.
+And whichever you choose, the rule from Part Three stands: the agent followed the issue, but
+it can't know which physics you intended. Review every PR for the science.
 -->
 
 
