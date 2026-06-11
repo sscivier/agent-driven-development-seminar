@@ -902,24 +902,20 @@ Learn the <strong>concepts</strong> once — instruction files · plan first · 
 </p>
 
 <!--
-Rather than a tour of each product, here's the honest picture in mid-2026: the two have
-converged. Same concepts, near-identical shapes — what differs is the name on the tin.
+Rather than a tour of each product, I'll give an overview of their shared features, and then some differences.
 
 Both ship as a CLI, an app, a cloud agent, and an editor extension. Both read a persistent
 instruction file at the start of every session — CLAUDE.md for Claude Code, where `/init`
-drafts you a starter from the project; AGENTS.md for Codex. Both have skills — modular,
+drafts you a starter from the project; AGENTS.md for Codex. And the parity runs deep: both
+support nested per-directory files for subsystem-specific rules and a global personal file
+that applies across all your projects. Both have skills — modular,
 on-demand knowledge that loads when relevant instead of every session. Both let you plan
 before any code is written: plan mode in Claude Code, Shift+Tab, where it reads and proposes
-but changes nothing until you approve; the /plan command in Codex. That plan step is where
+but changes nothing until you approve; the `/plan` command in Codex. That plan step is where
 you catch misunderstandings early — before the tokens are spent and the diff exists. Both run
 parallel sessions safely via Git worktrees. And both now run unprompted, scheduled or
 event-triggered — Routines in Claude Code, Automations in Codex: nightly test triage,
 automatic PR review.
-
-So the skill you're building isn't "how to use Claude Code" — it's how to drive this class
-of tool. The rhythm is the same in both: explore, plan, implement, commit. And the most
-common mistake is the same in both: letting a session run on and on with no checkpoints, no
-compaction, and no scientific verification.
 -->
 
 ---
@@ -938,8 +934,8 @@ compaction, and no scientific verification.
     <p><strong>Claude Code:</strong> interactive local session in your terminal. <strong>Codex:</strong> headline flow is dispatch — issue in, PR out.</p>
   </div>
   <div class="block">
-    <span class="tag">Teaching it your project</span>
-    <p><strong>CLAUDE.md</strong> goes deep: nested per-module files, <code>@imports</code>, a global file. <strong>Codex</strong> spreads the same job across modular skills.</p>
+    <span class="tag">Safety model</span>
+    <p><strong>Claude Code</strong> mediates each action through permission modes — plan, ask, auto. <strong>Codex</strong> runs tasks inside an OS-level sandbox.</p>
   </div>
   <div class="block">
     <span class="tag">Token economics</span>
@@ -954,19 +950,22 @@ Benchmarks have them near parity — choose by <strong>access and workflow</stro
 <!--
 So if they're the same shape, what actually decides between them? Four things.
 
-Access — for this room, probably the decisive one. Codex is the agent Oxford already gives
+Access. Codex is the agent Oxford already gives
 you: it comes with ChatGPT Edu once you've done the consent forms, drawing on the weekly
 allowance of around thirty queries — treat those as scarce and spend them on tasks that are
 worth it. Claude Code has no institutional route; it needs a personal plan, from about
 seventeen dollars a month.
 
-Workflow — the centre of gravity differs. Claude Code's natural home is the interactive
+Workflow. Claude Code's natural home is the interactive
 local session: you in the terminal, supervising as it works. Codex leans towards dispatch:
 its headline flow takes a GitHub issue, explores the repo, implements, runs the tests, and
 hands you back a pull request. For routine, well-specified issues that's genuinely efficient.
 
-Teaching it your project — CLAUDE.md is the deeper system: nested per-module files, imports,
-a global file across all your projects. Codex spreads the same job across its modular skills.
+Safety model — both keep you in the loop, by different mechanisms. Claude Code mediates each
+action through permission modes: plan mode, where it can't change anything; the default,
+asking before it acts; and an auto mode for long runs. Codex's distinctive move is
+sandboxing — tasks execute inside an OS-level sandbox, with approval settings controlling
+what reaches your real files and network. Same goal, contained agents; two mechanisms.
 
 And token economics — this one's from the mid-2026 comparison reports rather than gospel,
 and it moves fast: Claude tends to burn more tokens per task, and Codex's message allowances
