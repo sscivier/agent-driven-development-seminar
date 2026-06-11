@@ -30,7 +30,7 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 | 1. Real-world impact + conceptual shift | 5 min |
 | 2. Ecosystem — tools, pricing, Oxford access | 8 min |
 | 3. Practical workflows | 8 min |
-| 4. Codex and Codex deep dives | 7 min |
+| 4. Claude Code and Codex deep dives | 7 min |
 | 5. Cost, failure modes, risks | 7 min |
 | 6. Live demo (optional) | 5 min |
 | Discussion | 20 min |
@@ -40,11 +40,11 @@ postdocs, RSEs, faculty. Experienced scientific programmers; most not advanced A
 - Slide 1: Title
 - Slides 2–5: Conceptual shift (open with Anthropic 80%/800 stat; chat vs agent diagram;
   task decision framework; "capable junior collaborator" mental model)
-- Slides 6–11: Ecosystem (landscape diagram; Oxford access; Codex; Copilot/VS Code;
+- Slides 6–11: Ecosystem (landscape diagram; Oxford access; Claude Code; Copilot/VS Code;
   Cursor/Devin; decision tree)
-- Slides 12–16: Practical workflows (scoping; context/AGENTS.md; context management;
+- Slides 12–16: Practical workflows (scoping; context/CLAUDE.md; context management;
   safe Git workflow; verifying outputs)
-- Slides 17–20: Deep dives (Codex features; Codex features; cost management;
+- Slides 17–20: Deep dives (Claude Code features; Codex features; cost management;
   cost comparison table)
 - Slides 21–24: Failure modes (scientific correctness; other risks; security/governance;
   summary when-to-use)

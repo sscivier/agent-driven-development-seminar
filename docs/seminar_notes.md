@@ -398,8 +398,8 @@ For comparison, a 1M-token context is roughly 750,000 words — about 10–15 ty
 **Codex at Oxford:**
 
 - Available to all staff and students via consent forms (staff can also access Codex Cloud).
-- **Codex Local**: complete the [Codex Local Consent form](https://unioxfordnexus.sharepoint.com/:l:/s/ITServices-AIMLCompetencyCentre/JAA5VRMMMX4TRoq0PAko9YUeAc_7mMOG9G5LawRq2Vy_Xw4) to use the Codex App and CLI locally.
-- **Codex Cloud**: complete the [Codex Cloud Consent form](https://unioxfordnexus.sharepoint.com/:l:/s/ITServices-AIMLCompetencyCentre/JAB7wqs4VdFmQpEkBJz6CHe3AauDW4BnufuTvYTqR_d70tE) to connect a GitHub repository and work via the cloud.
+- **Codex Local**: complete the Codex Local consent form (linked from the OeRC AI Competency Centre's Codex page, [oerc.ox.ac.uk/ai-centre/generative-ai-tools/codex](https://oerc.ox.ac.uk/ai-centre/generative-ai-tools/codex)) to use the Codex App and CLI locally.
+- **Codex Cloud**: complete the Codex Cloud consent form (also linked from the [OeRC Codex page](https://oerc.ox.ac.uk/ai-centre/generative-ai-tools/codex)) to connect a GitHub repository and work via the cloud.
 - Codex usage counts against your ChatGPT Edu weekly limits (~30 queries/week).
 - Training course: [Getting Started with Codex](https://canvas.ox.ac.uk/courses/289256) on Canvas.
 
