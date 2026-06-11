@@ -238,7 +238,6 @@ So the unit of work moves from answering a question to carrying out a task.
     <ul>
       <li>Decisions only you can own</li>
       <li>What counts as a valid result</li>
-      <li>Outputs neither of you can check</li>
       <li>Vague, exploratory tasks</li>
       <li>Work quicker to do than to brief</li>
     </ul>
@@ -260,8 +259,7 @@ scientific sparring partner: deriving and checking equations, critiquing a metho
 explaining an unfamiliar technique, reviewing your code for scientific errors.
 
 What stays yours isn't a capability boundary so much as an ownership boundary: decisions
-about research direction and acceptable approximations, what counts as a valid result,
-anything neither you nor the agent can check objectively, vague exploratory work, and
+about research direction and acceptable approximations, what counts as a valid result, vague exploratory work, and
 anything where briefing takes longer than doing.
 
 The heuristic used to be "if you could brief a skilled programmer who doesn't know your
