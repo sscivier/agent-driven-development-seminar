@@ -902,24 +902,18 @@ Learn the <strong>concepts</strong> once — instruction files · plan first · 
 </p>
 
 <!--
-Rather than a tour of each product, here's the honest picture in mid-2026: the two have
-converged. Same concepts, near-identical shapes — what differs is the name on the tin.
+Rather than a tour of each product, I'll give an overview of their shared features, and then some differents.
 
 Both ship as a CLI, an app, a cloud agent, and an editor extension. Both read a persistent
 instruction file at the start of every session — CLAUDE.md for Claude Code, where `/init`
 drafts you a starter from the project; AGENTS.md for Codex. Both have skills — modular,
 on-demand knowledge that loads when relevant instead of every session. Both let you plan
 before any code is written: plan mode in Claude Code, Shift+Tab, where it reads and proposes
-but changes nothing until you approve; the /plan command in Codex. That plan step is where
+but changes nothing until you approve; the `/plan` command in Codex. That plan step is where
 you catch misunderstandings early — before the tokens are spent and the diff exists. Both run
 parallel sessions safely via Git worktrees. And both now run unprompted, scheduled or
 event-triggered — Routines in Claude Code, Automations in Codex: nightly test triage,
 automatic PR review.
-
-So the skill you're building isn't "how to use Claude Code" — it's how to drive this class
-of tool. The rhythm is the same in both: explore, plan, implement, commit. And the most
-common mistake is the same in both: letting a session run on and on with no checkpoints, no
-compaction, and no scientific verification.
 -->
 
 ---
@@ -954,13 +948,13 @@ Benchmarks have them near parity — choose by <strong>access and workflow</stro
 <!--
 So if they're the same shape, what actually decides between them? Four things.
 
-Access — for this room, probably the decisive one. Codex is the agent Oxford already gives
+Access. Codex is the agent Oxford already gives
 you: it comes with ChatGPT Edu once you've done the consent forms, drawing on the weekly
 allowance of around thirty queries — treat those as scarce and spend them on tasks that are
 worth it. Claude Code has no institutional route; it needs a personal plan, from about
 seventeen dollars a month.
 
-Workflow — the centre of gravity differs. Claude Code's natural home is the interactive
+Workflow. Claude Code's natural home is the interactive
 local session: you in the terminal, supervising as it works. Codex leans towards dispatch:
 its headline flow takes a GitHub issue, explores the repo, implements, runs the tests, and
 hands you back a pull request. For routine, well-specified issues that's genuinely efficient.
