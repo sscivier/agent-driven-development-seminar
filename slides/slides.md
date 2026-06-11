@@ -423,7 +423,7 @@ but it raises your review burden, not lowers it.
     <ul>
       <li>Codex Local for App & CLI</li>
       <li>Codex Cloud for GitHub repos</li>
-      <li>Counts against Edu weekly limits (~30/wk)</li>
+      <li>Counts against Edu weekly limits</li>
     </ul>
   </div>
   <div class="block">
@@ -576,7 +576,7 @@ easiest first step.
     <ul>
       <li>Free light quota; Pro at $20/mo</li>
       <li>Highest autonomy of the tools here</li>
-      <li>Issue → plan → code → test → PR</li>
+      <li>SWE-1.6 model: unlimited usage (Pro plan)</li>
     </ul>
   </div>
 </div>
@@ -593,7 +593,7 @@ code-review bot. If you want one cohesive all-in-one IDE-plus-agent, it's a stro
 And then Devin — and I'll flag this explicitly because the naming changed: Windsurf, the IDE
 that used to be Codeium's, was acquired by Cognition and is now rebranded as Devin Desktop.
 Free light quota, Pro at twenty dollars. Devin is the highest-autonomy tool here — give it
-an issue and it'll plan, code, test, and open a PR.
+an issue and it'll plan, code, test, and open a PR. It also has its own model, SWE-1.6, which you can use with unlimited usage on the Pro plan.
 -->
 
 ---
@@ -712,7 +712,7 @@ layoutClass: gap-10
   </div>
   <div class="block">
     <span class="tag">Scientific</span>
-    <p>What the code can't reveal: equations, expected ranges, numerical pitfalls, physical constraints.</p>
+    <p>What the code may not reveal: equations, expected ranges, numerical pitfalls, physical constraints.</p>
   </div>
   <div class="block">
     <span class="tag">Task</span>
@@ -733,7 +733,7 @@ once, and possibly update them periodically: what the project does, the conventi
 uses pytest, black, and NumPy docstrings."
 
 Scientific context is the part that's on us. A frontier agent often knows the physics in
-general — what it cannot know is which constraints apply to *your* configuration. It doesn't necessarily know that your timestep has to satisfy the CFL
+general — what it may not know is which constraints apply to *your* configuration. It doesn't necessarily know that your timestep has to satisfy the CFL
 condition, unless you say so. If you're implementing a parameterisation, give it the
 governing equations, the expected ranges, the known numerical pitfalls.
 
@@ -1040,7 +1040,7 @@ So the cost message in one line: use the cheapest mode that reliably does the jo
 
 Oxford's Edu access is your free tier for learning,
 scoping, and limited Codex tasks, bounded by that weekly quota. A Claude Pro or ChatGPT Plus
-plan suits occasional short sprints to medium-usage agent-drive work. The Max or Pro tiers are for high-usage agent-driven work.
+plan suits occasional short sprints to medium-usage agent-driven work. The Max or Pro tiers are for high-usage agent-driven work.
 And direct API billing is for automation and bulk jobs — powerful, but it can spike if you're
 not watching it.
 
@@ -1093,7 +1093,7 @@ Never deploy without validation against reference values; read any algorithm of 
 </v-click>
 
 <!--
-This is the slide I'd most want you to remember from the whole talk. So, the code runs. The
+So, the
 tests pass. The result looks plausible. And the science is wrong.
 
 That's what makes this dangerous. A normal software bug crashes, or gives you obvious
@@ -1191,7 +1191,7 @@ data residency is in the US. On disclosure — think about authorship and attrib
 licensing, and your reproducibility obligations if published results lean on agent-written
 code.
 
-And students for students, there's a genuine risk: a student who
+And for students, there's a genuine risk: a student who
 leans on an agent to produce code they don't understand doesn't build the core skills. But
 the very same tool is an excellent tutor — and not just for programming. Worked examples,
 walking through code line by line, explaining why a method works, the reasoning behind a
@@ -1317,7 +1317,7 @@ landscapes — not a production hydrology package.
 
 The method we'll use is called D8 flow routing. So how does D8 actually decide where the water goes? The rule is deliberately simple. Water
 runs downhill, so each cell just sends all of its flow to whichever of its eight surrounding
-neighbours is lowest — the steepest way down. One cell, one downstream cell. That's the "D8":
+neighbours is lowest — the steepest way down. That's the "D8":
 deterministic, eight directions.
 
 Once every cell has a direction, accumulation is just bookkeeping: for each cell, count how
@@ -1406,7 +1406,7 @@ channel builds up — three, six, nine — until the outlet collects all nine ce
 </div>
 
 <ul class="steps">
-  <li><strong>Scaffold</strong> — uv package, minimal deps, README, CLAUDE.md / AGENTS.md.</li>
+  <li><strong>Scaffold</strong> — <code>uv</code> package, minimal deps, README, CLAUDE.md / AGENTS.md.</li>
   <li><strong>Source + tests</strong> — agent researches D8, asks questions, proposes a plan and states assumptions <em>before</em> coding.</li>
   <li><strong>Example</strong> — end-to-end CLI script: DEM → route → accumulate → plot.</li>
   <li><strong>Docs</strong> — a short background note.</li>
