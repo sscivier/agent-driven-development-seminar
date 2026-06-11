@@ -1235,7 +1235,7 @@ class: divider
   <div class="dnum">PART SIX</div>
   <h1>Live demo</h1>
   <div class="title-rule"></div>
-  <p>Process, not spectacle.</p>
+  <p>Process, not spectacle (depends how it goes).</p>
 </div>
 
 <!--
