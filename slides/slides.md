@@ -965,15 +965,13 @@ Safety model — both keep you in the loop, by different mechanisms. Claude Code
 action through permission modes: plan mode, where it can't change anything; the default,
 asking before it acts; and an auto mode for long runs. Codex's distinctive move is
 sandboxing — tasks execute inside an OS-level sandbox, with approval settings controlling
-what reaches your real files and network. Same goal, contained agents; two mechanisms.
+what reaches your real files and network.
 
 And token economics — this one's from the mid-2026 comparison reports rather than gospel,
 and it moves fast: Claude tends to burn more tokens per task, and Codex's message allowances
 stretch further at the same price tier. Worth checking before you commit to heavy use.
 
 On raw capability the benchmarks have them near parity — so choose by access and workflow.
-And whichever you choose, the rule from Part Three stands: the agent followed the issue, but
-it can't know which physics you intended. Review every PR for the science.
 -->
 
 ---
@@ -1003,12 +1001,12 @@ Overspend usually comes from long context, mismatched models, redundant reads, r
 Here's the cost intuition that catches people out: agent cost is multiplicative, not linear.
 A single task isn't one prompt and one answer. The agent reads files, reasons and plans,
 writes code, runs commands, reads the output, corrects its mistakes — and every one of those
-steps is fresh input and output tokens.
+steps can be fresh input and output tokens.
 
-So a complex task on a medium codebase can run a hundred thousand to half a million tokens —
+So a complex task on a medium codebase can run fifty thousand to half a million tokens —
 which at frontier-model pricing is roughly three to thirty dollars for the one task: Opus
 4.8 is now five dollars in, twenty-five out per million tokens, and Fable 5 is ten and
-fifty. On a subscription plan, a few big tasks can eat your monthly allocation.
+fifty. On a subscription plan, a few big tasks can eat your weekly or monthly allocation.
 
 [If pressed on "multiplicative": strictly, uncached cost grows roughly *quadratically* with
 session length — the model is stateless, so every step re-sends the whole history as input.
