@@ -44,6 +44,7 @@ which to reach for, and how to drive them safely.
 -->
 
 ---
+
 layout: center
 class: divider
 ---
@@ -321,6 +322,7 @@ scientific contributions you check.
 -->
 
 ---
+
 layout: center
 class: divider
 ---
@@ -340,7 +342,6 @@ So that's the idea. Now let's get concrete: what tools actually exist in mid-202
 they cost, and — the part that matters most for this room — what you already have through
 Oxford.
 -->
-
 
 ---
 
@@ -631,6 +632,7 @@ Part Three.
 -->
 
 ---
+
 layout: center
 class: divider
 ---
@@ -648,7 +650,6 @@ class: divider
 This is the practical heart of the talk: four habits that separate people who get real value
 from agents from people who get a mess. Scope, context, safety, verification.
 -->
-
 
 ---
 
@@ -699,6 +700,7 @@ top form before you hand it over.
 -->
 
 ---
+
 layout: two-cols-header
 layoutClass: gap-10
 ---
@@ -827,7 +829,6 @@ goes off the rails, those commit checkpoints mean you just check out the last go
 carry on.
 -->
 
-
 ---
 
 <div class="eyebrow">Verifying outputs</div>
@@ -865,6 +866,7 @@ derivation. It will catch errors in the agent's work *and in yours*.
 -->
 
 ---
+
 layout: center
 class: divider
 ---
@@ -980,7 +982,6 @@ And whichever you choose, the rule from Part Three stands: the agent followed th
 it can't know which physics you intended. Review every PR for the science.
 -->
 
-
 ---
 
 <div class="eyebrow">Cost mechanics</div>
@@ -997,7 +998,7 @@ it can't know which physics you intended. Review every PR for the science.
 </div>
 
 <v-click>
-  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">100k–500k tokens</span> — roughly $3–$30 at frontier-model pricing.</p>
+  <p class="lead">A complex task on a medium codebase: <span v-mark="{ at: 1, type: 'box', color: '#C15F3C' }">50k–500k tokens</span> — roughly $3–$30 at frontier-model pricing.</p>
 </v-click>
 
 <p class="note">
@@ -1027,7 +1028,6 @@ reaching for an expensive model when a cheaper one would do, the agent re-readin
 files, a runaway session you weren't watching, or parallel agents running without a benefit
 to match. None of that is mysterious once you know to look for it.
 -->
-
 
 ---
 
@@ -1061,8 +1061,8 @@ retrying a bad prompt on a more expensive model; compact or clear long sessions;
 look at your usage dashboard now and then.
 -->
 
-
 ---
+
 layout: center
 class: divider
 ---
@@ -1080,7 +1080,6 @@ class: divider
 Now the sober part — and I think the most important part for this room. Where do these tools
 fail? And I'm going to start with the one that matters most for scientists.
 -->
-
 
 ---
 
@@ -1128,7 +1127,6 @@ hand-written code and derivations. So fold it into the process: a fresh agent as
 scientific reviewer. Second — never the only one.
 -->
 
-
 ---
 
 <div class="eyebrow">Other technical failure modes</div>
@@ -1175,7 +1173,6 @@ commit. Record your versions and set your seeds. None of this is exotic; it's ju
 discipline you already apply, applied consistently.
 -->
 
-
 ---
 
 <div class="eyebrow">Security · governance · training</div>
@@ -1220,7 +1217,6 @@ that. So the nuance is: be thoughtful about agent use for assessed or production
 actively encouraging it as a way to learn and explore.
 -->
 
-
 ---
 
 <div class="eyebrow">Takeaway</div>
@@ -1250,8 +1246,8 @@ If you remember nothing else from this section: agents propose, check, and teach
 decisions and the verification stay yours.
 -->
 
-
 ---
+
 layout: center
 class: divider
 ---
@@ -1270,7 +1266,6 @@ say one line — "I'll spare you the live demo, but here's the shape of it" — 
 the close. The two background slides are quick (~1–2 min) so the audience knows what we're
 building. Prompts are in docs/d8_prompts.md; full demo script in docs/seminar_notes.md §6.2.]
 -->
-
 
 ---
 
@@ -1306,7 +1301,6 @@ It underpins drainage networks, catchment delineation, erosion and flood modelli
 we'll build, d8demo, is a deliberately tiny, educational version of this on small synthetic
 landscapes — not a production hydrology package.
 -->
-
 
 ---
 
@@ -1356,7 +1350,6 @@ numbers light up the channels. And the lowest cells — the ones with no lower n
 outlets, where water leaves the grid. That's the whole method; the production tools add
 machinery on top, but this is the core.
 -->
-
 
 ---
 
@@ -1431,7 +1424,6 @@ tests pass, "is the science right?" isn't a leap of faith — we have hand-check
 this to validate against.
 -->
 
-
 ---
 
 <div class="eyebrow">Live demo</div>
@@ -1470,8 +1462,8 @@ the agent did real work, fast; we supplied the scoping, the context, and the sci
 judgement. Full script: docs/seminar_notes.md §6.2.]
 -->
 
-
 ---
+
 layout: center
 class: takeaways
 ---
@@ -1513,8 +1505,8 @@ build your intuition before you put an agent anywhere near critical code. With t
 open it up.
 -->
 
-
 ---
+
 layout: center
 class: discussion
 ---
@@ -1562,8 +1554,8 @@ codebase right now?") is a reliable starter. Full bank of ten questions in
 docs/seminar_notes.md §6.3.]
 -->
 
-
 ---
+
 class: disclosure
 ---
 
