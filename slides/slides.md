@@ -1270,8 +1270,7 @@ building. Prompts are in docs/d8_prompts.md; full demo script in docs/seminar_no
 <!--
 **Demo background 1 · ~30s.**
 
-First, the wider picture — what is the package even for. This is hydrological flow modelling:
-you start from a landscape's elevation and you want to know where water flows and where it
+First, the wider picture. In this demo, I'll work on a simple and educational Python package for hydrological flow modelling (with apologies to hydrologists in advance, for any simplifications and omissions). We start from a landscape's elevation and you want to know where water flows and where it
 collects. The input is a DEM — a digital elevation model, just a grid of heights. From that
 you derive, first, a flow direction for every cell, and then flow accumulation — how much
 drains through each cell — which is what gives you rivers, channels, and catchment boundaries.
@@ -1312,13 +1311,13 @@ landscapes — not a production hydrology package.
 </div>
 
 <v-click>
-  <p class="note">"D8" = <strong>deterministic, eight directions</strong>. It is the simplest of a family of routing methods — and the building block the real tools elaborate on.</p>
+  <p class="note">"D8" = <strong>deterministic, eight directions</strong>. It is the simplest of a family of routing methods.</p>
 </v-click>
 
 <!--
 **Demo background 2 · ~45s.**
 
-So how does D8 actually decide where the water goes? The rule is deliberately simple. Water
+The method we'll use is called D8 flow routing. So how does D8 actually decide where the water goes? The rule is deliberately simple. Water
 runs downhill, so each cell just sends all of its flow to whichever of its eight surrounding
 neighbours is lowest — the steepest way down. One cell, one downstream cell. That's the "D8":
 deterministic, eight directions.
@@ -1326,8 +1325,7 @@ deterministic, eight directions.
 Once every cell has a direction, accumulation is just bookkeeping: for each cell, count how
 many cells ultimately drain through it. Those totals grow as you go downstream, so the big
 numbers light up the channels. And the lowest cells — the ones with no lower neighbour — are
-outlets, where water leaves the grid. That's the whole method; the production tools add
-machinery on top, but this is the core.
+outlets, where water leaves the grid.
 -->
 
 ---
@@ -1392,15 +1390,10 @@ machinery on top, but this is the core.
 <!--
 **Demo background 3 · ~30s. (Cut this slide if short on time.)**
 
-And because the grids are tiny, we can check the whole thing by hand — which is exactly the
-point. Here's a three-by-three valley: a channel falling south, walls either side. The wall
+To gain intuition, we can check a tiny example by hand. Here's a three-by-three valley: a channel falling south, walls either side. The wall
 cells drain inward to the channel, the channel drains south, and the bottom-centre cell is
-the outlet, where water leaves. Follow the accumulation: each wall cell is one, and the
-channel builds up — three, six, nine — until the outlet collects all nine cells in the grid.
-
-Hold onto that, because it's the answer to the question the demo ends on. When the agent's
-tests pass, "is the science right?" isn't a leap of faith — we have hand-checkable cases like
-this to validate against.
+the outlet, where water leaves. Let's assume rain falls evenly over the surface. Follow the accumulation: each wall cell is one, and the
+channel builds up — three, six, nine — until the outlet collects all nine cells in the grid. This is an example of a case we can check our implementation against.
 -->
 
 ---
@@ -1421,8 +1414,6 @@ this to validate against.
   <li><strong>Docs</strong> — a short background note.</li>
 </ul>
 
-<p class="lead accent">Review the diff, run <code>uv run pytest</code> — the tests pass and the figure looks right. But is the science right?</p>
-
 <!--
 [OPTIONAL demo slide — facilitation cues, not a script. The demo builds the d8demo package
 live from a clean scaffold, using the staged, well-scoped prompts in docs/d8_prompts.md. Branch
@@ -1434,11 +1425,6 @@ scaffold prompt and the source+tests prompt are the richest: the agent researche
 clarifying questions, proposes a plan and states its assumptions *before* writing code, and
 persistent context goes into CLAUDE.md/AGENTS.md up front. Then review the diff and run
 `uv run pytest`.
-
-Land the punchline: the tests pass and the plot looks plausible — "but is the science right?"
-— and point back to the hand-checkable cases from the previous slide. Debrief in one line:
-the agent did real work, fast; we supplied the scoping, the context, and the scientific
-judgement. Full script: docs/seminar_notes.md §6.2.]
 -->
 
 ---
